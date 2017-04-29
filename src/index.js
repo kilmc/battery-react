@@ -145,6 +145,81 @@ const formatSubprops = ({ propName, propSeparator, prop }) =>
       subProps.map((sp) => `${prop}-${sp}`)
 });
 
+export const propsCompile = ({
+  props,
+  subProps = {},
+  propSeparator = '',
+  root = true
+}) => [
+  Object.assign(
+    ...Object.entries(props).map(([propName, prop]) => (
+      root ? { "propName": propName, "props": prop } : {}
+    )
+  )
+)];
+
+// propsCompile({
+//   props: {
+//     'p': 'padding'
+//   },
+//   subprops: {
+//     't': ['top'],
+//     'r': ['right'],
+//     'b': ['bottom'],
+//     'l': ['left'],
+//     'x': ['right', 'left'],
+//     'y': ['top', 'bottom']
+//   }
+// });
+// const outPut = [
+//   {
+//     propName: 'p',
+//     props: ['padding']
+//   },
+//   {
+//     propName: 'pt',
+//     props: ['padding-top']
+//   },
+//   {
+//     propName: 'pr',
+//     props: ['padding-right']
+//   },
+//     {
+//     propName: 'pb',
+//     props: ['padding-bottom']
+//   },
+//     {
+//     propName: 'pl',
+//     props: ['padding-left']
+//   },
+//   {
+//     propName: 'px',
+//     props: ['padding-right', 'padding-left']
+//   },
+//   {
+//     propName: 'py',
+//     props: ['padding-top', 'padding-bottom']
+//   }
+// ];
+
+
+export const classCompile = ({
+  propName,
+  props,
+  valueName,
+  value
+}) => ({
+  [`${propName}${valueName}`]: Object.assign(
+    ...props.map((x) => ({
+      [x]: value
+    }))
+  )
+});
+
+const paddingObject = [
+
+];
+
 export const spacingProps = props({
   props: {
     'p': 'padding',

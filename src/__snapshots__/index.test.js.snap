@@ -1,3 +1,21 @@
+exports[`Battery classCompile matches snapshot 1`] = `
+Object {
+  "py1": Object {
+    "padding-bottom": "0.6rem",
+    "padding-top": "0.6rem",
+  },
+}
+`;
+
+exports[`Battery propsCompile matches snapshot 1`] = `
+Array [
+  Object {
+    "propName": "p",
+    "props": "padding",
+  },
+]
+`;
+
 exports[`Battery spacingProps matches snapshot 1`] = `
 Object {
   "margin": Object {
