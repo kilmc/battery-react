@@ -9,22 +9,56 @@ Object {
 
 exports[`Battery propsCompile matches snapshot 1`] = `
 Object {
-  "margin": Array [
-    Object {
-      "prop": Array [
-        "margin",
-      ],
-      "propName": "m",
-    },
-  ],
-  "padding": Array [
-    Object {
-      "prop": Array [
-        "padding",
-      ],
-      "propName": "p",
-    },
-  ],
+  "0": Object {
+    "padding": Array [
+      Object {
+        "prop": Array [
+          "padding",
+        ],
+        "propName": "p",
+      },
+      Object {
+        "0": Object {
+          "propName": "pt",
+          "props": Array [
+            "padding-top",
+          ],
+        },
+        "1": Object {
+          "propName": "px",
+          "props": Array [
+            "padding-right",
+            "padding-left",
+          ],
+        },
+      },
+    ],
+  },
+  "1": Object {
+    "margin": Array [
+      Object {
+        "prop": Array [
+          "margin",
+        ],
+        "propName": "m",
+      },
+      Object {
+        "0": Object {
+          "propName": "mt",
+          "props": Array [
+            "margin-top",
+          ],
+        },
+        "1": Object {
+          "propName": "mx",
+          "props": Array [
+            "margin-right",
+            "margin-left",
+          ],
+        },
+      },
+    ],
+  },
 }
 `;
 

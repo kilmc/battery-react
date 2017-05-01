@@ -150,24 +150,49 @@ export const propsCompile = ({
   subProps = {},
   propSeparator = '',
   root = true
-}) => Object.assign(
+}) => ({
   ...Object.entries(props).map(([propName, prop]) => ({
-    [prop]: Object.assign(
-      root ? [
-        {
-          "propName": propName,
-          "prop": [prop]
-        }
-      ] : [],
-      [...Object.entries(subProps)
-        .map(([subPropName, subProps]) => ({
-          "propName": `${propName}${propSeparator}${subPropName}`,
-          "props": subProps.map((sp) => `${prop}-${sp}`)
-        }))
-      ]
-    )
-  }))
-);
+    [prop]: [
+      root ? { "propName": propName, "prop": [prop] } : {},
+      {...Object.entries(subProps).map(([subPropName, subProps]) => ({
+        "propName": `${propName}${propSeparator}${subPropName}`,
+        "props": subProps.map((sp) => `${prop}-${sp}`)
+      }))}
+  ]}))
+});
+
+const outPut = {
+  "padding": [
+    {
+      propName: 'p',
+      props: ['padding']
+    },
+    {
+      propName: 'pt',
+      props: ['padding-top']
+    },
+    {
+      propName: 'pr',
+      props: ['padding-right']
+    },
+      {
+      propName: 'pb',
+      props: ['padding-bottom']
+    },
+      {
+      propName: 'pl',
+      props: ['padding-left']
+    },
+    {
+      propName: 'px',
+      props: ['padding-right', 'padding-left']
+    },
+    {
+      propName: 'py',
+      props: ['padding-top', 'padding-bottom']
+    }
+  ]
+};
 
 // propsCompile({
 //   props: {
@@ -182,38 +207,7 @@ export const propsCompile = ({
 //     'y': ['top', 'bottom']
 //   }
 // });
-// const outPut = {
-//   "padding": [
-//     {
-//       propName: 'p',
-//       props: ['padding']
-//     },
-//     {
-//       propName: 'pt',
-//       props: ['padding-top']
-//     },
-//     {
-//       propName: 'pr',
-//       props: ['padding-right']
-//     },
-//       {
-//       propName: 'pb',
-//       props: ['padding-bottom']
-//     },
-//       {
-//       propName: 'pl',
-//       props: ['padding-left']
-//     },
-//     {
-//       propName: 'px',
-//       props: ['padding-right', 'padding-left']
-//     },
-//     {
-//       propName: 'py',
-//       props: ['padding-top', 'padding-bottom']
-//     }
-//   ]
-// };
+
 
 
 export const classCompile = ({
