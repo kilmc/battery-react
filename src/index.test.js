@@ -26,9 +26,10 @@ describe('Battery', () => {
     it('matches snapshot', () => {
       expect(propsCompile({
         props: {
-          'p': 'padding'
+          'p': 'padding',
+          'm': 'margin'
         },
-        subprops: {
+        subProps: {
           't': ['top'],
           'x': ['right', 'left']
         }

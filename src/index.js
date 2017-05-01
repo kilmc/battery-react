@@ -150,13 +150,24 @@ export const propsCompile = ({
   subProps = {},
   propSeparator = '',
   root = true
-}) => [
-  Object.assign(
-    ...Object.entries(props).map(([propName, prop]) => (
-      root ? { "propName": propName, "props": prop } : {}
+}) => Object.assign(
+  ...Object.entries(props).map(([propName, prop]) => ({
+    [prop]: Object.assign(
+      root ? [
+        {
+          "propName": propName,
+          "prop": [prop]
+        }
+      ] : [],
+      [...Object.entries(subProps)
+        .map(([subPropName, subProps]) => ({
+          "propName": `${propName}${propSeparator}${subPropName}`,
+          "props": subProps.map((sp) => `${prop}-${sp}`)
+        }))
+      ]
     )
-  )
-)];
+  }))
+);
 
 // propsCompile({
 //   props: {
@@ -171,36 +182,38 @@ export const propsCompile = ({
 //     'y': ['top', 'bottom']
 //   }
 // });
-// const outPut = [
-//   {
-//     propName: 'p',
-//     props: ['padding']
-//   },
-//   {
-//     propName: 'pt',
-//     props: ['padding-top']
-//   },
-//   {
-//     propName: 'pr',
-//     props: ['padding-right']
-//   },
+// const outPut = {
+//   "padding": [
 //     {
-//     propName: 'pb',
-//     props: ['padding-bottom']
-//   },
+//       propName: 'p',
+//       props: ['padding']
+//     },
 //     {
-//     propName: 'pl',
-//     props: ['padding-left']
-//   },
-//   {
-//     propName: 'px',
-//     props: ['padding-right', 'padding-left']
-//   },
-//   {
-//     propName: 'py',
-//     props: ['padding-top', 'padding-bottom']
-//   }
-// ];
+//       propName: 'pt',
+//       props: ['padding-top']
+//     },
+//     {
+//       propName: 'pr',
+//       props: ['padding-right']
+//     },
+//       {
+//       propName: 'pb',
+//       props: ['padding-bottom']
+//     },
+//       {
+//       propName: 'pl',
+//       props: ['padding-left']
+//     },
+//     {
+//       propName: 'px',
+//       props: ['padding-right', 'padding-left']
+//     },
+//     {
+//       propName: 'py',
+//       props: ['padding-top', 'padding-bottom']
+//     }
+//   ]
+// };
 
 
 export const classCompile = ({
@@ -210,15 +223,11 @@ export const classCompile = ({
   value
 }) => ({
   [`${propName}${valueName}`]: Object.assign(
-    ...props.map((x) => ({
-      [x]: value
+    ...props.map((prop) => ({
+      [prop]: value
     }))
   )
 });
-
-const paddingObject = [
-
-];
 
 export const spacingProps = props({
   props: {

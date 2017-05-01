@@ -8,12 +8,24 @@ Object {
 `;
 
 exports[`Battery propsCompile matches snapshot 1`] = `
-Array [
-  Object {
-    "propName": "p",
-    "props": "padding",
-  },
-]
+Object {
+  "margin": Array [
+    Object {
+      "prop": Array [
+        "margin",
+      ],
+      "propName": "m",
+    },
+  ],
+  "padding": Array [
+    Object {
+      "prop": Array [
+        "padding",
+      ],
+      "propName": "p",
+    },
+  ],
+}
 `;
 
 exports[`Battery spacingProps matches snapshot 1`] = `
