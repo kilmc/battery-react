@@ -124,91 +124,38 @@ const backgroundColors = colors([
   'red'
 ]);
 
-const props = ({
-  props,
-  subprops = {},
-  propSeparator = '',
-  root = true
-}) => Object.assign(
-  ...Object.entries(props).map(([propName, prop]) => ({
-    [prop]: Object.assign(
-      root ? { [propName]: [prop] } : {},
-      ...Object.entries(subprops)
-        .map(formatSubprops({ propName, propSeparator, prop }))
-    )
-  }))
-);
-
-const formatSubprops = ({ propName, propSeparator, prop }) =>
-  ([subPropName, subProps]) => ({
-    [`${propName}${propSeparator}${subPropName}`]:
-      subProps.map((sp) => `${prop}-${sp}`)
-});
-
 export const propsCompile = ({
   props,
   subProps = {},
   propSeparator = '',
   root = true
-}) => ({
+}) => Object.assign(
   ...Object.entries(props).map(([propName, prop]) => ({
     [prop]: [
-      root ? { "propName": propName, "prop": [prop] } : {},
-      {...Object.entries(subProps).map(([subPropName, subProps]) => ({
+      root ? { "propName": propName, "props": [prop] } : {},
+      ...Object.entries(subProps).map(([subPropName, subProps]) => ({
         "propName": `${propName}${propSeparator}${subPropName}`,
         "props": subProps.map((sp) => `${prop}-${sp}`)
-      }))}
+      }))
   ]}))
-});
+);
 
-const outPut = {
-  "padding": [
-    {
-      propName: 'p',
-      props: ['padding']
-    },
-    {
-      propName: 'pt',
-      props: ['padding-top']
-    },
-    {
-      propName: 'pr',
-      props: ['padding-right']
-    },
-      {
-      propName: 'pb',
-      props: ['padding-bottom']
-    },
-      {
-      propName: 'pl',
-      props: ['padding-left']
-    },
-    {
-      propName: 'px',
-      props: ['padding-right', 'padding-left']
-    },
-    {
-      propName: 'py',
-      props: ['padding-top', 'padding-bottom']
-    }
-  ]
-};
-
-// propsCompile({
-//   props: {
-//     'p': 'padding'
-//   },
-//   subprops: {
-//     't': ['top'],
-//     'r': ['right'],
-//     'b': ['bottom'],
-//     'l': ['left'],
-//     'x': ['right', 'left'],
-//     'y': ['top', 'bottom']
-//   }
-// });
-
-
+// Replace inner spread with concat
+// export const propsCompile = ({
+//   props,
+//   subProps = {},
+//   propSeparator = '',
+//   root = true
+// }) => Object.assign(
+//   ...Object.entries(props).map(([propName, prop]) => ({
+//     [prop]: [
+//       root ? { "propName": propName, "prop": [prop] } : {},
+//       ...Object.entries(subProps).map(([subPropName, subProps]) => ({
+//         "propName": `${propName}${propSeparator}${subPropName}`,
+//         "props": subProps.map((sp) => `${prop}-${sp}`)
+//       }))
+//   ]}))
+// );
 
 export const classCompile = ({
   propName,
@@ -223,12 +170,12 @@ export const classCompile = ({
   )
 });
 
-export const spacingProps = props({
+export const spacingProps = propsCompile({
   props: {
     'p': 'padding',
     'm': 'margin'
   },
-  subprops: {
+  subProps: {
     't': ['top'],
     'r': ['right'],
     'b': ['bottom'],
@@ -238,7 +185,7 @@ export const spacingProps = props({
   }
 });
 
-const positionCoordinates = props({
+export const positionCoordinateProps = propsCompile({
   props: {
     't': 'top',
     'r': 'right',

@@ -7,112 +7,148 @@ Object {
 }
 `;
 
+exports[`Battery positionCoordinateProps matches snapshot 1`] = `undefined`;
+
 exports[`Battery propsCompile matches snapshot 1`] = `
 Object {
-  "0": Object {
-    "padding": Array [
-      Object {
-        "prop": Array [
-          "padding",
-        ],
-        "propName": "p",
-      },
-      Object {
-        "0": Object {
-          "propName": "pt",
-          "props": Array [
-            "padding-top",
-          ],
-        },
-        "1": Object {
-          "propName": "px",
-          "props": Array [
-            "padding-right",
-            "padding-left",
-          ],
-        },
-      },
-    ],
-  },
-  "1": Object {
-    "margin": Array [
-      Object {
-        "prop": Array [
-          "margin",
-        ],
-        "propName": "m",
-      },
-      Object {
-        "0": Object {
-          "propName": "mt",
-          "props": Array [
-            "margin-top",
-          ],
-        },
-        "1": Object {
-          "propName": "mx",
-          "props": Array [
-            "margin-right",
-            "margin-left",
-          ],
-        },
-      },
-    ],
-  },
+  "margin": Array [
+    Object {
+      "propName": "m",
+      "props": Array [
+        "margin",
+      ],
+    },
+    Object {
+      "propName": "mt",
+      "props": Array [
+        "margin-top",
+      ],
+    },
+    Object {
+      "propName": "mx",
+      "props": Array [
+        "margin-right",
+        "margin-left",
+      ],
+    },
+  ],
+  "padding": Array [
+    Object {
+      "propName": "p",
+      "props": Array [
+        "padding",
+      ],
+    },
+    Object {
+      "propName": "pt",
+      "props": Array [
+        "padding-top",
+      ],
+    },
+    Object {
+      "propName": "px",
+      "props": Array [
+        "padding-right",
+        "padding-left",
+      ],
+    },
+  ],
 }
 `;
 
 exports[`Battery spacingProps matches snapshot 1`] = `
 Object {
-  "margin": Object {
-    "m": Array [
-      "margin",
-    ],
-    "mb": Array [
-      "margin-bottom",
-    ],
-    "ml": Array [
-      "margin-left",
-    ],
-    "mr": Array [
-      "margin-right",
-    ],
-    "mt": Array [
-      "margin-top",
-    ],
-    "mx": Array [
-      "margin-right",
-      "margin-left",
-    ],
-    "my": Array [
-      "margin-top",
-      "margin-bottom",
-    ],
-  },
-  "padding": Object {
-    "p": Array [
-      "padding",
-    ],
-    "pb": Array [
-      "padding-bottom",
-    ],
-    "pl": Array [
-      "padding-left",
-    ],
-    "pr": Array [
-      "padding-right",
-    ],
-    "pt": Array [
-      "padding-top",
-    ],
-    "px": Array [
-      "padding-right",
-      "padding-left",
-    ],
-    "py": Array [
-      "padding-top",
-      "padding-bottom",
-    ],
-  },
+  "margin": Array [
+    Object {
+      "propName": "m",
+      "props": Array [
+        "margin",
+      ],
+    },
+    Object {
+      "propName": "mt",
+      "props": Array [
+        "margin-top",
+      ],
+    },
+    Object {
+      "propName": "mr",
+      "props": Array [
+        "margin-right",
+      ],
+    },
+    Object {
+      "propName": "mb",
+      "props": Array [
+        "margin-bottom",
+      ],
+    },
+    Object {
+      "propName": "ml",
+      "props": Array [
+        "margin-left",
+      ],
+    },
+    Object {
+      "propName": "mx",
+      "props": Array [
+        "margin-right",
+        "margin-left",
+      ],
+    },
+    Object {
+      "propName": "my",
+      "props": Array [
+        "margin-top",
+        "margin-bottom",
+      ],
+    },
+  ],
+  "padding": Array [
+    Object {
+      "propName": "p",
+      "props": Array [
+        "padding",
+      ],
+    },
+    Object {
+      "propName": "pt",
+      "props": Array [
+        "padding-top",
+      ],
+    },
+    Object {
+      "propName": "pr",
+      "props": Array [
+        "padding-right",
+      ],
+    },
+    Object {
+      "propName": "pb",
+      "props": Array [
+        "padding-bottom",
+      ],
+    },
+    Object {
+      "propName": "pl",
+      "props": Array [
+        "padding-left",
+      ],
+    },
+    Object {
+      "propName": "px",
+      "props": Array [
+        "padding-right",
+        "padding-left",
+      ],
+    },
+    Object {
+      "propName": "py",
+      "props": Array [
+        "padding-top",
+        "padding-bottom",
+      ],
+    },
+  ],
 }
 `;

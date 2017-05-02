@@ -1,13 +1,20 @@
 import {
   spacingProps,
   classCompile,
-  propsCompile
+  propsCompile,
+  positionCoordinateProps
 } from './index';
 
 describe('Battery', () => {
   describe('spacingProps', () => {
     it('matches snapshot', () => {
       expect(spacingProps).toMatchSnapshot()
+    });
+  });
+
+  describe('positionCoordinateProps', () => {
+    it('matches snapshot', () => {
+      expect(positionCoordinateProps).toEqual(null)
     });
   });
 
