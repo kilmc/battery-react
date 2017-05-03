@@ -2,6 +2,7 @@ import {
   spacingProps,
   classCompile,
   propsCompile,
+  scaleUnits,
   positionCoordinateProps
 } from './index';
 
@@ -12,9 +13,15 @@ describe('Battery', () => {
     });
   });
 
+  describe('scaleUnits', () => {
+    it('matches snapshot', () => {
+      expect(scaleUnits).toMatchSnapshot()
+    });
+  });
+
   describe('positionCoordinateProps', () => {
     it('matches snapshot', () => {
-      expect(positionCoordinateProps).toEqual(null)
+      expect(positionCoordinateProps).toMatchSnapshot()
     });
   });
 

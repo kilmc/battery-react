@@ -7,7 +7,42 @@ Object {
 }
 `;
 
-exports[`Battery positionCoordinateProps matches snapshot 1`] = `undefined`;
+exports[`Battery positionCoordinateProps matches snapshot 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "propName": "b",
+      "props": Array [
+        "bottom",
+      ],
+    },
+  ],
+  "left": Array [
+    Object {
+      "propName": "l",
+      "props": Array [
+        "left",
+      ],
+    },
+  ],
+  "right": Array [
+    Object {
+      "propName": "r",
+      "props": Array [
+        "right",
+      ],
+    },
+  ],
+  "top": Array [
+    Object {
+      "propName": "t",
+      "props": Array [
+        "top",
+      ],
+    },
+  ],
+}
+`;
 
 exports[`Battery propsCompile matches snapshot 1`] = `
 Object {
@@ -54,6 +89,95 @@ Object {
     },
   ],
 }
+`;
+
+exports[`Battery scaleUnits matches snapshot 1`] = `
+Array [
+  Object {
+    "value": "0rem",
+    "valueName": "0",
+  },
+  Object {
+    "value": "0.6rem",
+    "valueName": "1",
+  },
+  Object {
+    "value": "1.2rem",
+    "valueName": "2",
+  },
+  Object {
+    "value": "1.8rem",
+    "valueName": "3",
+  },
+  Object {
+    "value": "2.4rem",
+    "valueName": "4",
+  },
+  Object {
+    "value": "3rem",
+    "valueName": "5",
+  },
+  Object {
+    "value": "3.6rem",
+    "valueName": "6",
+  },
+  Object {
+    "value": "4.2rem",
+    "valueName": "7",
+  },
+  Object {
+    "value": "4.8rem",
+    "valueName": "8",
+  },
+  Object {
+    "value": "5.4rem",
+    "valueName": "9",
+  },
+  Object {
+    "value": "6rem",
+    "valueName": "10",
+  },
+  Object {
+    "value": "6.6rem",
+    "valueName": "11",
+  },
+  Object {
+    "value": "7.2rem",
+    "valueName": "12",
+  },
+  Object {
+    "value": "7.8rem",
+    "valueName": "13",
+  },
+  Object {
+    "value": "8.4rem",
+    "valueName": "14",
+  },
+  Object {
+    "value": "9rem",
+    "valueName": "15",
+  },
+  Object {
+    "value": "9.6rem",
+    "valueName": "16",
+  },
+  Object {
+    "value": "10.2rem",
+    "valueName": "17",
+  },
+  Object {
+    "value": "10.8rem",
+    "valueName": "18",
+  },
+  Object {
+    "value": "11.4rem",
+    "valueName": "19",
+  },
+  Object {
+    "value": "12rem",
+    "valueName": "20",
+  },
+]
 `;
 
 exports[`Battery spacingProps matches snapshot 1`] = `

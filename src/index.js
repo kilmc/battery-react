@@ -30,6 +30,7 @@ const baseUnit = 6;
 
 // Length value generator
 // --------------------------------------------------------
+
 const lengthUnits = ({
   values,
   keySuffix = '',
@@ -37,13 +38,13 @@ const lengthUnits = ({
   transform = [identity],
   negative = false
 }) => {
-  return values.reduce((obj, value) => {
-    const minus = negative ? '-' : '';
-    const transformed = compose(...transform)(value);
-
-    obj[`${minus}${value}${keySuffix}`] = `${minus}${transformed}${valueSuffix}`;
-    return obj;
-  },{});
+  const minus = negative ? '-' : '';
+  return Object.assign(
+    values.map((value) => ({
+      "valueName": `${minus}${value}${keySuffix}`,
+      "value": `${minus}${compose(...transform)(value)}${valueSuffix}`
+    })
+  ));
 };
 
 const percentageValues = [
@@ -74,7 +75,7 @@ const pixelUnits = lengthUnits({
   valueSuffix: 'rem'
 });
 
-const scaleUnits = lengthUnits({
+export const scaleUnits = lengthUnits({
   values: scaleMultipliers,
   transform: [remify, scaler],
   valueSuffix: 'rem'
@@ -140,22 +141,12 @@ export const propsCompile = ({
   ]}))
 );
 
-// Replace inner spread with concat
-// export const propsCompile = ({
-//   props,
-//   subProps = {},
-//   propSeparator = '',
-//   root = true
-// }) => Object.assign(
-//   ...Object.entries(props).map(([propName, prop]) => ({
-//     [prop]: [
-//       root ? { "propName": propName, "prop": [prop] } : {},
-//       ...Object.entries(subProps).map(([subPropName, subProps]) => ({
-//         "propName": `${propName}${propSeparator}${subPropName}`,
-//         "props": subProps.map((sp) => `${prop}-${sp}`)
-//       }))
-//   ]}))
-// );
+export const propsValuesMerge = ({
+  props,
+  values
+}) => {
+
+};
 
 export const classCompile = ({
   propName,
@@ -192,4 +183,26 @@ export const positionCoordinateProps = propsCompile({
     'b': 'bottom',
     'l': 'left'
   }
-})
+});
+
+
+
+
+
+// export const propsCompile = ({
+//   props,
+//   subProps = {},
+//   propSeparator = '',
+//   root = false
+// }) => Object.assign(
+//   ...Object.entries(props).map(([propName, prop]) => ({
+//     [prop]: [
+//       root ? { "propName": propName, "props": [prop] } : {},
+//     ].concat(
+//       Object.entries(subProps).map(([subPropName, subProps]) => ({
+//         "propName": `${propName}${propSeparator}${subPropName}`,
+//         "props": subProps.map((sp) => `${prop}-${sp}`)
+//       }))
+//     )
+//   }))
+// );
