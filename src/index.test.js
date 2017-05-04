@@ -3,13 +3,23 @@ import {
   classCompile,
   propsCompile,
   scaleUnits,
-  positionCoordinateProps
+  positionCoordinateProps,
+  propsValuesMerge
 } from './index';
 
 describe('Battery', () => {
   describe('spacingProps', () => {
     it('matches snapshot', () => {
       expect(spacingProps).toMatchSnapshot()
+    });
+  });
+
+  describe('propsValuesMerge', () => {
+    it('matches snapshot', () => {
+      expect(propsValuesMerge({
+        props: spacingProps,
+        values: scaleUnits
+      })).toMatchSnapshot()
     });
   });
 

@@ -91,6 +91,8 @@ Object {
 }
 `;
 
+exports[`Battery propsValuesMerge matches snapshot 1`] = `[Function]`;
+
 exports[`Battery scaleUnits matches snapshot 1`] = `
 Array [
   Object {

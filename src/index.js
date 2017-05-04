@@ -145,8 +145,129 @@ export const propsValuesMerge = ({
   props,
   values
 }) => {
-
+  return Object.keys(props).reduce((accum, prop) => {
+    return props[prop].reduce((accum, propPieces) => {
+      return values.reduce((accum, value) => {
+        return Object.assign(propPieces, value)
+      }, {})
+    }, {})
+  }, {});
 };
+
+// // Input
+// propsValuesMerge({
+//   props: positionCoordinateProps,
+//   values: pixelUnits
+// });
+// // Output
+
+// const outputtt = {
+//   "top": [
+//     {
+//       "propName": "t",
+//       "props": ["top"],
+//       "valueName": "1px",
+//       "value": "0.1rem"
+//     },
+//     {
+//       "propName": "t",
+//       "props": ["top"],
+//       "valueName": "2px",
+//       "value": "0.2rem"
+//     },
+//     {
+//       "propName": "t",
+//       "props": ["top"],
+//       "valueName": "3px",
+//       "value": "0.3rem"
+//     },
+//     {
+//       "propName": "t",
+//       "props": ["top"],
+//       "valueName": "4px",
+//       "value": "0.4rem"
+//     }
+//   ],
+//   "right": [
+//     {
+//       "propName": "r",
+//       "props": ["right"],
+//       "valueName": "1px",
+//       "value": "0.1rem"
+//     },
+//     {
+//       "propName": "r",
+//       "props": ["right"],
+//       "valueName": "2px",
+//       "value": "0.2rem"
+//     },
+//     {
+//       "propName": "r",
+//       "props": ["right"],
+//       "valueName": "3px",
+//       "value": "0.3rem"
+//     },
+//     {
+//       "propName": "r",
+//       "props": ["right"],
+//       "valueName": "4px",
+//       "value": "0.4rem"
+//     }
+//   ],
+//   "bottom": [
+//     {
+//       "propName": "b",
+//       "props": ["bottom"],
+//       "valueName": "1px",
+//       "value": "0.1rem"
+//     },
+//     {
+//       "propName": "b",
+//       "props": ["bottom"],
+//       "valueName": "2px",
+//       "value": "0.2rem"
+//     },
+//     {
+//       "propName": "b",
+//       "props": ["bottom"],
+//       "valueName": "3px",
+//       "value": "0.3rem"
+//     },
+//     {
+//       "propName": "b",
+//       "props": ["bottom"],
+//       "valueName": "4px",
+//       "value": "0.4rem"
+//     }
+//   ],
+//   "left": [
+//     {
+//       "propName": "l",
+//       "props": ["left"],
+//       "valueName": "1px",
+//       "value": "0.1rem"
+//     },
+//     {
+//       "propName": "l",
+//       "props": ["left"],
+//       "valueName": "2px",
+//       "value": "0.2rem"
+//     },
+//     {
+//       "propName": "l",
+//       "props": ["left"],
+//       "valueName": "3px",
+//       "value": "0.3rem"
+//     },
+//     {
+//       "propName": "l",
+//       "props": ["left"],
+//       "valueName": "4px",
+//       "value": "0.4rem"
+//     }
+//   ]
+// }
+
 
 export const classCompile = ({
   propName,
