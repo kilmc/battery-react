@@ -141,18 +141,34 @@ export const propsCompile = ({
   ]}))
 );
 
+// export const propsValuesMerge = ({
+//   props,
+//   values
+// }) => {
+//   return Object.keys(props).reduce((accum, prop) => {
+//     return props[prop].reduce((accum, propPieces) => {
+//       return values.reduce((accum, value) => {
+//         return Object.assign(propPieces, value)
+//       }, {})
+//     }, {})
+//   }, {});
+// };
+
 export const propsValuesMerge = ({
   props,
   values
-}) => {
-  return Object.keys(props).reduce((accum, prop) => {
-    return props[prop].reduce((accum, propPieces) => {
-      return values.reduce((accum, value) => {
-        return Object.assign(propPieces, value)
-      }, {})
-    }, {})
-  }, {});
-};
+}) => Object.keys(props).map(prop => (
+    [props[prop]]
+      .concat([values])
+      .reduce((accum, items) =>
+        accum.map(
+          x => items.map(
+            y => x.concat(y)
+          )
+        ).reduce((a,b) => a.concat(b)), [[]]
+      )
+  )
+);
 
 // // Input
 // propsValuesMerge({
