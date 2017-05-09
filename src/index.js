@@ -1,4 +1,9 @@
 import entries from 'object.entries';
+import fs from 'fs';
+
+Array.prototype.flatMap = function(lambda) {
+    return Array.prototype.concat.apply([], this.map(lambda));
+};
 
 Object.entries = entries;
 
@@ -69,7 +74,7 @@ const viewportHeightUnits = lengthUnits({
   valueSuffix: 'vh'
 });
 
-const pixelUnits = lengthUnits({
+export const pixelUnits = lengthUnits({
   values: pixelValues,
   keySuffix: "px",
   valueSuffix: 'rem'
@@ -141,19 +146,6 @@ export const propsCompile = ({
   ]}))
 );
 
-// export const propsValuesMerge = ({
-//   props,
-//   values
-// }) => {
-//   return Object.keys(props).reduce((accum, prop) => {
-//     return props[prop].reduce((accum, propPieces) => {
-//       return values.reduce((accum, value) => {
-//         return Object.assign(propPieces, value)
-//       }, {})
-//     }, {})
-//   }, {});
-// };
-
 export const propsValuesMerge = ({
   props,
   values
@@ -177,112 +169,112 @@ export const propsValuesMerge = ({
 // });
 // // Output
 
-// const outputtt = {
-//   "top": [
-//     {
-//       "propName": "t",
-//       "props": ["top"],
-//       "valueName": "1px",
-//       "value": "0.1rem"
-//     },
-//     {
-//       "propName": "t",
-//       "props": ["top"],
-//       "valueName": "2px",
-//       "value": "0.2rem"
-//     },
-//     {
-//       "propName": "t",
-//       "props": ["top"],
-//       "valueName": "3px",
-//       "value": "0.3rem"
-//     },
-//     {
-//       "propName": "t",
-//       "props": ["top"],
-//       "valueName": "4px",
-//       "value": "0.4rem"
-//     }
-//   ],
-//   "right": [
-//     {
-//       "propName": "r",
-//       "props": ["right"],
-//       "valueName": "1px",
-//       "value": "0.1rem"
-//     },
-//     {
-//       "propName": "r",
-//       "props": ["right"],
-//       "valueName": "2px",
-//       "value": "0.2rem"
-//     },
-//     {
-//       "propName": "r",
-//       "props": ["right"],
-//       "valueName": "3px",
-//       "value": "0.3rem"
-//     },
-//     {
-//       "propName": "r",
-//       "props": ["right"],
-//       "valueName": "4px",
-//       "value": "0.4rem"
-//     }
-//   ],
-//   "bottom": [
-//     {
-//       "propName": "b",
-//       "props": ["bottom"],
-//       "valueName": "1px",
-//       "value": "0.1rem"
-//     },
-//     {
-//       "propName": "b",
-//       "props": ["bottom"],
-//       "valueName": "2px",
-//       "value": "0.2rem"
-//     },
-//     {
-//       "propName": "b",
-//       "props": ["bottom"],
-//       "valueName": "3px",
-//       "value": "0.3rem"
-//     },
-//     {
-//       "propName": "b",
-//       "props": ["bottom"],
-//       "valueName": "4px",
-//       "value": "0.4rem"
-//     }
-//   ],
-//   "left": [
-//     {
-//       "propName": "l",
-//       "props": ["left"],
-//       "valueName": "1px",
-//       "value": "0.1rem"
-//     },
-//     {
-//       "propName": "l",
-//       "props": ["left"],
-//       "valueName": "2px",
-//       "value": "0.2rem"
-//     },
-//     {
-//       "propName": "l",
-//       "props": ["left"],
-//       "valueName": "3px",
-//       "value": "0.3rem"
-//     },
-//     {
-//       "propName": "l",
-//       "props": ["left"],
-//       "valueName": "4px",
-//       "value": "0.4rem"
-//     }
-//   ]
-// }
+const positionOutput = {
+  "top": [
+    {
+      propName: "t",
+      props: ["top"],
+      valueName: "1px",
+      value: "0.1rem"
+    },
+    {
+      propName: "t",
+      props: ["top"],
+      valueName: "2px",
+      value: "0.2rem"
+    },
+    {
+      propName: "t",
+      props: ["top"],
+      valueName: "3px",
+      value: "0.3rem"
+    },
+    {
+      propName: "t",
+      props: ["top"],
+      valueName: "4px",
+      value: "0.4rem"
+    }
+  ],
+  "right": [
+    {
+      propName: "r",
+      props: ["right"],
+      valueName: "1px",
+      value: "0.1rem"
+    },
+    {
+      propName: "r",
+      props: ["right"],
+      valueName: "2px",
+      value: "0.2rem"
+    },
+    {
+      propName: "r",
+      props: ["right"],
+      valueName: "3px",
+      value: "0.3rem"
+    },
+    {
+      propName: "r",
+      props: ["right"],
+      valueName: "4px",
+      value: "0.4rem"
+    }
+  ],
+  "bottom": [
+    {
+      propName: "b",
+      props: ["bottom"],
+      valueName: "1px",
+      value: "0.1rem"
+    },
+    {
+      propName: "b",
+      props: ["bottom"],
+      valueName: "2px",
+      value: "0.2rem"
+    },
+    {
+      propName: "b",
+      props: ["bottom"],
+      valueName: "3px",
+      value: "0.3rem"
+    },
+    {
+      propName: "b",
+      props: ["bottom"],
+      valueName: "4px",
+      value: "0.4rem"
+    }
+  ],
+  "left": [
+    {
+      propName: "l",
+      props: ["left"],
+      valueName: "1px",
+      value: "0.1rem"
+    },
+    {
+      propName: "l",
+      props: ["left"],
+      valueName: "2px",
+      value: "0.2rem"
+    },
+    {
+      propName: "l",
+      props: ["left"],
+      valueName: "3px",
+      value: "0.3rem"
+    },
+    {
+      propName: "l",
+      props: ["left"],
+      valueName: "4px",
+      value: "0.4rem"
+    }
+  ]
+}
 
 
 export const classCompile = ({
@@ -291,12 +283,54 @@ export const classCompile = ({
   valueName,
   value
 }) => ({
-  [`${propName}${valueName}`]: Object.assign(
+  [`.${propName}${valueName}`]: Object.assign(
     ...props.map((prop) => ({
       [prop]: value
     }))
   )
 });
+
+const sample = classCompile({
+  propName: "l",
+  props: ["left"],
+  valueName: "1px",
+  value: "0.1rem"
+},
+{
+  propName: "l",
+  props: ["left"],
+  valueName: "2px",
+  value: "0.2rem"
+},
+{
+  propName: "l",
+  props: ["left"],
+  valueName: "3px",
+  value: "0.3rem"
+},
+{
+  propName: "l",
+  props: ["left"],
+  valueName: "4px",
+  value: "0.4rem"
+});
+
+const printClass = (obj) => Object.keys(obj).map(className => {
+  Object.entries(obj[className]).map(
+    ([prop, value]) => {
+      return `${className} { ${prop}: ${value} }`
+    }
+  )
+});
+// JSONlog(sample);
+printClass(sample);
+
+// JSONlog(
+//   Object.keys(positionOutput)
+//   .map((prop) => (
+//     positionOutput[prop].map(classCompile)
+//   ))
+// )
 
 export const spacingProps = propsCompile({
   props: {
@@ -343,3 +377,8 @@ export const positionCoordinateProps = propsCompile({
 //     )
 //   }))
 // );
+
+// fs.writeFile('atomic.css', JSON.stringify(positionCoordinateProps, null, 4), function (err) {
+//   if (err) return console.log(err);
+//   console.log('Hello World > helloworld.txt');
+// });

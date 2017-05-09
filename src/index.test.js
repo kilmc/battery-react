@@ -4,7 +4,8 @@ import {
   propsCompile,
   scaleUnits,
   positionCoordinateProps,
-  propsValuesMerge
+  propsValuesMerge,
+  pixelUnits
 } from './index';
 
 describe('Battery', () => {
@@ -17,8 +18,8 @@ describe('Battery', () => {
   describe('propsValuesMerge', () => {
     it('matches snapshot', () => {
       expect(propsValuesMerge({
-        props: spacingProps,
-        values: scaleUnits
+        props: positionCoordinateProps,
+        values: pixelUnits
       })).toMatchSnapshot()
     });
   });
