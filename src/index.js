@@ -234,7 +234,7 @@ export const spacingClasses =
   scaleUnits
 );
 
-JSONlog(spacingClasses)
+JSONlog(spacingClasses)``
 
 // export const propsCompile = ({
 //   props,
