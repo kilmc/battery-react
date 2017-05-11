@@ -11,28 +11,12 @@ const compose = (...functions) =>
   functions.reduce((f, g) => (...xs) => f(g(...xs)));
 const identity = x => x;
 
-/**
- * ------------------------------------------------------------------
- * Atomic Base config
- * ------------------------------------------------------------------
- */
+// --------------------------------------------------------
+// Atomic Base Config
+// --------------------------------------------------------
 
 const baseFontSize = 10;
 const baseUnit = 6;
-
-
-/**
- * ------------------------------------------------------------------
- * Atomic functions
- * ------------------------------------------------------------------
- */
-const remify = (x) => x/baseFontSize;
-const scaler = (x) => x*baseUnit;
-
-
-/**
- * Colors
- * ------------------------------------------------------------------ */
 
 const systemColors = {
   'white': '#FFFFFF',
@@ -53,6 +37,14 @@ const systemColors = {
   'purple': '#800080'
 }
 
+// --------------------------------------------------------
+// Atomic Functions
+// --------------------------------------------------------
+
+const remify = (x) => x/baseFontSize;
+const scaler = (x) => x*baseUnit;
+const colorHex = (name) => systemColors[name];
+const opacify = (x) => x/10;
 
 // --------------------------------------------------------
 // Generators
@@ -70,6 +62,10 @@ const valuesCompile = (obj) => (
   Object.entries(obj).map(([name, value]) =>
     valueObjectFormat(name, value))
 );
+
+JSONlog(valuesCompile({
+  '': '0.1rem solid #ff0099'
+}))
 
 // Length value generator
 // --------------------------------------------------------
@@ -96,6 +92,12 @@ const colors = (array) => {
     return obj
   },{});
 };
+
+// Keyword value generator
+// --------------------------------------------------------
+const keywords = (obj) => {
+
+}
 
 // Prop generator functions
 // --------------------------------------------------------
@@ -212,8 +214,6 @@ const backgroundColors = valuesCompile(colors([
   'red'
 ]));
 
-
-
 export const spacingClasses =
   propsValuesMerge(
     propsCompile({
@@ -234,7 +234,7 @@ export const spacingClasses =
   scaleUnits
 );
 
-JSONlog(spacingClasses)
+// JSONlog(spacingClasses)
 
 
 
@@ -310,10 +310,10 @@ const borderConfig = {
   },
   propSeparator: '-',
   subProps: {
-    'top': 'top',
-    'right': 'right',
-    'bottom': 'bottom',
-    'left': 'left',
+    'top': ['top'],
+    'right': ['right'],
+    'bottom': ['bottom'],
+    'left': ['left']
   },
   responsiveValues: {
     '': `0.1rem solid ${colorHex('navy')}`
@@ -349,3 +349,5 @@ const borderConfig = {
 //   .border-bottom-lg { border-bottom: 0.1rem solid #000080 }
 //   .border-left-lg { border-left: 0.1rem solid #000080 }
 // }
+
+
