@@ -1,0 +1,76 @@
+.table { display: table }
+
+.block { display: block }
+.inline { display: inline }
+.inline-block { display: inline-block }
+.flex { display: flex }
+
+@media screen and (min-width: 600px) {
+  .block-sm { display: block }
+  .inline-sm { display: inline }
+  .inline-block-sm { display: inline-block }
+  .flex-sm { display: flex }
+}
+
+@media screen and (min-width: 900px) {
+  .block-md { display: block }
+  .inline-md { display: inline }
+  .inline-block-md { display: inline-block }
+  .flex-md { display: flex }
+}
+
+@media screen and (min-width: 1200px) {
+  .block-lg { display: block }
+  .inline-lg { display: inline }
+  .inline-block-lg { display: inline-block }
+  .flex-lg { display: flex }
+}
+
+@media screen and (max-width: 600px) {
+  .hide-xs { display: none }
+};
+
+@media screen and (min-width: 600px) and (max-width: 900px) {
+  .hide-sm { display: none }
+};
+
+@media screen and (min-width: 900px) and (max-width: 1200px) {
+  .hide-md { display: none }
+};
+
+@media screen and (min-width: 1200px) {
+  .hide-lg { display: none }
+};
+
+
+
+
+.border { border: 0.1rem solid #000080 }
+.border-top { border-top: 0.1rem solid #000080 }
+.border-right { border-right: 0.1rem solid #000080 }
+.border-bottom { border-bottom: 0.1rem solid #000080 }
+.border-left { border-left: 0.1rem solid #000080 }
+
+@media screen and (min-width: 600px) {
+  .border-sm { border: 0.1rem solid #000080 }
+  .border-top-sm { border-top: 0.1rem solid #000080 }
+  .border-right-sm { border-right: 0.1rem solid #000080 }
+  .border-bottom-sm { border-bottom: 0.1rem solid #000080 }
+  .border-left-sm { border-left: 0.1rem solid #000080 }
+}
+
+@media screen and (min-width: 900px) {
+  .border-md { border: 0.1rem solid #000080 }
+  .border-top-md { border-top: 0.1rem solid #000080 }
+  .border-right-md { border-right: 0.1rem solid #000080 }
+  .border-bottom-md { border-bottom: 0.1rem solid #000080 }
+  .border-left-md { border-left: 0.1rem solid #000080 }
+}
+
+@media screen and (min-width: 1200px) {
+  .border-lg { border: 0.1rem solid #000080 }
+  .border-top-lg { border-top: 0.1rem solid #000080 }
+  .border-right-lg { border-right: 0.1rem solid #000080 }
+  .border-bottom-lg { border-bottom: 0.1rem solid #000080 }
+  .border-left-lg { border-left: 0.1rem solid #000080 }
+}
