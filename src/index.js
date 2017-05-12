@@ -11,9 +11,9 @@ const compose = (...functions) =>
   functions.reduce((f, g) => (...xs) => f(g(...xs)));
 const identity = x => x;
 
-// --------------------------------------------------------
+// ------------------------------------------------------------------
 // Atomic Base Config
-// --------------------------------------------------------
+// ------------------------------------------------------------------
 
 const baseFontSize = 10;
 const baseUnit = 6;
@@ -37,38 +37,36 @@ const systemColors = {
   'purple': '#800080'
 }
 
-// --------------------------------------------------------
+// ------------------------------------------------------------------
 // Atomic Functions
-// --------------------------------------------------------
+// ------------------------------------------------------------------
 
 const remify = (x) => x/baseFontSize;
 const scaler = (x) => x*baseUnit;
 const colorHex = (name) => systemColors[name];
 const opacify = (x) => x/10;
 
-// --------------------------------------------------------
+// ------------------------------------------------------------------
 // Generators
-// --------------------------------------------------------
+// ------------------------------------------------------------------
 
 // Value generator functions
-// --------------------------------------------------------
+// ------------------------------------------------------------------
 
-const valueObjectFormat = (name, value) => ({
+const valueObjectFormat = (name, value, type = 'none') => ({
   "valueName": name,
-  "value": value
+  "value": value,
+  "valueType": type
 });
 
-const valuesCompile = (obj) => (
+const valuesCompile = (obj, type = 'none') => (
   Object.entries(obj).map(([name, value]) =>
     valueObjectFormat(name, value))
 );
 
-JSONlog(valuesCompile({
-  '': '0.1rem solid #ff0099'
-}))
-
 // Length value generator
-// --------------------------------------------------------
+// ------------------------------------------------------------------
+
 const lengths = ({
   values,
   keySuffix = '',
@@ -85,7 +83,8 @@ const lengths = ({
 };
 
 // Color value generator
-// --------------------------------------------------------
+// ------------------------------------------------------------------
+
 const colors = (array) => {
   return array.reduce((obj, value) => {
     obj[value] = systemColors[value];
@@ -93,14 +92,9 @@ const colors = (array) => {
   },{});
 };
 
-// Keyword value generator
-// --------------------------------------------------------
-const keywords = (obj) => {
-
-}
-
 // Prop generator functions
-// --------------------------------------------------------
+// ------------------------------------------------------------------
+
 export const propsCompile = ({
   props,
   subProps = {},
@@ -114,11 +108,13 @@ export const propsCompile = ({
         "propName": `${propName}${propSeparator}${subPropName}`,
         "props": subProps.map((sp) => `${prop}-${sp}`)
       }))
-  ]}))
+    ]
+  }))
 );
 
 // Length value generator
-// --------------------------------------------------------
+// ------------------------------------------------------------------
+
 export const propsValuesMerge = (props, values) =>
   Object.keys(props).map(prop => (
     [props[prop]]
@@ -155,11 +151,10 @@ const printClass = (obj) => Object.keys(obj)
   }
 );
 
-/**
- * ------------------------------------------------------------------
- * Values
- * ------------------------------------------------------------------
- */
+// ------------------------------------------------------------------
+// Values
+// ------------------------------------------------------------------
+
 
 const percentageValues = [
   0, 5, 10, 15, 20, 25, 30, 33, 40, 50,
