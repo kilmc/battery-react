@@ -48,11 +48,6 @@ const mobileFirstConfig = {
 };
 
 
-// Mobile first
-// bp1: (min-width: bp1)
-// bp2: (min-width: bp2)
-// bp3: (min-width: bp3)
-
 // Per Breakpoint
 // bp0: (max-width: bp1 - 1px)
 // bp1: (min-width: bp1) and (max-width: bp2 - 1px)
@@ -85,17 +80,25 @@ const opacify = (x) => x/10;
 //   valueType: "percentage"
 // }
 
+// valueObjectFormat
+// ------------------------------------------------------------------
 // Formats input as a valueObject
+//
 // Working: 100%
+
 const valueObjectFormat = (name, value, type = 'none') => ({
   valueName: name,
   value: value,
   valueType: type
 });
 
+// valuesCompile
+// ------------------------------------------------------------------
 // Iterates over an object and passes each entry to the
 // valueObject formatter.
+//
 // Working: 100%
+
 const valuesCompile = (obj, type = 'none') => (
   Object.entries(obj).map(([name, value]) =>
     valueObjectFormat(name, value))
@@ -105,6 +108,8 @@ const valuesCompile = (obj, type = 'none') => (
 // ------------------------------------------------------------------
 // Generates an object with length type values. The output of this
 // is meant to be used with the valuesCompile function.
+//
+// Consumed by: valuesCompile
 // Working: 100%
 
 const lengths = ({
@@ -126,6 +131,7 @@ const lengths = ({
 // ------------------------------------------------------------------
 // Converts an array of color names into an object with color names
 // and color hex values.
+//
 // Consumed by: valuesCompile
 // Working: 100%
 
@@ -151,6 +157,7 @@ const colors = (array) => {
 // ------------------------------------------------------------------
 // Converts a propsConfig object into an array containing objects
 // correctly formatted to be merged with a valueObject
+//
 // Working: 100%
 
 export const propsCompile = ({
@@ -173,6 +180,7 @@ export const propsCompile = ({
 // propsValuesMerge
 // ------------------------------------------------------------------
 // Merges an arrary of valueObjects with an array of propObjects
+//
 // Working: 75%
 
 export const propsValuesMerge = (props, values) =>
@@ -189,11 +197,12 @@ export const propsValuesMerge = (props, values) =>
   )
 );
 
-
 // breakpointClassFormat
 // ------------------------------------------------------------------
 // Adds a breakpoint indicator as a suffix or prefix depending on
 // the user config.
+//
+// Working: 100%
 
 const breakpointClassFormat = (baseClass,breakpoint) =>
   breakpointPrefixOrSuffix === 'suffix'
@@ -204,6 +213,8 @@ const breakpointClassFormat = (baseClass,breakpoint) =>
 // ------------------------------------------------------------------
 // Converst a classObject into a complete class. Optionally adds
 // a breakpoint indicator.
+//
+// Working: 100% (Might need a refactor because of assignment)
 
 export const classCompile = ({
   propName,
@@ -229,7 +240,8 @@ export const classCompile = ({
 // mobileFirstBreakpoints
 // ------------------------------------------------------------------
 // Creates an object with mobileFirst media query params
-// Working: Partially
+//
+// Working: Still being designed
 
 const mobileFirstBreakpoints = (obj) => Object.assign(
   ...Object.entries(obj).map(([bp, value]) => ({
@@ -239,7 +251,11 @@ const mobileFirstBreakpoints = (obj) => Object.assign(
 
 // printClass
 // ------------------------------------------------------------------
-// Working: Partially
+// Creates a formatted block of classes in a string which can be
+// passed to a another function to render it into a CSS file.
+//
+// Working: Still being designed
+
 const printClass = (obj) => Object.keys(obj)
   .map(className => {
     Object.entries(obj[className]).map(
