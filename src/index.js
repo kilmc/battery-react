@@ -177,21 +177,6 @@ export const propsCompile = ({
   }))
 );
 
-// JSONlog(propsCompile({
-//   props: {
-//     'p': 'padding',
-//     'm': 'margin'
-//   },
-//   subProps: {
-//     't': ['top'],
-//     'r': ['right'],
-//     'b': ['bottom'],
-//     'l': ['left'],
-//     'x': ['right', 'left'],
-//     'y': ['top', 'bottom']
-//   }
-// }))
-
 // propsValuesMerge
 // ------------------------------------------------------------------
 // Merges an arrary of valueObjects with an array of propObjects
@@ -234,19 +219,31 @@ export const classCompile = ({
   value,
   breakpoint = ''
 }) => {
-  const baseClassName = `${propName}${valueName}`;
-  let fullClassName = baseClassName;
+  let baseClassName = `${propName}${valueName}`;
   if (breakpoint !== '') {
-    fullClassName = breakpointClassFormat(baseClassName,breakpoint);
+    baseClassName = breakpointClassFormat(baseClassName,breakpoint);
   }
   return {
-    [`.${fullClassName}`]: Object.assign(
+    [`${baseClassName}`]: Object.assign(
       ...props.map((prop) => ({
         [prop]: value
       }))
     )
   }
 };
+
+export const propGroupCompile = (obj) => Object.assign(
+  ...Object.entries(obj)
+    .map(([propGroup, classes]) => ({
+      [propGroup]: classes.reduce((accum, singleClass) => (
+        classCompile(singleClass)
+      ), {})
+  })
+));
+
+// JSONlog(classCompile(
+
+// ))
 
 // mobileFirstBreakpoints
 // ------------------------------------------------------------------
@@ -296,14 +293,12 @@ const percentageUnits = lengths({
   keySuffix: "p",
   valueSuffix: '%'
 });
-// JSONlog(percentageUnits);
 
 const viewportHeightUnits = lengths({
   values: percentageValues,
   keySuffix: "vh",
   valueSuffix: 'vh'
 });
-// console.log(viewportHeightUnits);
 
 export const pixelUnits = lengths({
   values: pixelValues,
@@ -325,7 +320,6 @@ const textColors = colors([
   'navy'
 ]);
 
-
 const backgroundColors = colors([
   'white',
   'silver',
@@ -334,7 +328,7 @@ const backgroundColors = colors([
   'red'
 ]);
 
-export const spacingClasses =
+const spacingClasses =
   propsValuesMerge(
     propsCompile({
       props: {
@@ -353,6 +347,7 @@ export const spacingClasses =
   ),
   scaleUnits
 );
+
 
 
 

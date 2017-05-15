@@ -7,43 +7,6 @@ Object {
 }
 `;
 
-exports[`Battery positionCoordinateProps matches snapshot 1`] = `
-Object {
-  "bottom": Array [
-    Object {
-      "propName": "b",
-      "props": Array [
-        "bottom",
-      ],
-    },
-  ],
-  "left": Array [
-    Object {
-      "propName": "l",
-      "props": Array [
-        "left",
-      ],
-    },
-  ],
-  "right": Array [
-    Object {
-      "propName": "r",
-      "props": Array [
-        "right",
-      ],
-    },
-  ],
-  "top": Array [
-    Object {
-      "propName": "t",
-      "props": Array [
-        "top",
-      ],
-    },
-  ],
-}
-`;
-
 exports[`Battery propsCompile matches snapshot 1`] = `
 Object {
   "margin": Array [
@@ -91,190 +54,112 @@ Object {
 }
 `;
 
-exports[`Battery propsValuesMerge matches snapshot 1`] = `[Function]`;
-
 exports[`Battery scaleUnits matches snapshot 1`] = `
 Array [
   Object {
     "value": "0rem",
     "valueName": "0",
+    "valueType": "none",
   },
   Object {
     "value": "0.6rem",
     "valueName": "1",
+    "valueType": "none",
   },
   Object {
     "value": "1.2rem",
     "valueName": "2",
+    "valueType": "none",
   },
   Object {
     "value": "1.8rem",
     "valueName": "3",
+    "valueType": "none",
   },
   Object {
     "value": "2.4rem",
     "valueName": "4",
+    "valueType": "none",
   },
   Object {
     "value": "3rem",
     "valueName": "5",
+    "valueType": "none",
   },
   Object {
     "value": "3.6rem",
     "valueName": "6",
+    "valueType": "none",
   },
   Object {
     "value": "4.2rem",
     "valueName": "7",
+    "valueType": "none",
   },
   Object {
     "value": "4.8rem",
     "valueName": "8",
+    "valueType": "none",
   },
   Object {
     "value": "5.4rem",
     "valueName": "9",
+    "valueType": "none",
   },
   Object {
     "value": "6rem",
     "valueName": "10",
+    "valueType": "none",
   },
   Object {
     "value": "6.6rem",
     "valueName": "11",
+    "valueType": "none",
   },
   Object {
     "value": "7.2rem",
     "valueName": "12",
+    "valueType": "none",
   },
   Object {
     "value": "7.8rem",
     "valueName": "13",
+    "valueType": "none",
   },
   Object {
     "value": "8.4rem",
     "valueName": "14",
+    "valueType": "none",
   },
   Object {
     "value": "9rem",
     "valueName": "15",
+    "valueType": "none",
   },
   Object {
     "value": "9.6rem",
     "valueName": "16",
+    "valueType": "none",
   },
   Object {
     "value": "10.2rem",
     "valueName": "17",
+    "valueType": "none",
   },
   Object {
     "value": "10.8rem",
     "valueName": "18",
+    "valueType": "none",
   },
   Object {
     "value": "11.4rem",
     "valueName": "19",
+    "valueType": "none",
   },
   Object {
     "value": "12rem",
     "valueName": "20",
+    "valueType": "none",
   },
 ]
-`;
-
-exports[`Battery spacingProps matches snapshot 1`] = `
-Object {
-  "margin": Array [
-    Object {
-      "propName": "m",
-      "props": Array [
-        "margin",
-      ],
-    },
-    Object {
-      "propName": "mt",
-      "props": Array [
-        "margin-top",
-      ],
-    },
-    Object {
-      "propName": "mr",
-      "props": Array [
-        "margin-right",
-      ],
-    },
-    Object {
-      "propName": "mb",
-      "props": Array [
-        "margin-bottom",
-      ],
-    },
-    Object {
-      "propName": "ml",
-      "props": Array [
-        "margin-left",
-      ],
-    },
-    Object {
-      "propName": "mx",
-      "props": Array [
-        "margin-right",
-        "margin-left",
-      ],
-    },
-    Object {
-      "propName": "my",
-      "props": Array [
-        "margin-top",
-        "margin-bottom",
-      ],
-    },
-  ],
-  "padding": Array [
-    Object {
-      "propName": "p",
-      "props": Array [
-        "padding",
-      ],
-    },
-    Object {
-      "propName": "pt",
-      "props": Array [
-        "padding-top",
-      ],
-    },
-    Object {
-      "propName": "pr",
-      "props": Array [
-        "padding-right",
-      ],
-    },
-    Object {
-      "propName": "pb",
-      "props": Array [
-        "padding-bottom",
-      ],
-    },
-    Object {
-      "propName": "pl",
-      "props": Array [
-        "padding-left",
-      ],
-    },
-    Object {
-      "propName": "px",
-      "props": Array [
-        "padding-right",
-        "padding-left",
-      ],
-    },
-    Object {
-      "propName": "py",
-      "props": Array [
-        "padding-top",
-        "padding-bottom",
-      ],
-    },
-  ],
-}
 `;
