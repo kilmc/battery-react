@@ -119,12 +119,12 @@ const lengths = ({
   transform = [identity],
   negative = false
 }) => {
-  return values.reduce((obj, value) => {
+  return valuesCompile(values.reduce((obj, value) => {
     const minus = negative ? '-' : '';
 
     obj[`${minus}${value}${keySuffix}`] = `${minus}${compose(...transform)(value)}${valueSuffix}`;
     return obj;
-  },{});
+  },{}));
 };
 
 // Color value generator
@@ -136,10 +136,10 @@ const lengths = ({
 // Working: 100%
 
 const colors = (array) => {
-  return array.reduce((obj, value) => {
+  return valuesCompile(array.reduce((obj, value) => {
     obj[value] = systemColors[value];
     return obj
-  },{});
+  },{}));
 };
 
 // propObject
@@ -177,24 +177,35 @@ export const propsCompile = ({
   }))
 );
 
+// JSONlog(propsCompile({
+//   props: {
+//     'p': 'padding',
+//     'm': 'margin'
+//   },
+//   subProps: {
+//     't': ['top'],
+//     'r': ['right'],
+//     'b': ['bottom'],
+//     'l': ['left'],
+//     'x': ['right', 'left'],
+//     'y': ['top', 'bottom']
+//   }
+// }))
+
 // propsValuesMerge
 // ------------------------------------------------------------------
 // Merges an arrary of valueObjects with an array of propObjects
 //
-// Working: 75%
+// Working: 100%
 
-export const propsValuesMerge = (props, values) =>
-  Object.keys(props).map(prop => (
-    [props[prop]]
-      .concat([values])
-      .reduce((accum, items) =>
-        accum.map(
-          x => items.map(
-            y => x.concat(y)
-          )
-        ).reduce((a,b) => a.concat(b)), [[]]
-      )
-  )
+export const propsValuesMerge = (propGroups, values) => Object.assign(
+  ...Object.entries(propGroups).map(([propGroup, props]) => ({
+    [propGroup]: props.reduce((accum, prop) => (
+      accum.concat(values.map(value => (
+        { ...prop, ...value }
+      )))
+    ), [])
+  }))
 );
 
 // breakpointClassFormat
@@ -280,48 +291,48 @@ const scaleMultipliers = [
 ];
 const pixelValues = [1, 2, 3, 4];
 
-const percentageUnits = valuesCompile(lengths({
+const percentageUnits = lengths({
   values: percentageValues,
   keySuffix: "p",
   valueSuffix: '%'
-}));
-// console.log(percentageUnits);
+});
+// JSONlog(percentageUnits);
 
-const viewportHeightUnits = valuesCompile(lengths({
+const viewportHeightUnits = lengths({
   values: percentageValues,
   keySuffix: "vh",
   valueSuffix: 'vh'
-}));
+});
 // console.log(viewportHeightUnits);
 
-export const pixelUnits = valuesCompile(lengths({
+export const pixelUnits = lengths({
   values: pixelValues,
   transform: [remify],
   keySuffix: "px",
   valueSuffix: 'rem'
-}));
+});
 
-export const scaleUnits = valuesCompile(lengths({
+export const scaleUnits = lengths({
   values: scaleMultipliers,
   transform: [remify, scaler],
   valueSuffix: 'rem'
-}));
+});
 
-const textColors = valuesCompile(colors([
+const textColors = colors([
   'aqua',
   'teal',
   'blue',
   'navy'
-]));
+]);
 
 
-const backgroundColors = valuesCompile(colors([
+const backgroundColors = colors([
   'white',
   'silver',
   'gray',
   'black',
   'red'
-]));
+]);
 
 export const spacingClasses =
   propsValuesMerge(
@@ -342,6 +353,8 @@ export const spacingClasses =
   ),
   scaleUnits
 );
+
+
 
 // const atomBackgroundColor = propsValuesMerge(
 //   propsCompile(backgroundColorConfig),

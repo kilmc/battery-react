@@ -11,16 +11,65 @@ import {
 describe('Battery', () => {
   describe('spacingProps', () => {
     it('matches snapshot', () => {
-      expect(spacingProps).toMatchSnapshot()
+      expect(spacingProps).toEqual()
     });
   });
 
   describe('propsValuesMerge', () => {
-    it('matches snapshot', () => {
-      expect(propsValuesMerge({
-        props: positionCoordinateProps,
-        values: pixelUnits
-      })).toMatchSnapshot()
+    it('matches expectations', () => {
+      expect(propsValuesMerge(
+        {
+          padding: [
+            {
+              propName: 'p',
+              props: ['padding']
+            },
+            {
+              propName: 'py',
+              props: ['padding-top', 'padding-bottom']
+            }
+          ]
+        },
+        [
+          {
+            valueName: '1px',
+            value: '0.1rem'
+          },
+          {
+            valueName: '2px',
+            value: '0.2rem'
+          }
+        ]
+      )).toEqual(
+        {
+          padding: [
+            {
+              propName: 'p',
+              props: ['padding'],
+              valueName: '1px',
+              value: '0.1rem'
+            },
+            {
+              propName: 'p',
+              props: ['padding'],
+              valueName: '2px',
+              value: '0.2rem'
+            },
+            {
+              propName: 'py',
+              props: ['padding-top', 'padding-bottom'],
+              valueName: '1px',
+              value: '0.1rem'
+            },
+            {
+              propName: 'py',
+              props: ['padding-top', 'padding-bottom'],
+              valueName: '2px',
+              value: '0.2rem'
+            }
+          ]
+        }
+      )
     });
   });
 
@@ -61,4 +110,14 @@ describe('Battery', () => {
       })).toMatchSnapshot()
     });
   });
+
+  describe('flatmap', () => {
+    fit('flattens', () => {
+      const as = [1,2,3];
+      Array.prototype.flatMap = Array.prototype.map;
+      expect(as.flatMap(a =>
+        [a, a]
+      )).toEqual([1,1,2,2,3,3])
+    })
+  })
 });
