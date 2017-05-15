@@ -35,7 +35,30 @@ const systemColors = {
   'navy': '#000080',
   'fuchsia': '#FF00FF',
   'purple': '#800080'
-}
+};
+
+const breakpointPrefixOrSuffix = 'suffix';
+const breakpointSeparator = '-'
+
+const mobileOnlyBreakpintName = 'xs';
+const mobileFirstConfig = {
+  sm: '600px',
+  md: '900px',
+  lg: '1100px'
+};
+
+
+// Mobile first
+// bp1: (min-width: bp1)
+// bp2: (min-width: bp2)
+// bp3: (min-width: bp3)
+
+// Per Breakpoint
+// bp0: (max-width: bp1 - 1px)
+// bp1: (min-width: bp1) and (max-width: bp2 - 1px)
+// bp2: (min-width: bp2) and (max-width: bp3 - 1px)
+// bp3: (min-width: bp3)
+
 
 // ------------------------------------------------------------------
 // Atomic Functions
@@ -50,22 +73,39 @@ const opacify = (x) => x/10;
 // Generators
 // ------------------------------------------------------------------
 
-// Value generator functions
+// valueObject
 // ------------------------------------------------------------------
+// The valueObject is one half of the core information needed to
+// generate a full classObject. The following is an example of a
+// correctly formatted valueObject.
+//
+// {
+//   valueName: "10p",
+//   value: "10%",
+//   valueType: "percentage"
+// }
 
+// Formats input as a valueObject
+// Working: 100%
 const valueObjectFormat = (name, value, type = 'none') => ({
-  "valueName": name,
-  "value": value,
-  "valueType": type
+  valueName: name,
+  value: value,
+  valueType: type
 });
 
+// Iterates over an object and passes each entry to the
+// valueObject formatter.
+// Working: 100%
 const valuesCompile = (obj, type = 'none') => (
   Object.entries(obj).map(([name, value]) =>
     valueObjectFormat(name, value))
 );
 
-// Length value generator
+// lengths
 // ------------------------------------------------------------------
+// Generates an object with length type values. The output of this
+// is meant to be used with the valuesCompile function.
+// Working: 100%
 
 const lengths = ({
   values,
@@ -84,6 +124,10 @@ const lengths = ({
 
 // Color value generator
 // ------------------------------------------------------------------
+// Converts an array of color names into an object with color names
+// and color hex values.
+// Consumed by: valuesCompile
+// Working: 100%
 
 const colors = (array) => {
   return array.reduce((obj, value) => {
@@ -92,8 +136,22 @@ const colors = (array) => {
   },{});
 };
 
-// Prop generator functions
+// propObject
 // ------------------------------------------------------------------
+// The propObject is the second half of the core information needed
+// to generate a full classObject. The following is an example of a
+// correctly formatted propObject.
+//
+// {
+//   propName: "pt",
+//   prop: "padding-top"
+// }
+
+// propsCompile
+// ------------------------------------------------------------------
+// Converts a propsConfig object into an array containing objects
+// correctly formatted to be merged with a valueObject
+// Working: 100%
 
 export const propsCompile = ({
   props,
@@ -112,8 +170,10 @@ export const propsCompile = ({
   }))
 );
 
-// Length value generator
+// propsValuesMerge
 // ------------------------------------------------------------------
+// Merges an arrary of valueObjects with an array of propObjects
+// Working: 75%
 
 export const propsValuesMerge = (props, values) =>
   Object.keys(props).map(prop => (
@@ -129,19 +189,57 @@ export const propsValuesMerge = (props, values) =>
   )
 );
 
+
+// breakpointClassFormat
+// ------------------------------------------------------------------
+// Adds a breakpoint indicator as a suffix or prefix depending on
+// the user config.
+
+const breakpointClassFormat = (baseClass,breakpoint) =>
+  breakpointPrefixOrSuffix === 'suffix'
+    ? baseClass.concat(breakpointSeparator,breakpoint)
+    : breakpoint.concat(breakpointSeparator,baseClass);
+
+// classCompile
+// ------------------------------------------------------------------
+// Converst a classObject into a complete class. Optionally adds
+// a breakpoint indicator.
+
 export const classCompile = ({
   propName,
   props,
   valueName,
-  value
-}) => ({
-  [`.${propName}${valueName}`]: Object.assign(
-    ...props.map((prop) => ({
-      [prop]: value
-    }))
-  )
-});
+  value,
+  breakpoint = ''
+}) => {
+  const baseClassName = `${propName}${valueName}`;
+  let fullClassName = baseClassName;
+  if (breakpoint !== '') {
+    fullClassName = breakpointClassFormat(baseClassName,breakpoint);
+  }
+  return {
+    [`.${fullClassName}`]: Object.assign(
+      ...props.map((prop) => ({
+        [prop]: value
+      }))
+    )
+  }
+};
 
+// mobileFirstBreakpoints
+// ------------------------------------------------------------------
+// Creates an object with mobileFirst media query params
+// Working: Partially
+
+const mobileFirstBreakpoints = (obj) => Object.assign(
+  ...Object.entries(obj).map(([bp, value]) => ({
+    [bp]: `(min-width: ${value})`
+  }))
+);
+
+// printClass
+// ------------------------------------------------------------------
+// Working: Partially
 const printClass = (obj) => Object.keys(obj)
   .map(className => {
     Object.entries(obj[className]).map(
@@ -228,6 +326,11 @@ export const spacingClasses =
   ),
   scaleUnits
 );
+
+// const atomBackgroundColor = propsValuesMerge(
+//   propsCompile(backgroundColorConfig),
+//   backgroundColors
+// );
 
 // JSONlog(spacingClasses)
 
