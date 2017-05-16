@@ -61,8 +61,8 @@ const mobileFirstConfig = {
 
 const remify = (x) => x/baseFontSize;
 const scaler = (x) => x*baseUnit;
-const colorHex = (name) => systemColors[name];
 const opacify = (x) => x/10;
+const colorHex = (name) => systemColors[name];
 
 // ------------------------------------------------------------------
 // Generators
@@ -86,10 +86,15 @@ const opacify = (x) => x/10;
 //
 // Working: 100%
 
-const valueObjectFormat = (name, value, type = 'none') => ({
-  valueName: name,
-  value: value,
-  valueType: type
+const valueObjectFormat = ({
+  name,
+  value,
+  type = 'none',
+  breakpoint = ''
+}) => ({
+  'valueName': name,
+  'value': value,
+  'valueType': type
 });
 
 // valuesCompile
@@ -99,18 +104,106 @@ const valueObjectFormat = (name, value, type = 'none') => ({
 //
 // Working: 100%
 
-const valuesCompile = (obj, type = 'none') => (
-  Object.entries(obj).map(([name, value]) =>
-    valueObjectFormat(name, value))
+const valuesCompile = (values, type = 'none') => (
+  Object.entries(values).map(([name, value]) =>
+    valueObjectFormat({name, value, type}))
 );
+
+
+const atomStructure = {
+  'display': {
+    values: {
+      all: {
+        'table': {
+          'display': 'table'
+        },
+        'block': {
+          'display': 'block'
+        },
+        'inline': {
+          'display': 'inline'
+        },
+        'inline-block': {
+          'display': 'inline-block'
+        },
+        'flex': {
+          'display': 'flex'
+        }
+      }
+    },
+    responsiveValues: {
+      sm: {
+        'block-sm': {
+          'display': 'block'
+        },
+        'inline-sm': {
+          'display': 'inline'
+        },
+        'inline-block-sm': {
+          'display': 'inline-block'
+        },
+        'flex-sm': {
+          'display': 'flex'
+        }
+      },
+      md: {
+        'block-md': {
+          'display': 'block'
+        },
+        'inline-md': {
+          'display': 'inline'
+        },
+        'inline-block-md': {
+          'display': 'inline-block'
+        },
+        'flex-md': {
+          'display': 'flex'
+        }
+      },
+      lg: {
+        'block-lg': {
+          'display': 'block'
+        },
+        'inline-lg': {
+          'display': 'inline'
+        },
+        'inline-block-lg': {
+          'display': 'inline-block'
+        },
+        'flex-lg': {
+          'display': 'flex'
+        }
+      }
+    },
+    perBreakpointValues: {
+      xs: {
+        'hide': {
+          'display': 'none'
+        }
+      },
+      sm: {
+        'hide': {
+          'display': 'none'
+        }
+      },
+      md: {
+        'hide': {
+          'display': 'none'
+        }
+      },
+      lg: {
+        'hide': {
+          'display': 'none'
+        }
+      }
+    }
+  }
+}
 
 // lengths
 // ------------------------------------------------------------------
 // Generates an object with length type values. The output of this
 // is meant to be used with the valuesCompile function.
-//
-// Consumed by: valuesCompile
-// Working: 100%
 
 const lengths = ({
   values,
@@ -119,12 +212,12 @@ const lengths = ({
   transform = [identity],
   negative = false
 }) => {
-  return valuesCompile(values.reduce((obj, value) => {
+  return values.reduce((obj, value) => {
     const minus = negative ? '-' : '';
 
     obj[`${minus}${value}${keySuffix}`] = `${minus}${compose(...transform)(value)}${valueSuffix}`;
     return obj;
-  },{}));
+  },{});
 };
 
 // Color value generator
@@ -157,8 +250,6 @@ const colors = (array) => {
 // ------------------------------------------------------------------
 // Converts a propsConfig object into an array containing objects
 // correctly formatted to be merged with a valueObject
-//
-// Working: 100%
 
 export const propsCompile = ({
   props,
@@ -180,8 +271,6 @@ export const propsCompile = ({
 // propsValuesMerge
 // ------------------------------------------------------------------
 // Merges an arrary of valueObjects with an array of propObjects
-//
-// Working: 100%
 
 export const propsValuesMerge = (propGroups, values) => Object.assign(
   ...Object.entries(propGroups).map(([propGroup, props]) => ({
@@ -197,8 +286,6 @@ export const propsValuesMerge = (propGroups, values) => Object.assign(
 // ------------------------------------------------------------------
 // Adds a breakpoint indicator as a suffix or prefix depending on
 // the user config.
-//
-// Working: 100%
 
 const breakpointClassFormat = (baseClass,breakpoint) =>
   breakpointPrefixOrSuffix === 'suffix'
@@ -209,8 +296,6 @@ const breakpointClassFormat = (baseClass,breakpoint) =>
 // ------------------------------------------------------------------
 // Converst a classObject into a complete class. Optionally adds
 // a breakpoint indicator.
-//
-// Working: 100% (Might need a refactor because of assignment)
 
 export const classCompile = ({
   propName,
@@ -232,18 +317,44 @@ export const classCompile = ({
   }
 };
 
-export const propGroupCompile = (obj) => Object.assign(
-  ...Object.entries(obj)
-    .map(([propGroup, classes]) => ({
-      [propGroup]: classes.reduce((accum, singleClass) => (
-        classCompile(singleClass)
-      ), {})
-  })
-));
+// export const propGroupCompile = (obj) => Object.assign(
+//   ...Object.entries(obj)
+//     .map(([propGroup, classes]) => ({
+//       [propGroup]: Object.assign(
+//         ...classes.map(singleClass => (
+//           classCompile(singleClass)
+//         ))
+//       )
+//   })
+// ));
 
-// JSONlog(classCompile(
 
-// ))
+export const propGroupCompile = ({
+  props,
+  propSeparator = '',
+  subProps = {},
+  values = [],
+  responsiveValues = [],
+  perBreakpointValues = []
+}) => {
+  const propGroups = propsCompile({props, propSeparator, subProps})
+  const rv = valuesCompile(responsiveValues);
+  const pbv = valuesCompile(perBreakpointValues);
+  const uv = valuesCompile(values).concat(rv);
+  console.log(propGroups['padding'])
+  return Object.assign(
+    ...Object.entries(props).map(([propName, prop]) => ({
+      [prop]: {
+        "values": propsValuesMerge(propGroups, uv)
+      }
+    })
+  ))
+};
+
+
+
+
+
 
 // mobileFirstBreakpoints
 // ------------------------------------------------------------------
@@ -283,8 +394,7 @@ const percentageValues = [
   60, 66, 70, 80, 85, 90, 95, 100
 ];
 const scaleMultipliers = [
-  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
-  12, 13, 14, 15, 16, 17, 18, 19, 20
+  1, 2, 3, 4
 ];
 const pixelValues = [1, 2, 3, 4];
 
@@ -328,55 +438,9 @@ const backgroundColors = colors([
   'red'
 ]);
 
-const spacingClasses =
-  propsValuesMerge(
-    propsCompile({
-      props: {
-        'p': 'padding',
-        'm': 'margin'
-      },
-      subProps: {
-        't': ['top'],
-        'r': ['right'],
-        'b': ['bottom'],
-        'l': ['left'],
-        'x': ['right', 'left'],
-        'y': ['top', 'bottom']
-      }
-    }
-  ),
-  scaleUnits
-);
 
 
 
-
-// const atomBackgroundColor = propsValuesMerge(
-//   propsCompile(backgroundColorConfig),
-//   backgroundColors
-// );
-
-// JSONlog(spacingClasses)
-
-
-
-const displayConfig = {
-  props: {
-    '': 'display'
-  },
-  values: {
-    'table': 'table'
-  },
-  responsiveValues: {
-    'block': 'block',
-    'inline': 'inline',
-    'inline-block': 'inline-block',
-    'flex': 'flex',
-  },
-  perBreakpointValues: {
-    'hide': 'none'
-  }
-};
 
 // CSS output
 // // values
@@ -426,21 +490,21 @@ const displayConfig = {
 //   .hide-lg { display: none }
 // };
 
-const borderConfig = {
-  props: {
-    'border': 'border'
-  },
-  propSeparator: '-',
-  subProps: {
-    'top': ['top'],
-    'right': ['right'],
-    'bottom': ['bottom'],
-    'left': ['left']
-  },
-  responsiveValues: {
-    '': `0.1rem solid ${colorHex('navy')}`
-  }
-}
+// const borderConfig = {
+//   props: {
+//     'border': 'border'
+//   },
+//   propSeparator: '-',
+//   subProps: {
+//     'top': ['top'],
+//     'right': ['right'],
+//     'bottom': ['bottom'],
+//     'left': ['left']
+//   },
+//   responsiveValues: {
+//     '': `0.1rem solid ${colorHex('navy')}`
+//   }
+// }
 
 // .border { border: 0.1rem solid #000080 }
 // .border-top { border-top: 0.1rem solid #000080 }
@@ -471,5 +535,3 @@ const borderConfig = {
 //   .border-bottom-lg { border-bottom: 0.1rem solid #000080 }
 //   .border-left-lg { border-left: 0.1rem solid #000080 }
 // }
-
-

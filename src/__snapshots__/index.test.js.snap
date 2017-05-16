@@ -55,111 +55,27 @@ Object {
 `;
 
 exports[`Battery scaleUnits matches snapshot 1`] = `
-Array [
-  Object {
-    "value": "0rem",
-    "valueName": "0",
-    "valueType": "none",
-  },
-  Object {
-    "value": "0.6rem",
-    "valueName": "1",
-    "valueType": "none",
-  },
-  Object {
-    "value": "1.2rem",
-    "valueName": "2",
-    "valueType": "none",
-  },
-  Object {
-    "value": "1.8rem",
-    "valueName": "3",
-    "valueType": "none",
-  },
-  Object {
-    "value": "2.4rem",
-    "valueName": "4",
-    "valueType": "none",
-  },
-  Object {
-    "value": "3rem",
-    "valueName": "5",
-    "valueType": "none",
-  },
-  Object {
-    "value": "3.6rem",
-    "valueName": "6",
-    "valueType": "none",
-  },
-  Object {
-    "value": "4.2rem",
-    "valueName": "7",
-    "valueType": "none",
-  },
-  Object {
-    "value": "4.8rem",
-    "valueName": "8",
-    "valueType": "none",
-  },
-  Object {
-    "value": "5.4rem",
-    "valueName": "9",
-    "valueType": "none",
-  },
-  Object {
-    "value": "6rem",
-    "valueName": "10",
-    "valueType": "none",
-  },
-  Object {
-    "value": "6.6rem",
-    "valueName": "11",
-    "valueType": "none",
-  },
-  Object {
-    "value": "7.2rem",
-    "valueName": "12",
-    "valueType": "none",
-  },
-  Object {
-    "value": "7.8rem",
-    "valueName": "13",
-    "valueType": "none",
-  },
-  Object {
-    "value": "8.4rem",
-    "valueName": "14",
-    "valueType": "none",
-  },
-  Object {
-    "value": "9rem",
-    "valueName": "15",
-    "valueType": "none",
-  },
-  Object {
-    "value": "9.6rem",
-    "valueName": "16",
-    "valueType": "none",
-  },
-  Object {
-    "value": "10.2rem",
-    "valueName": "17",
-    "valueType": "none",
-  },
-  Object {
-    "value": "10.8rem",
-    "valueName": "18",
-    "valueType": "none",
-  },
-  Object {
-    "value": "11.4rem",
-    "valueName": "19",
-    "valueType": "none",
-  },
-  Object {
-    "value": "12rem",
-    "valueName": "20",
-    "valueType": "none",
-  },
-]
+Object {
+  "0": "0rem",
+  "1": "0.6rem",
+  "10": "6rem",
+  "11": "6.6rem",
+  "12": "7.2rem",
+  "13": "7.8rem",
+  "14": "8.4rem",
+  "15": "9rem",
+  "16": "9.6rem",
+  "17": "10.2rem",
+  "18": "10.8rem",
+  "19": "11.4rem",
+  "2": "1.2rem",
+  "20": "12rem",
+  "3": "1.8rem",
+  "4": "2.4rem",
+  "5": "3rem",
+  "6": "3.6rem",
+  "7": "4.2rem",
+  "8": "4.8rem",
+  "9": "5.4rem",
+}
 `;
