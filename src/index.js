@@ -40,13 +40,12 @@ const systemColors = {
 const breakpointPrefixOrSuffix = 'suffix';
 const breakpointSeparator = '-'
 
-const mobileOnlyBreakpintName = 'xs';
+const mobileOnlyBreakpointName = ['xs'];
 const mobileFirstConfig = {
   sm: '600px',
   md: '900px',
   lg: '1100px'
 };
-
 
 // Per Breakpoint
 // bp0: (max-width: bp1 - 1px)
@@ -94,7 +93,8 @@ const valueObjectFormat = ({
 }) => ({
   'valueName': name,
   'value': value,
-  'valueType': type
+  'valueType': type,
+  'breakpoint': breakpoint
 });
 
 // valuesCompile
@@ -104,31 +104,29 @@ const valueObjectFormat = ({
 //
 // Working: 100%
 
-const valuesCompile = (values, type = 'none') => (
+const valuesCompile = (values, breakpoint, type = 'none') => (
   Object.entries(values).map(([name, value]) =>
-    valueObjectFormat({name, value, type}))
+    valueObjectFormat({name, value, type, breakpoint}))
 );
 
 
 const atomStructure = {
   'display': {
     values: {
-      all: {
-        'table': {
-          'display': 'table'
-        },
-        'block': {
-          'display': 'block'
-        },
-        'inline': {
-          'display': 'inline'
-        },
-        'inline-block': {
-          'display': 'inline-block'
-        },
-        'flex': {
-          'display': 'flex'
-        }
+      'table': {
+        'display': 'table'
+      },
+      'block': {
+        'display': 'block'
+      },
+      'inline': {
+        'display': 'inline'
+      },
+      'inline-block': {
+        'display': 'inline-block'
+      },
+      'flex': {
+        'display': 'flex'
       }
     },
     responsiveValues: {
@@ -272,14 +270,22 @@ export const propsCompile = ({
 // ------------------------------------------------------------------
 // Merges an arrary of valueObjects with an array of propObjects
 
-export const propsValuesMerge = (propGroups, values) => Object.assign(
-  ...Object.entries(propGroups).map(([propGroup, props]) => ({
-    [propGroup]: props.reduce((accum, prop) => (
-      accum.concat(values.map(value => (
-        { ...prop, ...value }
-      )))
-    ), [])
-  }))
+// export const propsValuesMerge = (propGroups, values) => Object.assign(
+//   ...Object.entries(propGroups).map(([propGroup, props]) => ({
+//     [propGroup]: props.reduce((accum, prop) => (
+//       accum.concat(values.map(value => (
+//         { ...prop, ...value }
+//       )))
+//     ), [])
+//   }))
+// );
+
+export const propsValuesMerge = (props, values) => Object.assign(
+  props.reduce((accum, prop) => (
+    accum.concat(values.map(value => (
+      { ...prop, ...value }
+    )))
+  ), [])
 );
 
 // breakpointClassFormat
@@ -317,41 +323,74 @@ export const classCompile = ({
   }
 };
 
-// export const propGroupCompile = (obj) => Object.assign(
-//   ...Object.entries(obj)
-//     .map(([propGroup, classes]) => ({
-//       [propGroup]: Object.assign(
-//         ...classes.map(singleClass => (
-//           classCompile(singleClass)
-//         ))
-//       )
-//   })
-// ));
+export const breakpointsClassCompile = ({
+  prop,
+  values,
+  breakpoints
+}) => {
+  return breakpoints.reduce((obj,bp) => {
+    obj[bp] = propsValuesMerge(
+      prop,
+      valuesCompile(values, bp)
+    ).map(classCompile)
+    return obj
+  }, {})
+};
 
+
+// propGroupCompile
+// ------------------------------------------------------------------
+//
 
 export const propGroupCompile = ({
   props,
   propSeparator = '',
   subProps = {},
   values = [],
-  responsiveValues = [],
+  mobileFirstValues = [],
   perBreakpointValues = []
 }) => {
   const propGroups = propsCompile({props, propSeparator, subProps})
-  const rv = valuesCompile(responsiveValues);
-  const pbv = valuesCompile(perBreakpointValues);
-  const uv = valuesCompile(values).concat(rv);
-  console.log(propGroups['padding'])
+
   return Object.assign(
     ...Object.entries(props).map(([propName, prop]) => ({
       [prop]: {
-        "values": propsValuesMerge(propGroups, uv)
+        "values": propsValuesMerge(
+          propGroups[prop],
+          valuesCompile(Object.assign(values, mobileFirstValues))
+        ).map(classCompile),
+        "mobileFirstValues": breakpointsClassCompile({
+          prop: propGroups[prop],
+          values: mobileFirstValues,
+          breakpoints: Object.keys(mobileFirstConfig)
+        }),
+        "perBreakpointValues": breakpointsClassCompile({
+          prop: propGroups[prop],
+          values: perBreakpointValues,
+          breakpoints: mobileOnlyBreakpointName.concat(Object.keys(mobileFirstConfig))
+        })
       }
     })
   ))
 };
 
-
+JSONlog(propGroupCompile({
+  props: {
+    '': 'display'
+  },
+  values: {
+    'table': 'table'
+  },
+  mobileFirstValues: {
+    'block': 'block',
+    'inline': 'inline',
+    'inline-block': 'inline-block',
+    'flex': 'flex',
+  },
+  perBreakpointValues: {
+    'hide': 'none'
+  }
+}))
 
 
 
@@ -394,7 +433,8 @@ const percentageValues = [
   60, 66, 70, 80, 85, 90, 95, 100
 ];
 const scaleMultipliers = [
-  1, 2, 3, 4
+  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+  11, 12, 13, 14, 15, 16, 17, 18, 19, 20
 ];
 const pixelValues = [1, 2, 3, 4];
 
