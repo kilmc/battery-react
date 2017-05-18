@@ -82,8 +82,6 @@ const colorHex = (name) => systemColors[name];
 // valueObjectFormat
 // ------------------------------------------------------------------
 // Formats input as a valueObject
-//
-// Working: 100%
 
 const valueObjectFormat = ({
   name,
@@ -101,102 +99,11 @@ const valueObjectFormat = ({
 // ------------------------------------------------------------------
 // Iterates over an object and passes each entry to the
 // valueObject formatter.
-//
-// Working: 100%
 
 const valuesCompile = (values, breakpoint, type = 'none') => (
   Object.entries(values).map(([name, value]) =>
     valueObjectFormat({name, value, type, breakpoint}))
 );
-
-
-const atomStructure = {
-  'display': {
-    values: {
-      'table': {
-        'display': 'table'
-      },
-      'block': {
-        'display': 'block'
-      },
-      'inline': {
-        'display': 'inline'
-      },
-      'inline-block': {
-        'display': 'inline-block'
-      },
-      'flex': {
-        'display': 'flex'
-      }
-    },
-    responsiveValues: {
-      sm: {
-        'block-sm': {
-          'display': 'block'
-        },
-        'inline-sm': {
-          'display': 'inline'
-        },
-        'inline-block-sm': {
-          'display': 'inline-block'
-        },
-        'flex-sm': {
-          'display': 'flex'
-        }
-      },
-      md: {
-        'block-md': {
-          'display': 'block'
-        },
-        'inline-md': {
-          'display': 'inline'
-        },
-        'inline-block-md': {
-          'display': 'inline-block'
-        },
-        'flex-md': {
-          'display': 'flex'
-        }
-      },
-      lg: {
-        'block-lg': {
-          'display': 'block'
-        },
-        'inline-lg': {
-          'display': 'inline'
-        },
-        'inline-block-lg': {
-          'display': 'inline-block'
-        },
-        'flex-lg': {
-          'display': 'flex'
-        }
-      }
-    },
-    perBreakpointValues: {
-      xs: {
-        'hide': {
-          'display': 'none'
-        }
-      },
-      sm: {
-        'hide': {
-          'display': 'none'
-        }
-      },
-      md: {
-        'hide': {
-          'display': 'none'
-        }
-      },
-      lg: {
-        'hide': {
-          'display': 'none'
-        }
-      }
-    }
-  }
-}
 
 // lengths
 // ------------------------------------------------------------------
@@ -222,9 +129,6 @@ const lengths = ({
 // ------------------------------------------------------------------
 // Converts an array of color names into an object with color names
 // and color hex values.
-//
-// Consumed by: valuesCompile
-// Working: 100%
 
 const colors = (array) => {
   return valuesCompile(array.reduce((obj, value) => {
@@ -248,6 +152,19 @@ const colors = (array) => {
 // ------------------------------------------------------------------
 // Converts a propsConfig object into an array containing objects
 // correctly formatted to be merged with a valueObject
+//
+// Sample input:
+// {
+//   props: {
+//     'm': 'margin'
+//   },
+//   subProps: {
+//     't': ['top'],
+//     'r': ['right'],
+//     'b': ['bottom'],
+//     'l': ['left'],
+//   }
+// }
 
 export const propsCompile = ({
   props,
@@ -268,17 +185,8 @@ export const propsCompile = ({
 
 // propsValuesMerge
 // ------------------------------------------------------------------
-// Merges an arrary of valueObjects with an array of propObjects
-
-// export const propsValuesMerge = (propGroups, values) => Object.assign(
-//   ...Object.entries(propGroups).map(([propGroup, props]) => ({
-//     [propGroup]: props.reduce((accum, prop) => (
-//       accum.concat(values.map(value => (
-//         { ...prop, ...value }
-//       )))
-//     ), [])
-//   }))
-// );
+// Merges an array of valueObjects with an array of propObjects and
+// forms a classObject
 
 export const propsValuesMerge = (props, values) => Object.assign(
   props.reduce((accum, prop) => (
@@ -300,7 +208,7 @@ const breakpointClassFormat = (baseClass,breakpoint) =>
 
 // classCompile
 // ------------------------------------------------------------------
-// Converst a classObject into a complete class. Optionally adds
+// Converts a classObject into a complete class. Optionally adds
 // a breakpoint indicator.
 
 export const classCompile = ({
@@ -323,6 +231,11 @@ export const classCompile = ({
   }
 };
 
+// breakpointsClassCompile
+// ------------------------------------------------------------------
+// Converts a list of props, values and breakpoints into a set of
+// breakpoint specific arrays with breakpoint namespaced classes
+
 export const breakpointsClassCompile = ({
   prop,
   values,
@@ -340,7 +253,8 @@ export const breakpointsClassCompile = ({
 
 // propGroupCompile
 // ------------------------------------------------------------------
-//
+// Wraps up all functionality to process a minimal set of inputs into
+// an object containing all classes for a given CSS property
 
 export const propGroupCompile = ({
   props,
@@ -374,32 +288,9 @@ export const propGroupCompile = ({
   ))
 };
 
-JSONlog(propGroupCompile({
-  props: {
-    '': 'display'
-  },
-  values: {
-    'table': 'table'
-  },
-  mobileFirstValues: {
-    'block': 'block',
-    'inline': 'inline',
-    'inline-block': 'inline-block',
-    'flex': 'flex',
-  },
-  perBreakpointValues: {
-    'hide': 'none'
-  }
-}))
-
-
-
-
 // mobileFirstBreakpoints
 // ------------------------------------------------------------------
 // Creates an object with mobileFirst media query params
-//
-// Working: Still being designed
 
 const mobileFirstBreakpoints = (obj) => Object.assign(
   ...Object.entries(obj).map(([bp, value]) => ({
@@ -411,17 +302,46 @@ const mobileFirstBreakpoints = (obj) => Object.assign(
 // ------------------------------------------------------------------
 // Creates a formatted block of classes in a string which can be
 // passed to a another function to render it into a CSS file.
-//
-// Working: Still being designed
 
-const printClass = (obj) => Object.keys(obj)
-  .map(className => {
-    Object.entries(obj[className]).map(
-      ([prop, value]) =>
-        console.log(`${className} { ${prop}: ${value} }`)
-    )
+const preCompile = propsCompile({
+  props: {
+    'p': 'padding'
+  },
+  subProps: {
+    't': ['top'],
+    'y': ['top','bottom']
   }
-);
+})
+
+const classTest = propsValuesMerge(
+  preCompile['padding'],
+  valuesCompile(lengths({
+    values: [1,2,3,4],
+    transform: [remify],
+    keySuffix: "px",
+    valueSuffix: 'rem'
+  }))
+).map(classCompile);
+
+
+
+const printClass = (all) => {
+  // return all.map(className => {
+  //   Object.entries(all[className]).map(
+  //       ([prop, value]) =>
+  //         console.log(`${className} { ${prop}: ${value} }`)
+  //     )
+  //   }
+  // )
+  return all.map(x => (
+    Object.entries(x[Object.keys(x)])
+      .map(([prop, value]) => (
+        `${prop}: ${value}`
+      ))
+  ))
+};
+
+JSONlog(printClass(classTest))
 
 // ------------------------------------------------------------------
 // Values
