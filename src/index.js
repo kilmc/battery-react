@@ -1,5 +1,5 @@
 import entries from 'object.entries';
-// import fs from 'fs';
+import fs from 'fs';
 
 Object.entries = entries;
 
@@ -309,6 +309,10 @@ const preCompile = propsCompile({
   },
   subProps: {
     't': ['top'],
+    'r': ['right'],
+    'b': ['bottom'],
+    'l': ['left'],
+    'x': ['left','right'],
     'y': ['top','bottom']
   }
 })
@@ -316,32 +320,60 @@ const preCompile = propsCompile({
 const classTest = propsValuesMerge(
   preCompile['padding'],
   valuesCompile(lengths({
-    values: [1,2,3,4],
-    transform: [remify],
-    keySuffix: "px",
+    values: [
+  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+  11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+],
+    transform: [remify, scaler],
     valueSuffix: 'rem'
   }))
 ).map(classCompile);
 
 
 
-const printClass = (all) => {
-  // return all.map(className => {
-  //   Object.entries(all[className]).map(
-  //       ([prop, value]) =>
-  //         console.log(`${className} { ${prop}: ${value} }`)
-  //     )
-  //   }
-  // )
-  return all.map(x => (
-    Object.entries(x[Object.keys(x)])
-      .map(([prop, value]) => (
-        `${prop}: ${value}`
-      ))
-  ))
-};
+// const printClass = (all) => {
+//   // return all.map(className => {
+//   //   Object.entries(all[className]).map(
+//   //       ([prop, value]) =>
+//   //         console.log(`${className} { ${prop}: ${value} }`)
+//   //     )
+//   //   }
+//   // )
+//   return all.map(x => (
+//     Object.entries(x[Object.keys(x)])
+//       .map(([prop, value]) => (
+//         `${prop}: ${value}`
+//       ))
+//   ))
+// };
 
-JSONlog(printClass(classTest))
+const printProps = (cx, multiple) => {
+  return String(Object.entries(cx[Object.keys(cx)]).map(
+    ([prop, value]) => (
+      multiple ? `  ${prop}: ${value};\n` : `${prop}: ${value}`
+    )
+  )).replace(',','').trim()
+}
+
+const printClass = (cx) => {
+  const multiple = Object.keys(cx[Object.keys(cx)]).length > 1;
+  const className = Object.keys(cx)
+
+  let renderedClass;
+  if (multiple) {
+    renderedClass = `.${className} {
+  ${printProps(cx, multiple)}
+}\n`
+  } else {
+    renderedClass = `.${className} { ${printProps(cx, multiple)} }`
+  }
+  return renderedClass
+}
+
+const printClasses = (all) => {
+  return String(all.map(x => printClass(x))).replace(/,/g,'\n')
+}
+
 
 // ------------------------------------------------------------------
 // Values
@@ -398,8 +430,9 @@ const backgroundColors = colors([
   'red'
 ]);
 
+const paddingAtom = printClasses(classTest)
 
-
+fs.writeFile("atomic.css", paddingAtom);
 
 
 // CSS output
