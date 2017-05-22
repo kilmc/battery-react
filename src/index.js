@@ -40,18 +40,23 @@ const systemColors = {
 const breakpointPrefixOrSuffix = 'suffix';
 const breakpointSeparator = '-'
 
-const mobileOnlyBreakpointName = ['xs'];
-const mobileFirstConfig = {
-  sm: '600px',
-  md: '900px',
-  lg: '1100px'
+const breakpointsConfig = {
+  xs: '0',
+  sm: '600',
+  md: '900',
+  lg: '1100'
 };
+
+const mobileFirstBreakpoints = Object.entries(breakpointsConfig).slice(1).map(([bp, val]) => bp);
+const perScreenBreakpoints = Object.entries(breakpointsConfig).map(([bp, val]) => bp);
+
 
 // Per Breakpoint
 // bp0: (max-width: bp1 - 1px)
 // bp1: (min-width: bp1) and (max-width: bp2 - 1px)
 // bp2: (min-width: bp2) and (max-width: bp3 - 1px)
 // bp3: (min-width: bp3)
+
 
 
 // ------------------------------------------------------------------
@@ -276,12 +281,12 @@ export const propGroupCompile = ({
         "mobileFirstValues": breakpointsClassCompile({
           prop: propGroups[prop],
           values: mobileFirstValues,
-          breakpoints: Object.keys(mobileFirstConfig)
+          breakpoints: mobileFirstBreakpoints
         }),
         "perBreakpointValues": breakpointsClassCompile({
           prop: propGroups[prop],
           values: perBreakpointValues,
-          breakpoints: mobileOnlyBreakpointName.concat(Object.keys(mobileFirstConfig))
+          breakpoints: perScreenBreakpoints
         })
       }
     })
@@ -292,60 +297,32 @@ export const propGroupCompile = ({
 // ------------------------------------------------------------------
 // Creates an object with mobileFirst media query params
 
-const mobileFirstBreakpoints = (obj) => Object.assign(
-  ...Object.entries(obj).map(([bp, value]) => ({
-    [bp]: `(min-width: ${value})`
-  }))
-);
+// const mobileFirstQueries = Object.assign(
+//  mobileFirstBreakpoints.map(bp => ({
+//     [bp]: `(min-width: ${breakpointsConfig[bp]}px)`
+//   }))
+// );
 
-// printClass
+const mobileFirstQueries = mobileFirstBreakpoints.reduce((accum, bp) => {
+  accum[bp] = `(min-width: ${breakpointsConfig[bp]}px)`
+  return accum
+}, {})
+
+// perBreakpoint
 // ------------------------------------------------------------------
-// Creates a formatted block of classes in a string which can be
-// passed to a another function to render it into a CSS file.
+// Creates an object with mobileFirst media query params
 
-const preCompile = propsCompile({
-  props: {
-    'p': 'padding'
-  },
-  subProps: {
-    't': ['top'],
-    'r': ['right'],
-    'b': ['bottom'],
-    'l': ['left'],
-    'x': ['left','right'],
-    'y': ['top','bottom']
-  }
-})
+const perBreakpoint = perScreenBreakpoints.reduce((accum, bp) => {
+  accum[bp] = `(min-width: ${breakpointsConfig[bp]}px)`
+  return accum
+}, {})
+console.log(perBreakpoint)
 
-const classTest = propsValuesMerge(
-  preCompile['padding'],
-  valuesCompile(lengths({
-    values: [
-  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-  11, 12, 13, 14, 15, 16, 17, 18, 19, 20
-],
-    transform: [remify, scaler],
-    valueSuffix: 'rem'
-  }))
-).map(classCompile);
-
-
-
-// const printClass = (all) => {
-//   // return all.map(className => {
-//   //   Object.entries(all[className]).map(
-//   //       ([prop, value]) =>
-//   //         console.log(`${className} { ${prop}: ${value} }`)
-//   //     )
-//   //   }
-//   // )
-//   return all.map(x => (
-//     Object.entries(x[Object.keys(x)])
-//       .map(([prop, value]) => (
-//         `${prop}: ${value}`
-//       ))
-//   ))
-// };
+// printProps
+// ------------------------------------------------------------------
+// Creates a formatted block of CSS property and value sets as a
+// string which can be passed to a another to printClass to finish
+// formatting
 
 const printProps = (cx, multiple) => {
   return String(Object.entries(cx[Object.keys(cx)]).map(
@@ -355,13 +332,19 @@ const printProps = (cx, multiple) => {
   )).replace(',','').trim()
 }
 
+// printClass
+// ------------------------------------------------------------------
+// Creates a formatted block of classes in a string which can be
+// passed to a another function to render it into a CSS file.
+
 const printClass = (cx) => {
   const multiple = Object.keys(cx[Object.keys(cx)]).length > 1;
   const className = Object.keys(cx)
 
   let renderedClass;
   if (multiple) {
-    renderedClass = `.${className} {
+    renderedClass =
+`.${className} {
   ${printProps(cx, multiple)}
 }\n`
   } else {
@@ -374,6 +357,114 @@ const printClasses = (all) => {
   return String(all.map(x => printClass(x))).replace(/,/g,'\n')
 }
 
+const printBreakpoint = ([bp, cxs], mqs) => {
+  return (
+`@media ${mqs[bp]} {
+  ${printClasses(cxs)}
+}
+`
+  )
+}
+
+const printMobileFirst = (obj) => {
+  return String(
+    Object.entries(obj).map(([bp,cxs]) => printBreakpoint([bp,cxs], mobileFirstQueries))).replace(/,/g,'\n')
+}
+
+// const printPerBreakpoint = (obj) => {
+//   return String(
+//     Object.entries(obj).map(([bp,cxs]) => printBreakpoint([bp,cxs], mqs))).replace(/,/g,'\n')
+// }
+
+
+const displayConfig = {
+  props: {
+    '': 'display'
+  },
+  values: {
+    'table': 'table'
+  },
+  mobileFirstValues: {
+    'block': 'block',
+    'inline': 'inline',
+    'inline-block': 'inline-block',
+    'flex': 'flex'
+  },
+  perBreakpointValues: {
+    'hide': 'none'
+  },
+};
+
+console.log(printMobileFirst({
+  "sm": [
+    {
+      "block-sm": {
+        "display": "block"
+      }
+    },
+    {
+      "inline-sm": {
+        "display": "inline"
+      }
+    },
+    {
+      "inline-block-sm": {
+        "display": "inline-block"
+      }
+    },
+    {
+      "flex-sm": {
+        "display": "flex"
+      }
+    }
+  ],
+  "md": [
+    {
+      "block-md": {
+        "display": "block"
+      }
+    },
+    {
+      "inline-md": {
+        "display": "inline"
+      }
+    },
+    {
+      "inline-block-md": {
+        "display": "inline-block"
+      }
+    },
+    {
+      "flex-md": {
+        "display": "flex"
+      }
+    }
+  ],
+  "lg": [
+    {
+      "block-lg": {
+        "display": "block"
+      }
+    },
+    {
+      "inline-lg": {
+        "display": "inline"
+      }
+    },
+    {
+      "inline-block-lg": {
+        "display": "inline-block"
+      }
+    },
+    {
+      "flex-lg": {
+        "display": "flex"
+      }
+    }
+  ]
+}))
+
+// JSONlog(propGroupCompile(displayConfig))
 
 // ------------------------------------------------------------------
 // Values
@@ -430,101 +521,6 @@ const backgroundColors = colors([
   'red'
 ]);
 
-const paddingAtom = printClasses(classTest)
-
-fs.writeFile("atomic.css", paddingAtom);
 
 
-// CSS output
-// // values
-// .table { display: table }
-//
-// // responsiveValues
-// .block { display: block }
-// .inline { display: inline }
-// .inline-block { display: inline-block }
-// .flex { display: flex }
-//
-// @media screen and (min-width: 600px) {
-//   .block-sm { display: block }
-//   .inline-sm { display: inline }
-//   .inline-block-sm { display: inline-block }
-//   .flex-sm { display: flex }
-// }
-//
-// @media screen and (min-width: 900px) {
-//   .block-md { display: block }
-//   .inline-md { display: inline }
-//   .inline-block-md { display: inline-block }
-//   .flex-md { display: flex }
-// }
-//
-// @media screen and (min-width: 1200px) {
-//   .block-lg { display: block }
-//   .inline-lg { display: inline }
-//   .inline-block-lg { display: inline-block }
-//   .flex-lg { display: flex }
-// }
-//
-// // perBreakpointValues
-// @media screen and (max-width: 600px) {
-//   .hide-xs { display: none }
-// };
-//
-// @media screen and (min-width: 600px) and (max-width: 900px) {
-//   .hide-sm { display: none }
-// };
-//
-// @media screen and (min-width: 900px) and (max-width: 1200px) {
-//   .hide-md { display: none }
-// };
-//
-// @media screen and (min-width: 1200px) {
-//   .hide-lg { display: none }
-// };
-
-// const borderConfig = {
-//   props: {
-//     'border': 'border'
-//   },
-//   propSeparator: '-',
-//   subProps: {
-//     'top': ['top'],
-//     'right': ['right'],
-//     'bottom': ['bottom'],
-//     'left': ['left']
-//   },
-//   responsiveValues: {
-//     '': `0.1rem solid ${colorHex('navy')}`
-//   }
-// }
-
-// .border { border: 0.1rem solid #000080 }
-// .border-top { border-top: 0.1rem solid #000080 }
-// .border-right { border-right: 0.1rem solid #000080 }
-// .border-bottom { border-bottom: 0.1rem solid #000080 }
-// .border-left { border-left: 0.1rem solid #000080 }
-
-// @media screen and (min-width: 600px) {
-//   .border-sm { border: 0.1rem solid #000080 }
-//   .border-top-sm { border-top: 0.1rem solid #000080 }
-//   .border-right-sm { border-right: 0.1rem solid #000080 }
-//   .border-bottom-sm { border-bottom: 0.1rem solid #000080 }
-//   .border-left-sm { border-left: 0.1rem solid #000080 }
-// }
-
-// @media screen and (min-width: 900px) {
-//   .border-md { border: 0.1rem solid #000080 }
-//   .border-top-md { border-top: 0.1rem solid #000080 }
-//   .border-right-md { border-right: 0.1rem solid #000080 }
-//   .border-bottom-md { border-bottom: 0.1rem solid #000080 }
-//   .border-left-md { border-left: 0.1rem solid #000080 }
-// }
-
-// @media screen and (min-width: 1200px) {
-//   .border-lg { border: 0.1rem solid #000080 }
-//   .border-top-lg { border-top: 0.1rem solid #000080 }
-//   .border-right-lg { border-right: 0.1rem solid #000080 }
-//   .border-bottom-lg { border-bottom: 0.1rem solid #000080 }
-//   .border-left-lg { border-left: 0.1rem solid #000080 }
-// }
+// fs.writeFile("atomic.css", paddingAtom);
