@@ -41,22 +41,11 @@ const breakpointPrefixOrSuffix = 'suffix';
 const breakpointSeparator = '-'
 
 const breakpointsConfig = {
-  xs: '0',
-  sm: '600',
-  md: '900',
-  lg: '1100'
+  xs: 0,
+  sm: 600,
+  md: 900,
+  lg: 1100
 };
-
-const mobileFirstBreakpoints = Object.entries(breakpointsConfig).slice(1).map(([bp, val]) => bp);
-const perScreenBreakpoints = Object.entries(breakpointsConfig).map(([bp, val]) => bp);
-
-
-// Per Breakpoint
-// bp0: (max-width: bp1 - 1px)
-// bp1: (min-width: bp1) and (max-width: bp2 - 1px)
-// bp2: (min-width: bp2) and (max-width: bp3 - 1px)
-// bp3: (min-width: bp3)
-
 
 
 // ------------------------------------------------------------------
@@ -255,19 +244,26 @@ export const breakpointsClassCompile = ({
   }, {})
 };
 
+//
+// ------------------------------------------------------------------
 
-// propGroupCompile
+const perScreenBreakpoints = Object.entries(breakpointsConfig)
+  .map(([bp, val]) => bp);
+
+const mobileFirstBreakpoints = perScreenBreakpoints.slice(1);
+
+// atomCompile
 // ------------------------------------------------------------------
 // Wraps up all functionality to process a minimal set of inputs into
 // an object containing all classes for a given CSS property
 
-export const propGroupCompile = ({
+export const atomCompile = ({
   props,
   propSeparator = '',
   subProps = {},
   values = [],
   mobileFirstValues = [],
-  perBreakpointValues = []
+  perScreenValues = []
 }) => {
   const propGroups = propsCompile({props, propSeparator, subProps})
 
@@ -283,9 +279,9 @@ export const propGroupCompile = ({
           values: mobileFirstValues,
           breakpoints: mobileFirstBreakpoints
         }),
-        "perBreakpointValues": breakpointsClassCompile({
+        "perScreenValues": breakpointsClassCompile({
           prop: propGroups[prop],
-          values: perBreakpointValues,
+          values: perScreenValues,
           breakpoints: perScreenBreakpoints
         })
       }
@@ -308,15 +304,38 @@ const mobileFirstQueries = mobileFirstBreakpoints.reduce((accum, bp) => {
   return accum
 }, {})
 
-// perBreakpoint
+// perScreenQueries
 // ------------------------------------------------------------------
-// Creates an object with mobileFirst media query params
+// Generate an object with media query arguments per screen
 
-const perBreakpoint = perScreenBreakpoints.reduce((accum, bp) => {
-  accum[bp] = `(min-width: ${breakpointsConfig[bp]}px)`
-  return accum
-}, {})
-console.log(perBreakpoint)
+const perScreenQueries = () => {
+  const min = perScreenBreakpoints.slice(1)
+  const max = perScreenBreakpoints.slice(0, -1)
+  const both = min.filter(n => max.indexOf(n) !== -1);
+
+  const allQueries = Object.keys(breakpointsConfig)
+    .reduce((accum, bp) => {
+      accum[bp] = ''
+      return accum
+    }, {});
+
+  min.map(bp => (
+    allQueries[bp] = `(min-width: ${breakpointsConfig[bp]}px)`
+  ))
+
+  let count = 0;
+  max.map(bp => {
+    count++
+    allQueries[bp] +=
+      `(max-width: ${breakpointsConfig[perScreenBreakpoints[count]]-1}px)`
+  })
+
+  both.map(bp => {
+    allQueries[bp] = allQueries[bp].replace(')(',') and (');
+  })
+
+  return allQueries;
+};
 
 // printProps
 // ------------------------------------------------------------------
@@ -353,31 +372,52 @@ const printClass = (cx) => {
   return renderedClass
 }
 
+// printClasses
+// ------------------------------------------------------------------
+
 const printClasses = (all) => {
   return String(all.map(x => printClass(x))).replace(/,/g,'\n')
 }
+
+// printBreakpoint
+// ------------------------------------------------------------------
 
 const printBreakpoint = ([bp, cxs], mqs) => {
   return (
 `@media ${mqs[bp]} {
   ${printClasses(cxs)}
-}
-`
-  )
-}
+}`)}
+
+// printMobileFirst
+// ------------------------------------------------------------------
 
 const printMobileFirst = (obj) => {
   return String(
     Object.entries(obj).map(([bp,cxs]) => printBreakpoint([bp,cxs], mobileFirstQueries))).replace(/,/g,'\n')
 }
 
-// const printPerBreakpoint = (obj) => {
-//   return String(
-//     Object.entries(obj).map(([bp,cxs]) => printBreakpoint([bp,cxs], mqs))).replace(/,/g,'\n')
-// }
+// printPerScreen
+// ------------------------------------------------------------------
 
+const printPerScreen = (obj) => {
+  return String(
+    Object.entries(obj).map(([bp,cxs]) => printBreakpoint([bp,cxs],
+    perScreenQueries()))).replace(/,/g,'\n')
+}
 
-const displayConfig = {
+// printAtom
+// ------------------------------------------------------------------
+
+const printAtom = (obj) => {
+  const everyClass = Object.keys(obj).map(propGroup => {
+    return printClasses(obj[propGroup].values)
+      .concat(printMobileFirst(obj[propGroup].mobileFirstValues))
+      .concat(printPerScreen(obj[propGroup].perScreenValues));
+  })
+  return String(everyClass)
+}
+
+const displayAtom = atomCompile({
   props: {
     '': 'display'
   },
@@ -390,81 +430,12 @@ const displayConfig = {
     'inline-block': 'inline-block',
     'flex': 'flex'
   },
-  perBreakpointValues: {
+  perScreenValues: {
     'hide': 'none'
   },
-};
+});
 
-console.log(printMobileFirst({
-  "sm": [
-    {
-      "block-sm": {
-        "display": "block"
-      }
-    },
-    {
-      "inline-sm": {
-        "display": "inline"
-      }
-    },
-    {
-      "inline-block-sm": {
-        "display": "inline-block"
-      }
-    },
-    {
-      "flex-sm": {
-        "display": "flex"
-      }
-    }
-  ],
-  "md": [
-    {
-      "block-md": {
-        "display": "block"
-      }
-    },
-    {
-      "inline-md": {
-        "display": "inline"
-      }
-    },
-    {
-      "inline-block-md": {
-        "display": "inline-block"
-      }
-    },
-    {
-      "flex-md": {
-        "display": "flex"
-      }
-    }
-  ],
-  "lg": [
-    {
-      "block-lg": {
-        "display": "block"
-      }
-    },
-    {
-      "inline-lg": {
-        "display": "inline"
-      }
-    },
-    {
-      "inline-block-lg": {
-        "display": "inline-block"
-      }
-    },
-    {
-      "flex-lg": {
-        "display": "flex"
-      }
-    }
-  ]
-}))
-
-// JSONlog(propGroupCompile(displayConfig))
+console.log(printAtom(displayAtom));
 
 // ------------------------------------------------------------------
 // Values

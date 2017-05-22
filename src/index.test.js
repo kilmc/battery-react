@@ -6,7 +6,7 @@ import {
   positionCoordinateProps,
   propsValuesMerge,
   pixelUnits,
-  propGroupCompile,
+  atomCompile,
   lengths,
   remify,
   scaler,
@@ -75,9 +75,9 @@ describe('Battery', () => {
     });
   });
 
-  describe('propGroupCompile', () => {
+  describe('atomCompile', () => {
     it('matches expectations', () => {
-      expect(propGroupCompile({
+      expect(atomCompile({
         props: {
           'p': 'padding',
           'm': 'margin'
