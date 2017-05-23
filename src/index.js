@@ -1,5 +1,7 @@
 import entries from 'object.entries';
 import fs from 'fs';
+import postcss from 'postcss';
+import stylefmt from 'stylefmt';
 
 Object.entries = entries;
 
@@ -391,7 +393,8 @@ const printMobileFirst = (obj) => {
   return String(
     Object.entries(obj)
       .map(([bp,cxs]) => printBreakpoint([bp,cxs], mobileFirstQueries))
-    ).replace(/,/g,'\n')
+    )
+    // .replace(/,/g,'\n')
     // .replace(/^\./gm,'  .')
 }
 
@@ -416,7 +419,8 @@ const printAtom = (obj) => {
       .concat('\n',printMobileFirst(obj[propGroup].mobileFirstValues))
       .concat('\n',printPerScreen(obj[propGroup].perScreenValues));
   })
-  return String(everyClass)
+
+  return String(everyClass).replace(/,@/g,'\n@')
 }
 
 // ------------------------------------------------------------------
@@ -520,8 +524,15 @@ const paddingAtom = atomCompile({
 
 
 
-// console.log(printAtom(displayAtom));
+console.log(printAtom(displayAtom));
 // JSONlog(paddingAtom);
-console.log(printAtom(paddingAtom));
+// console.log(printAtom(paddingAtom));
+const padding = printAtom(displayAtom);
 
-// fs.writeFile("atomic.css", paddingAtom);
+fs.writeFile("./unprocessed-atomic.css", printAtom(paddingAtom));
+
+var css = fs.readFileSync('./unprocessed-atomic.css', 'utf-8');
+
+postcss([stylefmt])
+  .process(css, { from: 'unprocessed-atomic.css' })
+  .then(function (result) { result; });

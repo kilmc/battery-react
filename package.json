@@ -6,7 +6,8 @@
     "file-system": "^2.2.2",
     "object.entries": "^1.0.4",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "stylefmt": "^5.3.2"
   },
   "devDependencies": {
     "react-scripts": "0.9.5"
