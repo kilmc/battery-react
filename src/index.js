@@ -244,11 +244,18 @@ export const breakpointsClassCompile = ({
   }, {})
 };
 
-//
+// perScreenBreakpoints
 // ------------------------------------------------------------------
+// An array of breakpoint identifiers exctracted from the
+// breakpointsConfig to be used to compile perScreen media queries
 
 const perScreenBreakpoints = Object.entries(breakpointsConfig)
   .map(([bp, val]) => bp);
+
+// mobileFirstBreakpoints
+// ------------------------------------------------------------------
+// An array of breakpoint identifiers exctracted from the
+// breakpointsConfig to be used to compile mobileFirst media queries
 
 const mobileFirstBreakpoints = perScreenBreakpoints.slice(1);
 
@@ -274,12 +281,12 @@ export const atomCompile = ({
           propGroups[prop],
           valuesCompile(Object.assign(values, mobileFirstValues))
         ).map(classCompile),
-        "mobileFirstValues": breakpointsClassCompile({
+        "mobileFirstValues": mobileFirstValues === [] ? '' : breakpointsClassCompile({
           prop: propGroups[prop],
           values: mobileFirstValues,
           breakpoints: mobileFirstBreakpoints
         }),
-        "perScreenValues": breakpointsClassCompile({
+        "perScreenValues": perScreenValues === [] ? '' :  breakpointsClassCompile({
           prop: propGroups[prop],
           values: perScreenValues,
           breakpoints: perScreenBreakpoints
@@ -289,15 +296,9 @@ export const atomCompile = ({
   ))
 };
 
-// mobileFirstBreakpoints
+// mobileFirstQueries
 // ------------------------------------------------------------------
 // Creates an object with mobileFirst media query params
-
-// const mobileFirstQueries = Object.assign(
-//  mobileFirstBreakpoints.map(bp => ({
-//     [bp]: `(min-width: ${breakpointsConfig[bp]}px)`
-//   }))
-// );
 
 const mobileFirstQueries = mobileFirstBreakpoints.reduce((accum, bp) => {
   accum[bp] = `(min-width: ${breakpointsConfig[bp]}px)`
@@ -306,7 +307,7 @@ const mobileFirstQueries = mobileFirstBreakpoints.reduce((accum, bp) => {
 
 // perScreenQueries
 // ------------------------------------------------------------------
-// Generate an object with media query arguments per screen
+// Creates an object with media query arguments per screen
 
 const perScreenQueries = () => {
   const min = perScreenBreakpoints.slice(1)
@@ -362,10 +363,7 @@ const printClass = (cx) => {
 
   let renderedClass;
   if (multiple) {
-    renderedClass =
-`.${className} {
-  ${printProps(cx, multiple)}
-}\n`
+    renderedClass = `.${className} {\n${printProps(cx, multiple)}\n}\n`
   } else {
     renderedClass = `.${className} { ${printProps(cx, multiple)} }`
   }
@@ -374,7 +372,7 @@ const printClass = (cx) => {
 
 // printClasses
 // ------------------------------------------------------------------
-
+// Run through a
 const printClasses = (all) => {
   return String(all.map(x => printClass(x))).replace(/,/g,'\n')
 }
@@ -384,16 +382,16 @@ const printClasses = (all) => {
 
 const printBreakpoint = ([bp, cxs], mqs) => {
   return (
-`@media ${mqs[bp]} {
-  ${printClasses(cxs)}
-}`)}
+`@media ${mqs[bp]} {\n${printClasses(cxs)}\n}\n`)}
 
 // printMobileFirst
 // ------------------------------------------------------------------
 
 const printMobileFirst = (obj) => {
   return String(
-    Object.entries(obj).map(([bp,cxs]) => printBreakpoint([bp,cxs], mobileFirstQueries))).replace(/,/g,'\n')
+    Object.entries(obj)
+      .map(([bp,cxs]) => printBreakpoint([bp,cxs], mobileFirstQueries))
+    ).replace(/,/g,'\n').replace(/^\./gm,'  .')
 }
 
 // printPerScreen
@@ -401,8 +399,10 @@ const printMobileFirst = (obj) => {
 
 const printPerScreen = (obj) => {
   return String(
-    Object.entries(obj).map(([bp,cxs]) => printBreakpoint([bp,cxs],
-    perScreenQueries()))).replace(/,/g,'\n')
+    Object.entries(obj)
+      .map(([bp,cxs]) => printBreakpoint([bp,cxs], perScreenQueries()))
+  ).replace(/,/g,'\n').replace(/^\./gm,'  .')
+    // TODO: Replacing all commas with \n will lead to bus in CSS
 }
 
 // printAtom
@@ -410,32 +410,12 @@ const printPerScreen = (obj) => {
 
 const printAtom = (obj) => {
   const everyClass = Object.keys(obj).map(propGroup => {
-    return printClasses(obj[propGroup].values)
-      .concat(printMobileFirst(obj[propGroup].mobileFirstValues))
-      .concat(printPerScreen(obj[propGroup].perScreenValues));
+    return printClasses(obj[propGroup].values).concat('\n')
+      .concat('\n',printMobileFirst(obj[propGroup].mobileFirstValues))
+      .concat('\n',printPerScreen(obj[propGroup].perScreenValues));
   })
   return String(everyClass)
 }
-
-const displayAtom = atomCompile({
-  props: {
-    '': 'display'
-  },
-  values: {
-    'table': 'table'
-  },
-  mobileFirstValues: {
-    'block': 'block',
-    'inline': 'inline',
-    'inline-block': 'inline-block',
-    'flex': 'flex'
-  },
-  perScreenValues: {
-    'hide': 'none'
-  },
-});
-
-console.log(printAtom(displayAtom));
 
 // ------------------------------------------------------------------
 // Values
@@ -492,6 +472,54 @@ const backgroundColors = colors([
   'red'
 ]);
 
+const displayAtom = atomCompile({
+  props: {
+    '': 'display'
+  },
+  values: {
+    'table': 'table'
+  },
+  mobileFirstValues: {
+    'block': 'block',
+    'inline': 'inline',
+    'inline-block': 'inline-block',
+    'flex': 'flex'
+  },
+  perScreenValues: {
+    'hide': 'none'
+  },
+});
 
+
+
+
+
+const paddingAtom = atomCompile({
+  props: {
+    'p': 'padding'
+  },
+  subProps: {
+    't': ['top'],
+    'r': ['right'],
+    'b': ['bottom'],
+    'l': ['left'],
+    'x': ['right', 'left'],
+    'y': ['top', 'bottom']
+  },
+  mobileFirstValues: lengths({
+    values: [1,2,3,4],
+    transform: [remify, scaler],
+    valueSuffix: 'rem'
+  })
+});
+
+
+
+
+
+
+// console.log(printAtom(displayAtom));
+// JSONlog(paddingAtom);
+console.log(printAtom(paddingAtom));
 
 // fs.writeFile("atomic.css", paddingAtom);
