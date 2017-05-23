@@ -411,3 +411,92 @@ const spaceConfigOutput = {
     ]
   }
 }
+
+
+const atomStructure = {
+  'display': {
+    values: {
+      'table': {
+        'display': 'table'
+      },
+      'block': {
+        'display': 'block'
+      },
+      'inline': {
+        'display': 'inline'
+      },
+      'inline-block': {
+        'display': 'inline-block'
+      },
+      'flex': {
+        'display': 'flex'
+      }
+    },
+    responsiveValues: {
+      sm: {
+        'block-sm': {
+          'display': 'block'
+        },
+        'inline-sm': {
+          'display': 'inline'
+        },
+        'inline-block-sm': {
+          'display': 'inline-block'
+        },
+        'flex-sm': {
+          'display': 'flex'
+        }
+      },
+      md: {
+        'block-md': {
+          'display': 'block'
+        },
+        'inline-md': {
+          'display': 'inline'
+        },
+        'inline-block-md': {
+          'display': 'inline-block'
+        },
+        'flex-md': {
+          'display': 'flex'
+        }
+      },
+      lg: {
+        'block-lg': {
+          'display': 'block'
+        },
+        'inline-lg': {
+          'display': 'inline'
+        },
+        'inline-block-lg': {
+          'display': 'inline-block'
+        },
+        'flex-lg': {
+          'display': 'flex'
+        }
+      }
+    },
+    perBreakpointValues: {
+      xs: {
+        'hide': {
+          'display': 'none'
+        }
+      },
+      sm: {
+        'hide': {
+          'display': 'none'
+        }
+      },
+      md: {
+        'hide': {
+          'display': 'none'
+        }
+      },
+      lg: {
+        'hide': {
+          'display': 'none'
+        }
+      }
+    }
+  }
+}

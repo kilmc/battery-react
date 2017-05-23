@@ -347,7 +347,7 @@ const perScreenQueries = () => {
 const printProps = (cx, multiple) => {
   return String(Object.entries(cx[Object.keys(cx)]).map(
     ([prop, value]) => (
-      multiple ? `  ${prop}: ${value};\n` : `${prop}: ${value}`
+      multiple ? `\t${prop}: ${value};\n` : `${prop}: ${value}`
     )
   )).replace(',','').trim()
 }
@@ -363,7 +363,7 @@ const printClass = (cx) => {
 
   let renderedClass;
   if (multiple) {
-    renderedClass = `.${className} {\n${printProps(cx, multiple)}\n}\n`
+    renderedClass = `.${className} {\n\t${printProps(cx, multiple)}\n}\n`
   } else {
     renderedClass = `.${className} { ${printProps(cx, multiple)} }`
   }
@@ -391,7 +391,8 @@ const printMobileFirst = (obj) => {
   return String(
     Object.entries(obj)
       .map(([bp,cxs]) => printBreakpoint([bp,cxs], mobileFirstQueries))
-    ).replace(/,/g,'\n').replace(/^\./gm,'  .')
+    ).replace(/,/g,'\n')
+    // .replace(/^\./gm,'  .')
 }
 
 // printPerScreen
@@ -401,7 +402,8 @@ const printPerScreen = (obj) => {
   return String(
     Object.entries(obj)
       .map(([bp,cxs]) => printBreakpoint([bp,cxs], perScreenQueries()))
-  ).replace(/,/g,'\n').replace(/^\./gm,'  .')
+  ).replace(/,/g,'\n')
+  // .replace(/^\./gm,'  .')
     // TODO: Replacing all commas with \n will lead to bus in CSS
 }
 
