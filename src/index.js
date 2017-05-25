@@ -1,7 +1,7 @@
 import entries from 'object.entries';
 import fs from 'fs';
-import postcss from 'postcss';
-import stylefmt from 'stylefmt';
+// var postcss = require('postcss');
+// var stylefmt = require('stylefmt');
 
 Object.entries = entries;
 
@@ -41,6 +41,7 @@ const systemColors = {
 
 const breakpointPrefixOrSuffix = 'suffix';
 const breakpointSeparator = '-'
+const negativeValueIndicator = '-'
 
 const breakpointsConfig = {
   xs: 0,
@@ -79,7 +80,7 @@ const colorHex = (name) => systemColors[name];
 // ------------------------------------------------------------------
 // Formats input as a valueObject
 
-const valueObjectFormat = ({
+export const valueObjectFormat = ({
   name,
   value,
   type = 'none',
@@ -96,7 +97,7 @@ const valueObjectFormat = ({
 // Iterates over an object and passes each entry to the
 // valueObject formatter.
 
-const valuesCompile = (values, breakpoint, type = 'none') => (
+export const valuesCompile = (values, breakpoint, type = 'none') => (
   Object.entries(values).map(([name, value]) =>
     valueObjectFormat({name, value, type, breakpoint}))
 );
@@ -106,7 +107,7 @@ const valuesCompile = (values, breakpoint, type = 'none') => (
 // Generates an object with length type values. The output of this
 // is meant to be used with the valuesCompile function.
 
-const lengths = ({
+export const lengths = ({
   values,
   keySuffix = '',
   valueSuffix = '',
@@ -115,8 +116,9 @@ const lengths = ({
 }) => {
   return values.reduce((obj, value) => {
     const minus = negative ? '-' : '';
+    const negativeIndicator = negative ? negativeValueIndicator : '';
 
-    obj[`${minus}${value}${keySuffix}`] = `${minus}${compose(...transform)(value)}${valueSuffix}`;
+    obj[`${negativeIndicator}${value}${keySuffix}`] = `${minus}${compose(...transform)(value)}${valueSuffix}`;
     return obj;
   },{});
 };
@@ -126,11 +128,11 @@ const lengths = ({
 // Converts an array of color names into an object with color names
 // and color hex values.
 
-const colors = (array) => {
-  return valuesCompile(array.reduce((obj, value) => {
+export const colors = (array) => {
+  return array.reduce((obj, value) => {
     obj[value] = systemColors[value];
     return obj
-  },{}));
+  },{});
 };
 
 // propObject
@@ -197,7 +199,7 @@ export const propsValuesMerge = (props, values) => Object.assign(
 // Adds a breakpoint indicator as a suffix or prefix depending on
 // the user config.
 
-const breakpointClassFormat = (baseClass,breakpoint) =>
+export const breakpointClassFormat = (baseClass,breakpoint) =>
   breakpointPrefixOrSuffix === 'suffix'
     ? baseClass.concat(breakpointSeparator,breakpoint)
     : breakpoint.concat(breakpointSeparator,baseClass);
@@ -438,14 +440,14 @@ const scaleMultipliers = [
 ];
 const pixelValues = [1, 2, 3, 4];
 
-const percentageUnits = lengths({
-  values: percentageValues,
+const percentageUnits = (units) => lengths({
+  values: units,
   keySuffix: "p",
   valueSuffix: '%'
 });
 
-const viewportHeightUnits = lengths({
-  values: percentageValues,
+const viewportHeightUnits = (units) => lengths({
+  values: units,
   keySuffix: "vh",
   valueSuffix: 'vh'
 });
@@ -524,15 +526,15 @@ const paddingAtom = atomCompile({
 
 
 
-console.log(printAtom(displayAtom));
+// JSONlog(displayAtom);
 // JSONlog(paddingAtom);
 // console.log(printAtom(paddingAtom));
 const padding = printAtom(displayAtom);
 
-fs.writeFile("./unprocessed-atomic.css", printAtom(paddingAtom));
+// fs.writeFile("./unprocessed-atomic.css", printAtom(paddingAtom));
 
-var css = fs.readFileSync('./unprocessed-atomic.css', 'utf-8');
+// var css = fs.readFileSync('./unprocessed-atomic.css', 'utf-8');
 
-postcss([stylefmt])
-  .process(css, { from: 'unprocessed-atomic.css' })
-  .then(function (result) { result; });
+// postcss([stylefmt])
+//   .process(css, { from: 'unprocessed-atomic.css' })
+//   .then(function (result) { result; });

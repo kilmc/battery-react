@@ -1,23 +1,71 @@
 import {
-  spacingProps,
-  classCompile,
-  propsCompile,
-  scaleUnits,
-  positionCoordinateProps,
-  propsValuesMerge,
-  pixelUnits,
   atomCompile,
+  breakpointsClassCompile,
+  breakpointClassFormat,
+  breakpointsCompile,
+  classCompile,
+  colors,
   lengths,
+  pixelUnits,
+  positionCoordinateProps,
+  propsCompile,
+  propsValuesMerge,
   remify,
   scaler,
-  valuesCompile,
-  breakpointsCompile
+  scaleUnits,
+  spacingProps,
+  valueObjectFormat,
+  valuesCompile
 } from './index';
 
 describe('Battery', () => {
-  describe('spacingProps', () => {
+  describe('valueObjectFormat', () => {
     it('matches snapshot', () => {
-      expect(spacingProps).toEqual()
+      expect(valueObjectFormat({
+        name: '1',
+        value: '0.6rem'
+      })).toMatchSnapshot()
+    });
+  });
+
+  describe('valuesCompile', () => {
+    it('matches snapshot', () => {
+      expect(valuesCompile(
+        { 'lime': '#00FF00', 'navy': '#000080' },
+        'sm'
+      )).toMatchSnapshot()
+    });
+  });
+
+  describe('lengths', () => {
+    it('matches snapshot', () => {
+      expect(lengths({
+        values: [1,2,3,4],
+        transform: [remify],
+        keySuffix: 'px',
+        valueSuffix: 'rem'
+      })).toMatchSnapshot()
+    });
+  });
+
+  describe('colors', () => {
+    it('matches snapshot', () => {
+      expect(colors(['lime','navy'])).toMatchSnapshot()
+    });
+  });
+
+  describe('propsCompile', () => {
+    it('matches snapshot', () => {
+      expect(propsCompile({
+        props: {
+          'p': 'padding',
+          'm': 'margin'
+        },
+        subProps: {
+          't': ['top'],
+          'x': ['right', 'left']
+        }
+      })).toMatchSnapshot()
     });
   });
 
@@ -44,36 +92,56 @@ describe('Battery', () => {
             value: '0.2rem'
           }
         ]
-      )).toEqual(
-        [
-          {
-            propName: 'p',
-            props: ['padding'],
-            valueName: '1px',
-            value: '0.1rem'
-          },
-          {
-            propName: 'p',
-            props: ['padding'],
-            valueName: '2px',
-            value: '0.2rem'
-          },
-          {
-            propName: 'py',
-            props: ['padding-top', 'padding-bottom'],
-            valueName: '1px',
-            value: '0.1rem'
-          },
-          {
-            propName: 'py',
-            props: ['padding-top', 'padding-bottom'],
-            valueName: '2px',
-            value: '0.2rem'
-          }
-        ]
-      )
+      )).toMatchSnapshot()
     });
   });
+
+  describe('breakpointClassFormat', () => {
+    it('matches snapshot', () => {
+      expect(breakpointClassFormat('pt2','sm')).toMatchSnapshot()
+    });
+  });
+
+  describe('classCompile', () => {
+    it('matches snapshot', () => {
+      expect(classCompile({
+        propName: 'py',
+        props: ['padding-top', 'padding-bottom'],
+        valueName: '1',
+        value: '0.6rem'
+      })).toMatchSnapshot()
+    });
+  });
+
+  describe('breakpointsClassCompile', () => {
+    it('matches snapshot', () => {
+      expect(breakpointsClassCompile({
+        prop: [
+          {
+            propName: 'p',
+            props: ['padding']
+          },
+          {
+            propName: 'py',
+            props: ['padding-top', 'padding-bottom']
+          }
+        ],
+        values: {
+          '1px': '0.1rem',
+          '2px': '0.2rem'
+        },
+        breakpoints: ['sm', 'md', 'lg']
+      })).toMatchSnapshot()
+    });
+  });
+
+
+  describe('spacingProps', () => {
+    it('matches snapshot', () => {
+      expect(spacingProps).toEqual()
+    });
+  });
+
 
   describe('atomCompile', () => {
     it('matches expectations', () => {
@@ -96,51 +164,4 @@ describe('Battery', () => {
       expect(scaleUnits).toMatchSnapshot()
     });
   });
-
-  // describe('positionCoordinateProps', () => {
-  //   it('matches snapshot', () => {
-  //     expect(positionCoordinateProps).toMatchSnapshot()
-  //   });
-  // });
-
-  describe('classCompile', () => {
-    it('matches snapshot', () => {
-      expect(classCompile({
-        propName: 'py',
-        props: ['padding-top', 'padding-bottom'],
-        valueName: '1',
-        value: '0.6rem'
-      })).toMatchSnapshot()
-    });
-  });
-
-  describe('propsCompile', () => {
-    it('matches snapshot', () => {
-      expect(propsCompile({
-        props: {
-          'p': 'padding',
-          'm': 'margin'
-        },
-        subProps: {
-          't': ['top'],
-          'x': ['right', 'left']
-        }
-      })).toMatchSnapshot()
-    });
-  });
-
-  // describe('flatmap', () => {
-  //   fit('flattens', () => {
-  //     const as = [1,2,3];
-  //     Array.prototype.flatMap = function(x) {
-  //       return x.map(x)
-  //     };
-  //     expect(as.flatMap(a =>
-  //       [a, a]
-  //     )).toEqual([1,1,2,2,3,3])
-  //     expect(flatMap(a =>
-  //       [a, a]
-  //     ), as).toEqual([1,1,2,2,3,3])
-  //   })
-  // })
 });
