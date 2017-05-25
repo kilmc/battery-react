@@ -50,15 +50,14 @@ const breakpointsConfig = {
   lg: 1100
 };
 
-
 // ------------------------------------------------------------------
 // Atomic Functions
 // ------------------------------------------------------------------
 
-const remify = (x) => x/baseFontSize;
-const scaler = (x) => x*baseUnit;
-const opacify = (x) => x/10;
-const colorHex = (name) => systemColors[name];
+export const remify = (x) => x/baseFontSize;
+export const scaler = (x) => x*baseUnit;
+export const opacify = (x) => x/10;
+export const colorHex = (name) => systemColors[name];
 
 // ------------------------------------------------------------------
 // Generators
@@ -263,12 +262,12 @@ const perScreenBreakpoints = Object.entries(breakpointsConfig)
 
 const mobileFirstBreakpoints = perScreenBreakpoints.slice(1);
 
-// atomCompile
+// atomTree
 // ------------------------------------------------------------------
 // Wraps up all functionality to process a minimal set of inputs into
 // an object containing all classes for a given CSS property
 
-export const atomCompile = ({
+export const atomTree = ({
   props,
   propSeparator = '',
   subProps = {},
@@ -281,10 +280,12 @@ export const atomCompile = ({
   return Object.assign(
     ...Object.entries(props).map(([propName, prop]) => ({
       [prop]: {
-        "values": propsValuesMerge(
-          propGroups[prop],
-          valuesCompile(Object.assign(values, mobileFirstValues))
-        ).map(classCompile),
+        "values": {
+          all: propsValuesMerge(
+                propGroups[prop],
+                valuesCompile(Object.assign(values, mobileFirstValues))
+                ).map(classCompile)
+        },
         "mobileFirstValues": mobileFirstValues === [] ? '' : breakpointsClassCompile({
           prop: propGroups[prop],
           values: mobileFirstValues,
@@ -300,6 +301,66 @@ export const atomCompile = ({
   ))
 };
 
+// atomList
+// ------------------------------------------------------------------
+
+const atomList = ({
+  props,
+  propSeparator = '',
+  subProps = {},
+  values = [],
+  mobileFirstValues = [],
+  perScreenValues = []
+}) => {
+  const propGroups = propsCompile({props, propSeparator, subProps})
+
+  return Object.assign({}, ...Object.assign(
+    ...Object.entries(props).map(([propName, prop]) => (
+      propsValuesMerge(
+        propGroups[prop],
+        valuesCompile(Object.assign(values, mobileFirstValues))
+      ).map(classCompile)
+      .concat(
+        ...mobileFirstBreakpoints.map(bp => (
+          propsValuesMerge(
+            propGroups[prop],
+            valuesCompile(mobileFirstValues, bp)
+          ).map(classCompile)
+        ))
+      ).concat(
+        ...perScreenBreakpoints.map(bp => (
+          propsValuesMerge(
+            propGroups[prop],
+            valuesCompile(perScreenValues, bp)
+          ).map(classCompile)
+        ))
+      )
+    ))
+  ));
+}
+
+console.log(atomList({
+  props: {
+    'p': 'padding'
+  },
+  subProps: {
+    't': ['top'],
+    'r': ['right'],
+    'b': ['bottom'],
+    'l': ['left'],
+    'x': ['right', 'left'],
+    'y': ['top', 'bottom']
+  },
+  mobileFirstValues: lengths({
+    values: [1,2,3,4],
+    transform: [remify, scaler],
+    valueSuffix: 'rem'
+  }),
+  perScreenValues: {
+    '-auto': 'auto'
+  }
+}));
+
 // mobileFirstQueries
 // ------------------------------------------------------------------
 // Creates an object with mobileFirst media query params
@@ -313,7 +374,7 @@ export const mobileFirstQueries = mobileFirstBreakpoints.reduce((accum, bp) => {
 // ------------------------------------------------------------------
 // Creates an object with media query arguments per screen
 
-const perScreenQueries = () => {
+export const perScreenQueries = () => {
   const min = perScreenBreakpoints.slice(1)
   const max = perScreenBreakpoints.slice(0, -1)
   const both = min.filter(n => max.indexOf(n) !== -1);
@@ -396,8 +457,6 @@ export const printMobileFirst = (obj) => {
     Object.entries(obj)
       .map(([bp,classObjs]) => printBreakpoint([bp,classObjs], mobileFirstQueries))
     )
-    // .replace(/,/g,'\n')
-    // .replace(/^\./gm,'  .')
 }
 
 // printPerScreen
@@ -407,9 +466,7 @@ export const printPerScreen = (obj) => {
   return String(
     Object.entries(obj)
       .map(([bp,cxs]) => printBreakpoint([bp,cxs], perScreenQueries()))
-  ).replace(/,/g,'\n')
-  // .replace(/^\./gm,'  .')
-    // TODO: Replacing all commas with \n will lead to bus in CSS
+  )
 }
 
 // printAtom
@@ -417,7 +474,7 @@ export const printPerScreen = (obj) => {
 
 export const printAtom = (obj) => {
   const everyClass = Object.keys(obj).map(propGroup => {
-    return printClasses(obj[propGroup].values).concat('\n')
+    return printClasses(obj[propGroup].values.all).concat('\n')
       .concat('\n',printMobileFirst(obj[propGroup].mobileFirstValues))
       .concat('\n',printPerScreen(obj[propGroup].perScreenValues));
   })
@@ -480,7 +537,7 @@ const backgroundColors = colors([
   'red'
 ]);
 
-const displayAtom = atomCompile({
+const displayAtom = atomTree({
   props: {
     '': 'display'
   },
@@ -502,7 +559,7 @@ const displayAtom = atomCompile({
 
 
 
-const paddingAtom = atomCompile({
+const paddingAtom = atomTree({
   props: {
     'p': 'padding'
   },
@@ -518,11 +575,39 @@ const paddingAtom = atomCompile({
     values: [1,2,3,4],
     transform: [remify, scaler],
     valueSuffix: 'rem'
-  })
+  }),
+  perScreenValues: {
+    '-auto': 'auto'
+  }
 });
 
+// console.log(paddingAtom)
 
+const allClasses = (atom) => {
+  return atom[Object.keys(atom)].values.all
+    .concat(
+      Object.keys(atom[Object.keys(atom)].mobileFirstValues)
+        .map(bp => atom[Object.keys(atom)].mobileFirstValues[bp])
+    .concat(Object.keys(atom[Object.keys(atom)].perScreenValues)
+        .map(bp => atom[Object.keys(atom)].perScreenValues[bp])
+    ));
+}
 
+// const allClasses = (atom) => {
+//   const allClassnames = atom[Object.keys(atom)].values.all.map((x) => Object.keys(x))
+//   allClassnames.reduce((accum, name) => {
+//     console.log(name)
+//     accum.concat(name)
+//       return accum
+//   }, [])
+//   return allClassnames
+
+//   // return atom[Object.keys(atom)].values.all.reduce((accum, fullClass) => {
+//   //   accum[]
+//   // })
+// }
+
+// JSONlog(allClasses(paddingAtom));
 
 
 
@@ -531,7 +616,7 @@ const paddingAtom = atomCompile({
 // console.log(printAtom(paddingAtom));
 const padding = printAtom(displayAtom);
 
-// fs.writeFile("./unprocessed-atomic.css", printAtom(paddingAtom));
+fs.writeFile("./unprocessed-atomic.css", printAtom(paddingAtom));
 
 // var css = fs.readFileSync('./unprocessed-atomic.css', 'utf-8');
 

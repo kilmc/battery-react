@@ -1,4 +1,4 @@
-exports[`Battery atomCompile matches expectations 1`] = `
+exports[`Battery atomTree matches expectations 1`] = `
 Object {
   "margin": Object {
     "mobileFirstValues": Object {
@@ -1023,344 +1023,346 @@ Object {
       "sm": Array [],
       "xs": Array [],
     },
-    "values": Array [
-      Object {
-        "m0": Object {
-          "margin": "0rem",
+    "values": Object {
+      "all": Array [
+        Object {
+          "m0": Object {
+            "margin": "0rem",
+          },
         },
-      },
-      Object {
-        "m1": Object {
-          "margin": "0.6rem",
+        Object {
+          "m1": Object {
+            "margin": "0.6rem",
+          },
         },
-      },
-      Object {
-        "m2": Object {
-          "margin": "1.2rem",
+        Object {
+          "m2": Object {
+            "margin": "1.2rem",
+          },
         },
-      },
-      Object {
-        "m3": Object {
-          "margin": "1.8rem",
+        Object {
+          "m3": Object {
+            "margin": "1.8rem",
+          },
         },
-      },
-      Object {
-        "m4": Object {
-          "margin": "2.4rem",
+        Object {
+          "m4": Object {
+            "margin": "2.4rem",
+          },
         },
-      },
-      Object {
-        "m5": Object {
-          "margin": "3rem",
+        Object {
+          "m5": Object {
+            "margin": "3rem",
+          },
         },
-      },
-      Object {
-        "m6": Object {
-          "margin": "3.6rem",
+        Object {
+          "m6": Object {
+            "margin": "3.6rem",
+          },
         },
-      },
-      Object {
-        "m7": Object {
-          "margin": "4.2rem",
+        Object {
+          "m7": Object {
+            "margin": "4.2rem",
+          },
         },
-      },
-      Object {
-        "m8": Object {
-          "margin": "4.8rem",
+        Object {
+          "m8": Object {
+            "margin": "4.8rem",
+          },
         },
-      },
-      Object {
-        "m9": Object {
-          "margin": "5.4rem",
+        Object {
+          "m9": Object {
+            "margin": "5.4rem",
+          },
         },
-      },
-      Object {
-        "m10": Object {
-          "margin": "6rem",
+        Object {
+          "m10": Object {
+            "margin": "6rem",
+          },
         },
-      },
-      Object {
-        "m11": Object {
-          "margin": "6.6rem",
+        Object {
+          "m11": Object {
+            "margin": "6.6rem",
+          },
         },
-      },
-      Object {
-        "m12": Object {
-          "margin": "7.2rem",
+        Object {
+          "m12": Object {
+            "margin": "7.2rem",
+          },
         },
-      },
-      Object {
-        "m13": Object {
-          "margin": "7.8rem",
+        Object {
+          "m13": Object {
+            "margin": "7.8rem",
+          },
         },
-      },
-      Object {
-        "m14": Object {
-          "margin": "8.4rem",
+        Object {
+          "m14": Object {
+            "margin": "8.4rem",
+          },
         },
-      },
-      Object {
-        "m15": Object {
-          "margin": "9rem",
+        Object {
+          "m15": Object {
+            "margin": "9rem",
+          },
         },
-      },
-      Object {
-        "m16": Object {
-          "margin": "9.6rem",
+        Object {
+          "m16": Object {
+            "margin": "9.6rem",
+          },
         },
-      },
-      Object {
-        "m17": Object {
-          "margin": "10.2rem",
+        Object {
+          "m17": Object {
+            "margin": "10.2rem",
+          },
         },
-      },
-      Object {
-        "m18": Object {
-          "margin": "10.8rem",
+        Object {
+          "m18": Object {
+            "margin": "10.8rem",
+          },
         },
-      },
-      Object {
-        "m19": Object {
-          "margin": "11.4rem",
+        Object {
+          "m19": Object {
+            "margin": "11.4rem",
+          },
         },
-      },
-      Object {
-        "m20": Object {
-          "margin": "12rem",
+        Object {
+          "m20": Object {
+            "margin": "12rem",
+          },
         },
-      },
-      Object {
-        "mt0": Object {
-          "margin-top": "0rem",
+        Object {
+          "mt0": Object {
+            "margin-top": "0rem",
+          },
         },
-      },
-      Object {
-        "mt1": Object {
-          "margin-top": "0.6rem",
+        Object {
+          "mt1": Object {
+            "margin-top": "0.6rem",
+          },
         },
-      },
-      Object {
-        "mt2": Object {
-          "margin-top": "1.2rem",
+        Object {
+          "mt2": Object {
+            "margin-top": "1.2rem",
+          },
         },
-      },
-      Object {
-        "mt3": Object {
-          "margin-top": "1.8rem",
+        Object {
+          "mt3": Object {
+            "margin-top": "1.8rem",
+          },
         },
-      },
-      Object {
-        "mt4": Object {
-          "margin-top": "2.4rem",
+        Object {
+          "mt4": Object {
+            "margin-top": "2.4rem",
+          },
         },
-      },
-      Object {
-        "mt5": Object {
-          "margin-top": "3rem",
+        Object {
+          "mt5": Object {
+            "margin-top": "3rem",
+          },
         },
-      },
-      Object {
-        "mt6": Object {
-          "margin-top": "3.6rem",
+        Object {
+          "mt6": Object {
+            "margin-top": "3.6rem",
+          },
         },
-      },
-      Object {
-        "mt7": Object {
-          "margin-top": "4.2rem",
+        Object {
+          "mt7": Object {
+            "margin-top": "4.2rem",
+          },
         },
-      },
-      Object {
-        "mt8": Object {
-          "margin-top": "4.8rem",
+        Object {
+          "mt8": Object {
+            "margin-top": "4.8rem",
+          },
         },
-      },
-      Object {
-        "mt9": Object {
-          "margin-top": "5.4rem",
+        Object {
+          "mt9": Object {
+            "margin-top": "5.4rem",
+          },
         },
-      },
-      Object {
-        "mt10": Object {
-          "margin-top": "6rem",
+        Object {
+          "mt10": Object {
+            "margin-top": "6rem",
+          },
         },
-      },
-      Object {
-        "mt11": Object {
-          "margin-top": "6.6rem",
+        Object {
+          "mt11": Object {
+            "margin-top": "6.6rem",
+          },
         },
-      },
-      Object {
-        "mt12": Object {
-          "margin-top": "7.2rem",
+        Object {
+          "mt12": Object {
+            "margin-top": "7.2rem",
+          },
         },
-      },
-      Object {
-        "mt13": Object {
-          "margin-top": "7.8rem",
+        Object {
+          "mt13": Object {
+            "margin-top": "7.8rem",
+          },
         },
-      },
-      Object {
-        "mt14": Object {
-          "margin-top": "8.4rem",
+        Object {
+          "mt14": Object {
+            "margin-top": "8.4rem",
+          },
         },
-      },
-      Object {
-        "mt15": Object {
-          "margin-top": "9rem",
+        Object {
+          "mt15": Object {
+            "margin-top": "9rem",
+          },
         },
-      },
-      Object {
-        "mt16": Object {
-          "margin-top": "9.6rem",
+        Object {
+          "mt16": Object {
+            "margin-top": "9.6rem",
+          },
         },
-      },
-      Object {
-        "mt17": Object {
-          "margin-top": "10.2rem",
+        Object {
+          "mt17": Object {
+            "margin-top": "10.2rem",
+          },
         },
-      },
-      Object {
-        "mt18": Object {
-          "margin-top": "10.8rem",
+        Object {
+          "mt18": Object {
+            "margin-top": "10.8rem",
+          },
         },
-      },
-      Object {
-        "mt19": Object {
-          "margin-top": "11.4rem",
+        Object {
+          "mt19": Object {
+            "margin-top": "11.4rem",
+          },
         },
-      },
-      Object {
-        "mt20": Object {
-          "margin-top": "12rem",
+        Object {
+          "mt20": Object {
+            "margin-top": "12rem",
+          },
         },
-      },
-      Object {
-        "mx0": Object {
-          "margin-left": "0rem",
-          "margin-right": "0rem",
+        Object {
+          "mx0": Object {
+            "margin-left": "0rem",
+            "margin-right": "0rem",
+          },
         },
-      },
-      Object {
-        "mx1": Object {
-          "margin-left": "0.6rem",
-          "margin-right": "0.6rem",
+        Object {
+          "mx1": Object {
+            "margin-left": "0.6rem",
+            "margin-right": "0.6rem",
+          },
         },
-      },
-      Object {
-        "mx2": Object {
-          "margin-left": "1.2rem",
-          "margin-right": "1.2rem",
+        Object {
+          "mx2": Object {
+            "margin-left": "1.2rem",
+            "margin-right": "1.2rem",
+          },
         },
-      },
-      Object {
-        "mx3": Object {
-          "margin-left": "1.8rem",
-          "margin-right": "1.8rem",
+        Object {
+          "mx3": Object {
+            "margin-left": "1.8rem",
+            "margin-right": "1.8rem",
+          },
         },
-      },
-      Object {
-        "mx4": Object {
-          "margin-left": "2.4rem",
-          "margin-right": "2.4rem",
+        Object {
+          "mx4": Object {
+            "margin-left": "2.4rem",
+            "margin-right": "2.4rem",
+          },
         },
-      },
-      Object {
-        "mx5": Object {
-          "margin-left": "3rem",
-          "margin-right": "3rem",
+        Object {
+          "mx5": Object {
+            "margin-left": "3rem",
+            "margin-right": "3rem",
+          },
         },
-      },
-      Object {
-        "mx6": Object {
-          "margin-left": "3.6rem",
-          "margin-right": "3.6rem",
+        Object {
+          "mx6": Object {
+            "margin-left": "3.6rem",
+            "margin-right": "3.6rem",
+          },
         },
-      },
-      Object {
-        "mx7": Object {
-          "margin-left": "4.2rem",
-          "margin-right": "4.2rem",
+        Object {
+          "mx7": Object {
+            "margin-left": "4.2rem",
+            "margin-right": "4.2rem",
+          },
         },
-      },
-      Object {
-        "mx8": Object {
-          "margin-left": "4.8rem",
-          "margin-right": "4.8rem",
+        Object {
+          "mx8": Object {
+            "margin-left": "4.8rem",
+            "margin-right": "4.8rem",
+          },
         },
-      },
-      Object {
-        "mx9": Object {
-          "margin-left": "5.4rem",
-          "margin-right": "5.4rem",
+        Object {
+          "mx9": Object {
+            "margin-left": "5.4rem",
+            "margin-right": "5.4rem",
+          },
         },
-      },
-      Object {
-        "mx10": Object {
-          "margin-left": "6rem",
-          "margin-right": "6rem",
+        Object {
+          "mx10": Object {
+            "margin-left": "6rem",
+            "margin-right": "6rem",
+          },
         },
-      },
-      Object {
-        "mx11": Object {
-          "margin-left": "6.6rem",
-          "margin-right": "6.6rem",
+        Object {
+          "mx11": Object {
+            "margin-left": "6.6rem",
+            "margin-right": "6.6rem",
+          },
         },
-      },
-      Object {
-        "mx12": Object {
-          "margin-left": "7.2rem",
-          "margin-right": "7.2rem",
+        Object {
+          "mx12": Object {
+            "margin-left": "7.2rem",
+            "margin-right": "7.2rem",
+          },
         },
-      },
-      Object {
-        "mx13": Object {
-          "margin-left": "7.8rem",
-          "margin-right": "7.8rem",
+        Object {
+          "mx13": Object {
+            "margin-left": "7.8rem",
+            "margin-right": "7.8rem",
+          },
         },
-      },
-      Object {
-        "mx14": Object {
-          "margin-left": "8.4rem",
-          "margin-right": "8.4rem",
+        Object {
+          "mx14": Object {
+            "margin-left": "8.4rem",
+            "margin-right": "8.4rem",
+          },
         },
-      },
-      Object {
-        "mx15": Object {
-          "margin-left": "9rem",
-          "margin-right": "9rem",
+        Object {
+          "mx15": Object {
+            "margin-left": "9rem",
+            "margin-right": "9rem",
+          },
         },
-      },
-      Object {
-        "mx16": Object {
-          "margin-left": "9.6rem",
-          "margin-right": "9.6rem",
+        Object {
+          "mx16": Object {
+            "margin-left": "9.6rem",
+            "margin-right": "9.6rem",
+          },
         },
-      },
-      Object {
-        "mx17": Object {
-          "margin-left": "10.2rem",
-          "margin-right": "10.2rem",
+        Object {
+          "mx17": Object {
+            "margin-left": "10.2rem",
+            "margin-right": "10.2rem",
+          },
         },
-      },
-      Object {
-        "mx18": Object {
-          "margin-left": "10.8rem",
-          "margin-right": "10.8rem",
+        Object {
+          "mx18": Object {
+            "margin-left": "10.8rem",
+            "margin-right": "10.8rem",
+          },
         },
-      },
-      Object {
-        "mx19": Object {
-          "margin-left": "11.4rem",
-          "margin-right": "11.4rem",
+        Object {
+          "mx19": Object {
+            "margin-left": "11.4rem",
+            "margin-right": "11.4rem",
+          },
         },
-      },
-      Object {
-        "mx20": Object {
-          "margin-left": "12rem",
-          "margin-right": "12rem",
+        Object {
+          "mx20": Object {
+            "margin-left": "12rem",
+            "margin-right": "12rem",
+          },
         },
-      },
-    ],
+      ],
+    },
   },
   "padding": Object {
     "mobileFirstValues": Object {
@@ -2385,344 +2387,346 @@ Object {
       "sm": Array [],
       "xs": Array [],
     },
-    "values": Array [
-      Object {
-        "p0": Object {
-          "padding": "0rem",
+    "values": Object {
+      "all": Array [
+        Object {
+          "p0": Object {
+            "padding": "0rem",
+          },
         },
-      },
-      Object {
-        "p1": Object {
-          "padding": "0.6rem",
+        Object {
+          "p1": Object {
+            "padding": "0.6rem",
+          },
         },
-      },
-      Object {
-        "p2": Object {
-          "padding": "1.2rem",
+        Object {
+          "p2": Object {
+            "padding": "1.2rem",
+          },
         },
-      },
-      Object {
-        "p3": Object {
-          "padding": "1.8rem",
+        Object {
+          "p3": Object {
+            "padding": "1.8rem",
+          },
         },
-      },
-      Object {
-        "p4": Object {
-          "padding": "2.4rem",
+        Object {
+          "p4": Object {
+            "padding": "2.4rem",
+          },
         },
-      },
-      Object {
-        "p5": Object {
-          "padding": "3rem",
+        Object {
+          "p5": Object {
+            "padding": "3rem",
+          },
         },
-      },
-      Object {
-        "p6": Object {
-          "padding": "3.6rem",
+        Object {
+          "p6": Object {
+            "padding": "3.6rem",
+          },
         },
-      },
-      Object {
-        "p7": Object {
-          "padding": "4.2rem",
+        Object {
+          "p7": Object {
+            "padding": "4.2rem",
+          },
         },
-      },
-      Object {
-        "p8": Object {
-          "padding": "4.8rem",
+        Object {
+          "p8": Object {
+            "padding": "4.8rem",
+          },
         },
-      },
-      Object {
-        "p9": Object {
-          "padding": "5.4rem",
+        Object {
+          "p9": Object {
+            "padding": "5.4rem",
+          },
         },
-      },
-      Object {
-        "p10": Object {
-          "padding": "6rem",
+        Object {
+          "p10": Object {
+            "padding": "6rem",
+          },
         },
-      },
-      Object {
-        "p11": Object {
-          "padding": "6.6rem",
+        Object {
+          "p11": Object {
+            "padding": "6.6rem",
+          },
         },
-      },
-      Object {
-        "p12": Object {
-          "padding": "7.2rem",
+        Object {
+          "p12": Object {
+            "padding": "7.2rem",
+          },
         },
-      },
-      Object {
-        "p13": Object {
-          "padding": "7.8rem",
+        Object {
+          "p13": Object {
+            "padding": "7.8rem",
+          },
         },
-      },
-      Object {
-        "p14": Object {
-          "padding": "8.4rem",
+        Object {
+          "p14": Object {
+            "padding": "8.4rem",
+          },
         },
-      },
-      Object {
-        "p15": Object {
-          "padding": "9rem",
+        Object {
+          "p15": Object {
+            "padding": "9rem",
+          },
         },
-      },
-      Object {
-        "p16": Object {
-          "padding": "9.6rem",
+        Object {
+          "p16": Object {
+            "padding": "9.6rem",
+          },
         },
-      },
-      Object {
-        "p17": Object {
-          "padding": "10.2rem",
+        Object {
+          "p17": Object {
+            "padding": "10.2rem",
+          },
         },
-      },
-      Object {
-        "p18": Object {
-          "padding": "10.8rem",
+        Object {
+          "p18": Object {
+            "padding": "10.8rem",
+          },
         },
-      },
-      Object {
-        "p19": Object {
-          "padding": "11.4rem",
+        Object {
+          "p19": Object {
+            "padding": "11.4rem",
+          },
         },
-      },
-      Object {
-        "p20": Object {
-          "padding": "12rem",
+        Object {
+          "p20": Object {
+            "padding": "12rem",
+          },
         },
-      },
-      Object {
-        "pt0": Object {
-          "padding-top": "0rem",
+        Object {
+          "pt0": Object {
+            "padding-top": "0rem",
+          },
         },
-      },
-      Object {
-        "pt1": Object {
-          "padding-top": "0.6rem",
+        Object {
+          "pt1": Object {
+            "padding-top": "0.6rem",
+          },
         },
-      },
-      Object {
-        "pt2": Object {
-          "padding-top": "1.2rem",
+        Object {
+          "pt2": Object {
+            "padding-top": "1.2rem",
+          },
         },
-      },
-      Object {
-        "pt3": Object {
-          "padding-top": "1.8rem",
+        Object {
+          "pt3": Object {
+            "padding-top": "1.8rem",
+          },
         },
-      },
-      Object {
-        "pt4": Object {
-          "padding-top": "2.4rem",
+        Object {
+          "pt4": Object {
+            "padding-top": "2.4rem",
+          },
         },
-      },
-      Object {
-        "pt5": Object {
-          "padding-top": "3rem",
+        Object {
+          "pt5": Object {
+            "padding-top": "3rem",
+          },
         },
-      },
-      Object {
-        "pt6": Object {
-          "padding-top": "3.6rem",
+        Object {
+          "pt6": Object {
+            "padding-top": "3.6rem",
+          },
         },
-      },
-      Object {
-        "pt7": Object {
-          "padding-top": "4.2rem",
+        Object {
+          "pt7": Object {
+            "padding-top": "4.2rem",
+          },
         },
-      },
-      Object {
-        "pt8": Object {
-          "padding-top": "4.8rem",
+        Object {
+          "pt8": Object {
+            "padding-top": "4.8rem",
+          },
         },
-      },
-      Object {
-        "pt9": Object {
-          "padding-top": "5.4rem",
+        Object {
+          "pt9": Object {
+            "padding-top": "5.4rem",
+          },
         },
-      },
-      Object {
-        "pt10": Object {
-          "padding-top": "6rem",
+        Object {
+          "pt10": Object {
+            "padding-top": "6rem",
+          },
         },
-      },
-      Object {
-        "pt11": Object {
-          "padding-top": "6.6rem",
+        Object {
+          "pt11": Object {
+            "padding-top": "6.6rem",
+          },
         },
-      },
-      Object {
-        "pt12": Object {
-          "padding-top": "7.2rem",
+        Object {
+          "pt12": Object {
+            "padding-top": "7.2rem",
+          },
         },
-      },
-      Object {
-        "pt13": Object {
-          "padding-top": "7.8rem",
+        Object {
+          "pt13": Object {
+            "padding-top": "7.8rem",
+          },
         },
-      },
-      Object {
-        "pt14": Object {
-          "padding-top": "8.4rem",
+        Object {
+          "pt14": Object {
+            "padding-top": "8.4rem",
+          },
         },
-      },
-      Object {
-        "pt15": Object {
-          "padding-top": "9rem",
+        Object {
+          "pt15": Object {
+            "padding-top": "9rem",
+          },
         },
-      },
-      Object {
-        "pt16": Object {
-          "padding-top": "9.6rem",
+        Object {
+          "pt16": Object {
+            "padding-top": "9.6rem",
+          },
         },
-      },
-      Object {
-        "pt17": Object {
-          "padding-top": "10.2rem",
+        Object {
+          "pt17": Object {
+            "padding-top": "10.2rem",
+          },
         },
-      },
-      Object {
-        "pt18": Object {
-          "padding-top": "10.8rem",
+        Object {
+          "pt18": Object {
+            "padding-top": "10.8rem",
+          },
         },
-      },
-      Object {
-        "pt19": Object {
-          "padding-top": "11.4rem",
+        Object {
+          "pt19": Object {
+            "padding-top": "11.4rem",
+          },
         },
-      },
-      Object {
-        "pt20": Object {
-          "padding-top": "12rem",
+        Object {
+          "pt20": Object {
+            "padding-top": "12rem",
+          },
         },
-      },
-      Object {
-        "px0": Object {
-          "padding-left": "0rem",
-          "padding-right": "0rem",
+        Object {
+          "px0": Object {
+            "padding-left": "0rem",
+            "padding-right": "0rem",
+          },
         },
-      },
-      Object {
-        "px1": Object {
-          "padding-left": "0.6rem",
-          "padding-right": "0.6rem",
+        Object {
+          "px1": Object {
+            "padding-left": "0.6rem",
+            "padding-right": "0.6rem",
+          },
         },
-      },
-      Object {
-        "px2": Object {
-          "padding-left": "1.2rem",
-          "padding-right": "1.2rem",
+        Object {
+          "px2": Object {
+            "padding-left": "1.2rem",
+            "padding-right": "1.2rem",
+          },
         },
-      },
-      Object {
-        "px3": Object {
-          "padding-left": "1.8rem",
-          "padding-right": "1.8rem",
+        Object {
+          "px3": Object {
+            "padding-left": "1.8rem",
+            "padding-right": "1.8rem",
+          },
         },
-      },
-      Object {
-        "px4": Object {
-          "padding-left": "2.4rem",
-          "padding-right": "2.4rem",
+        Object {
+          "px4": Object {
+            "padding-left": "2.4rem",
+            "padding-right": "2.4rem",
+          },
         },
-      },
-      Object {
-        "px5": Object {
-          "padding-left": "3rem",
-          "padding-right": "3rem",
+        Object {
+          "px5": Object {
+            "padding-left": "3rem",
+            "padding-right": "3rem",
+          },
         },
-      },
-      Object {
-        "px6": Object {
-          "padding-left": "3.6rem",
-          "padding-right": "3.6rem",
+        Object {
+          "px6": Object {
+            "padding-left": "3.6rem",
+            "padding-right": "3.6rem",
+          },
         },
-      },
-      Object {
-        "px7": Object {
-          "padding-left": "4.2rem",
-          "padding-right": "4.2rem",
+        Object {
+          "px7": Object {
+            "padding-left": "4.2rem",
+            "padding-right": "4.2rem",
+          },
         },
-      },
-      Object {
-        "px8": Object {
-          "padding-left": "4.8rem",
-          "padding-right": "4.8rem",
+        Object {
+          "px8": Object {
+            "padding-left": "4.8rem",
+            "padding-right": "4.8rem",
+          },
         },
-      },
-      Object {
-        "px9": Object {
-          "padding-left": "5.4rem",
-          "padding-right": "5.4rem",
+        Object {
+          "px9": Object {
+            "padding-left": "5.4rem",
+            "padding-right": "5.4rem",
+          },
         },
-      },
-      Object {
-        "px10": Object {
-          "padding-left": "6rem",
-          "padding-right": "6rem",
+        Object {
+          "px10": Object {
+            "padding-left": "6rem",
+            "padding-right": "6rem",
+          },
         },
-      },
-      Object {
-        "px11": Object {
-          "padding-left": "6.6rem",
-          "padding-right": "6.6rem",
+        Object {
+          "px11": Object {
+            "padding-left": "6.6rem",
+            "padding-right": "6.6rem",
+          },
         },
-      },
-      Object {
-        "px12": Object {
-          "padding-left": "7.2rem",
-          "padding-right": "7.2rem",
+        Object {
+          "px12": Object {
+            "padding-left": "7.2rem",
+            "padding-right": "7.2rem",
+          },
         },
-      },
-      Object {
-        "px13": Object {
-          "padding-left": "7.8rem",
-          "padding-right": "7.8rem",
+        Object {
+          "px13": Object {
+            "padding-left": "7.8rem",
+            "padding-right": "7.8rem",
+          },
         },
-      },
-      Object {
-        "px14": Object {
-          "padding-left": "8.4rem",
-          "padding-right": "8.4rem",
+        Object {
+          "px14": Object {
+            "padding-left": "8.4rem",
+            "padding-right": "8.4rem",
+          },
         },
-      },
-      Object {
-        "px15": Object {
-          "padding-left": "9rem",
-          "padding-right": "9rem",
+        Object {
+          "px15": Object {
+            "padding-left": "9rem",
+            "padding-right": "9rem",
+          },
         },
-      },
-      Object {
-        "px16": Object {
-          "padding-left": "9.6rem",
-          "padding-right": "9.6rem",
+        Object {
+          "px16": Object {
+            "padding-left": "9.6rem",
+            "padding-right": "9.6rem",
+          },
         },
-      },
-      Object {
-        "px17": Object {
-          "padding-left": "10.2rem",
-          "padding-right": "10.2rem",
+        Object {
+          "px17": Object {
+            "padding-left": "10.2rem",
+            "padding-right": "10.2rem",
+          },
         },
-      },
-      Object {
-        "px18": Object {
-          "padding-left": "10.8rem",
-          "padding-right": "10.8rem",
+        Object {
+          "px18": Object {
+            "padding-left": "10.8rem",
+            "padding-right": "10.8rem",
+          },
         },
-      },
-      Object {
-        "px19": Object {
-          "padding-left": "11.4rem",
-          "padding-right": "11.4rem",
+        Object {
+          "px19": Object {
+            "padding-left": "11.4rem",
+            "padding-right": "11.4rem",
+          },
         },
-      },
-      Object {
-        "px20": Object {
-          "padding-left": "12rem",
-          "padding-right": "12rem",
+        Object {
+          "px20": Object {
+            "padding-left": "12rem",
+            "padding-right": "12rem",
+          },
         },
-      },
-    ],
+      ],
+    },
   },
 }
 `;
@@ -2822,7 +2826,14 @@ Object {
 }
 `;
 
-exports[`Battery lengths matches snapshot 1`] = `"ok"`;
+exports[`Battery lengths matches snapshot 1`] = `
+Object {
+  "1px": "0.1rem",
+  "2px": "0.2rem",
+  "3px": "0.3rem",
+  "4px": "0.4rem",
+}
+`;
 
 exports[`Battery mobileFirstQueries matches snapshot 1`] = `
 Object {
@@ -2832,7 +2843,14 @@ Object {
 }
 `;
 
-exports[`Battery perScreenQueries matches snapshot 1`] = `undefined`;
+exports[`Battery perScreenQueries matches snapshot 1`] = `
+Object {
+  "lg": "(min-width: 1100px)",
+  "md": "(min-width: 900px) and (max-width: 1099px)",
+  "sm": "(min-width: 600px) and (max-width: 899px)",
+  "xs": "(max-width: 599px)",
+}
+`;
 
 exports[`Battery printAtom matches snapshot 1`] = `
 ".table { display: table }
@@ -2915,16 +2933,13 @@ exports[`Battery printPerScreen matches snapshot 1`] = `
 "@media (max-width: 599px) {
 .hide-xs { display: none }
 }
-
-@media (min-width: 600px) and (max-width: 899px) {
+,@media (min-width: 600px) and (max-width: 899px) {
 .hide-sm { display: none }
 }
-
-@media (min-width: 900px) and (max-width: 1099px) {
+,@media (min-width: 900px) and (max-width: 1099px) {
 .hide-md { display: none }
 }
-
-@media (min-width: 1100px) {
+,@media (min-width: 1100px) {
 .hide-lg { display: none }
 }
 "

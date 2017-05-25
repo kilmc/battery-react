@@ -1,5 +1,6 @@
+// eslint-env jest, node
 import {
-  atomCompile,
+  atomTree,
   breakpointsClassCompile,
   breakpointClassFormat,
   breakpointsCompile,
@@ -47,6 +48,7 @@ describe('Battery', () => {
 
   describe('lengths', () => {
     it('matches snapshot', () => {
+      console.log(remify.name)
       expect(lengths({
         values: [1,2,3,4],
         transform: [remify],
@@ -143,9 +145,9 @@ describe('Battery', () => {
     });
   });
 
-  describe('atomCompile', () => {
+  describe('atomTree', () => {
     it('matches expectations', () => {
-      expect(atomCompile({
+      expect(atomTree({
         props: {
           'p': 'padding',
           'm': 'margin'
@@ -253,7 +255,7 @@ describe('Battery', () => {
 
   describe('printAtom', () => {
     it('matches snapshot', () => {
-      expect(printAtom(atomCompile({
+      expect(printAtom(atomTree({
         props: {
           '': 'display'
         },
