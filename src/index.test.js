@@ -6,14 +6,22 @@ import {
   classCompile,
   colors,
   lengths,
+  mobileFirstQueries,
+  perScreenQueries,
   pixelUnits,
+  printBreakpoint,
   positionCoordinateProps,
+  printAtom,
+  printClass,
+  printClasses,
+  printMobileFirst,
+  printPerScreen,
+  printProps,
   propsCompile,
   propsValuesMerge,
   remify,
   scaler,
   scaleUnits,
-  spacingProps,
   valueObjectFormat,
   valuesCompile
 } from './index';
@@ -135,14 +143,6 @@ describe('Battery', () => {
     });
   });
 
-
-  describe('spacingProps', () => {
-    it('matches snapshot', () => {
-      expect(spacingProps).toEqual()
-    });
-  });
-
-
   describe('atomCompile', () => {
     it('matches expectations', () => {
       expect(atomCompile({
@@ -159,9 +159,117 @@ describe('Battery', () => {
     });
   });
 
-  describe('scaleUnits', () => {
+  describe('mobileFirstQueries', () => {
     it('matches snapshot', () => {
-      expect(scaleUnits).toMatchSnapshot()
+      expect(mobileFirstQueries).toMatchSnapshot()
+    });
+  });
+
+  describe('perScreenQueries', () => {
+    it('matches snapshot', () => {
+      expect(perScreenQueries()).toMatchSnapshot()
+    });
+  });
+
+  describe('printProps', () => {
+    it('matches snapshot', () => {
+      expect(printProps({
+        'rounded': { 'border-radius': '0.2rem' }
+      })).toMatchSnapshot()
+    });
+  });
+
+  describe('printClass', () => {
+    it('matches snapshot', () => {
+      expect(printClass({
+        'rounded': { 'border-radius': '0.2rem' }
+      })).toMatchSnapshot()
+    });
+  });
+
+  describe('printClasses', () => {
+    it('matches snapshot', () => {
+      expect(printClasses([
+        { 'rounded': { 'border-radius': '0.2rem' } },
+        { 'rounded-medium': { 'border-radius': '0.4rem' } }
+      ])).toMatchSnapshot()
+    });
+  });
+
+  describe('printBreakpoint', () => {
+    it('matches snapshot', () => {
+      expect(printBreakpoint(
+      [
+        'sm', [
+          { 'rounded': { 'border-radius': '0.2rem' } },
+          { 'rounded-medium': { 'border-radius': '0.4rem' } }
+        ]
+      ],
+      {
+        'sm': '(min-width: 600px)',
+        'md': '(min-width: 900px)'
+      }
+      )).toMatchSnapshot()
+    });
+  });
+
+  describe('printMobileFirst', () => {
+    it('matches snapshot', () => {
+      expect(printMobileFirst({
+        sm: [
+          { "block-sm": { "display": "block" } },
+          { "inline-sm": { "display": "inline" } }
+        ],
+        md: [
+          { "block-md": { "display": "block" } },
+          { "inline-md": { "display": "inline" } }
+        ],
+        lg: [
+          { "block-lg": { "display": "block" } },
+          { "inline-lg": { "display": "inline" } }
+        ]
+      })).toMatchSnapshot()
+    });
+  });
+
+  describe('printPerScreen', () => {
+    it('matches snapshot', () => {
+      expect(printPerScreen({
+        xs: [
+          { "hide-xs": { "display": "none" } }
+        ],
+        sm: [
+          { "hide-sm": { "display": "none" } }
+        ],
+        md: [
+          { "hide-md": { "display": "none" } }
+        ],
+        lg: [
+          { "hide-lg": { "display": "none" } }
+        ],
+      })).toMatchSnapshot()
+    });
+  });
+
+  describe('printAtom', () => {
+    it('matches snapshot', () => {
+      expect(printAtom(atomCompile({
+        props: {
+          '': 'display'
+        },
+        values: {
+          'table': 'table'
+        },
+        mobileFirstValues: {
+          'block': 'block',
+          'inline': 'inline',
+          'inline-block': 'inline-block',
+          'flex': 'flex'
+        },
+        perScreenValues: {
+          'hide': 'none'
+        },
+      }))).toMatchSnapshot()
     });
   });
 });

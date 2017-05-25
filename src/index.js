@@ -304,7 +304,7 @@ export const atomCompile = ({
 // ------------------------------------------------------------------
 // Creates an object with mobileFirst media query params
 
-const mobileFirstQueries = mobileFirstBreakpoints.reduce((accum, bp) => {
+export const mobileFirstQueries = mobileFirstBreakpoints.reduce((accum, bp) => {
   accum[bp] = `(min-width: ${breakpointsConfig[bp]}px)`
   return accum
 }, {})
@@ -348,8 +348,8 @@ const perScreenQueries = () => {
 // string which can be passed to a another to printClass to finish
 // formatting
 
-const printProps = (cx, multiple) => {
-  return String(Object.entries(cx[Object.keys(cx)]).map(
+export const printProps = (classObj, multiple) => {
+  return String(Object.entries(classObj[Object.keys(classObj)]).map(
     ([prop, value]) => (
       multiple ? `\t${prop}: ${value};\n` : `${prop}: ${value}`
     )
@@ -361,15 +361,15 @@ const printProps = (cx, multiple) => {
 // Creates a formatted block of classes in a string which can be
 // passed to a another function to render it into a CSS file.
 
-const printClass = (cx) => {
-  const multiple = Object.keys(cx[Object.keys(cx)]).length > 1;
-  const className = Object.keys(cx)
+export const printClass = (classObj) => {
+  const multiple = Object.keys(classObj[Object.keys(classObj)]).length > 1;
+  const className = Object.keys(classObj)
 
   let renderedClass;
   if (multiple) {
-    renderedClass = `.${className} {\n\t${printProps(cx, multiple)}\n}\n`
+    renderedClass = `.${className} {\n\t${printProps(classObj, multiple)}\n}\n`
   } else {
-    renderedClass = `.${className} { ${printProps(cx, multiple)} }`
+    renderedClass = `.${className} { ${printProps(classObj, multiple)} }`
   }
   return renderedClass
 }
@@ -377,24 +377,24 @@ const printClass = (cx) => {
 // printClasses
 // ------------------------------------------------------------------
 // Run through a
-const printClasses = (all) => {
-  return String(all.map(x => printClass(x))).replace(/,/g,'\n')
+export const printClasses = (allClasses) => {
+  return String(allClasses.map(classObj => printClass(classObj))).replace(/,/g,'\n')
 }
 
 // printBreakpoint
 // ------------------------------------------------------------------
 
-const printBreakpoint = ([bp, cxs], mqs) => {
+export const printBreakpoint = ([bp, classObjs], mediaQueryObj) => {
   return (
-`@media ${mqs[bp]} {\n${printClasses(cxs)}\n}\n`)}
+`@media ${mediaQueryObj[bp]} {\n${printClasses(classObjs)}\n}\n`)}
 
 // printMobileFirst
 // ------------------------------------------------------------------
 
-const printMobileFirst = (obj) => {
+export const printMobileFirst = (obj) => {
   return String(
     Object.entries(obj)
-      .map(([bp,cxs]) => printBreakpoint([bp,cxs], mobileFirstQueries))
+      .map(([bp,classObjs]) => printBreakpoint([bp,classObjs], mobileFirstQueries))
     )
     // .replace(/,/g,'\n')
     // .replace(/^\./gm,'  .')
@@ -403,7 +403,7 @@ const printMobileFirst = (obj) => {
 // printPerScreen
 // ------------------------------------------------------------------
 
-const printPerScreen = (obj) => {
+export const printPerScreen = (obj) => {
   return String(
     Object.entries(obj)
       .map(([bp,cxs]) => printBreakpoint([bp,cxs], perScreenQueries()))
@@ -415,7 +415,7 @@ const printPerScreen = (obj) => {
 // printAtom
 // ------------------------------------------------------------------
 
-const printAtom = (obj) => {
+export const printAtom = (obj) => {
   const everyClass = Object.keys(obj).map(propGroup => {
     return printClasses(obj[propGroup].values).concat('\n')
       .concat('\n',printMobileFirst(obj[propGroup].mobileFirstValues))

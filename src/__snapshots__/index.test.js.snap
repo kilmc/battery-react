@@ -2824,6 +2824,114 @@ Object {
 
 exports[`Battery lengths matches snapshot 1`] = `"ok"`;
 
+exports[`Battery mobileFirstQueries matches snapshot 1`] = `
+Object {
+  "lg": "(min-width: 1100px)",
+  "md": "(min-width: 900px)",
+  "sm": "(min-width: 600px)",
+}
+`;
+
+exports[`Battery perScreenQueries matches snapshot 1`] = `undefined`;
+
+exports[`Battery printAtom matches snapshot 1`] = `
+".table { display: table }
+.block { display: block }
+.inline { display: inline }
+.inline-block { display: inline-block }
+.flex { display: flex }
+
+@media (min-width: 600px) {
+.block-sm { display: block }
+.inline-sm { display: inline }
+.inline-block-sm { display: inline-block }
+.flex-sm { display: flex }
+}
+
+@media (min-width: 900px) {
+.block-md { display: block }
+.inline-md { display: inline }
+.inline-block-md { display: inline-block }
+.flex-md { display: flex }
+}
+
+@media (min-width: 1100px) {
+.block-lg { display: block }
+.inline-lg { display: inline }
+.inline-block-lg { display: inline-block }
+.flex-lg { display: flex }
+}
+
+@media (max-width: 599px) {
+.hide-xs { display: none }
+}
+
+@media (min-width: 600px) and (max-width: 899px) {
+.hide-sm { display: none }
+}
+
+@media (min-width: 900px) and (max-width: 1099px) {
+.hide-md { display: none }
+}
+
+@media (min-width: 1100px) {
+.hide-lg { display: none }
+}
+"
+`;
+
+exports[`Battery printBreakpoint matches snapshot 1`] = `
+"@media (min-width: 600px) {
+.rounded { border-radius: 0.2rem }
+.rounded-medium { border-radius: 0.4rem }
+}
+"
+`;
+
+exports[`Battery printClass matches snapshot 1`] = `".rounded { border-radius: 0.2rem }"`;
+
+exports[`Battery printClasses matches snapshot 1`] = `
+".rounded { border-radius: 0.2rem }
+.rounded-medium { border-radius: 0.4rem }"
+`;
+
+exports[`Battery printMobileFirst matches snapshot 1`] = `
+"@media (min-width: 600px) {
+.block-sm { display: block }
+.inline-sm { display: inline }
+}
+,@media (min-width: 900px) {
+.block-md { display: block }
+.inline-md { display: inline }
+}
+,@media (min-width: 1100px) {
+.block-lg { display: block }
+.inline-lg { display: inline }
+}
+"
+`;
+
+exports[`Battery printPerScreen matches snapshot 1`] = `
+"@media (max-width: 599px) {
+.hide-xs { display: none }
+}
+
+@media (min-width: 600px) and (max-width: 899px) {
+.hide-sm { display: none }
+}
+
+@media (min-width: 900px) and (max-width: 1099px) {
+.hide-md { display: none }
+}
+
+@media (min-width: 1100px) {
+.hide-lg { display: none }
+}
+"
+`;
+
+exports[`Battery printProps matches snapshot 1`] = `"border-radius: 0.2rem"`;
+
 exports[`Battery propsCompile matches snapshot 1`] = `
 Object {
   "margin": Array [
@@ -2908,32 +3016,6 @@ Array [
     "valueName": "2px",
   },
 ]
-`;
-
-exports[`Battery scaleUnits matches snapshot 1`] = `
-Object {
-  "0": "0rem",
-  "1": "0.6rem",
-  "10": "6rem",
-  "11": "6.6rem",
-  "12": "7.2rem",
-  "13": "7.8rem",
-  "14": "8.4rem",
-  "15": "9rem",
-  "16": "9.6rem",
-  "17": "10.2rem",
-  "18": "10.8rem",
-  "19": "11.4rem",
-  "2": "1.2rem",
-  "20": "12rem",
-  "3": "1.8rem",
-  "4": "2.4rem",
-  "5": "3rem",
-  "6": "3.6rem",
-  "7": "4.2rem",
-  "8": "4.8rem",
-  "9": "5.4rem",
-}
 `;
 
 exports[`Battery valueObjectFormat matches snapshot 1`] = `
