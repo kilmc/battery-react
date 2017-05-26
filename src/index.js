@@ -1,5 +1,4 @@
 import entries from 'object.entries';
-import fs from 'fs-extra';
 // var postcss = require('postcss');
 // var stylefmt = require('stylefmt');
 
@@ -12,6 +11,37 @@ const JSONlog = (x) => console.log(JSON.stringify(x, null, 2));
 const compose = (...functions) =>
   functions.reduce((f, g) => (...xs) => f(g(...xs)));
 const identity = x => x;
+
+Array.prototype.flatMap = function(fn) {
+  return this
+    .map(fn)
+    .reduce((xs,x) => xs.concat(x),[])
+}
+
+const users = [
+  {
+    name: 'kilmc',
+    sessions: [
+      { client: 'iphone' },
+      { client: 'mac' }
+    ]
+  },
+  {
+    name: 'stephen',
+    sessions: []
+  },
+  {
+    name: 'tadler',
+    sessions: [
+      { client: 'droid' }
+    ]
+  }
+]
+
+const sessions = users.flatMap(user => user.sessions);
+
+JSONlog(sessions);
+
 
 // ------------------------------------------------------------------
 // Atomic Base Config
@@ -53,7 +83,9 @@ const breakpointsConfig = {
 // ------------------------------------------------------------------
 // Atomic Functions
 // ------------------------------------------------------------------
+export const compile = (config) => {
 
+}
 export const remify = (x) => x/baseFontSize;
 export const scaler = (x) => x*baseUnit;
 export const opacify = (x) => x/10;
@@ -507,7 +539,7 @@ const backgroundColors = colors([
   'red'
 ]);
 
-const displayConfig = {
+export const displayConfig = {
   props: {
     '': 'display'
   },
@@ -553,43 +585,49 @@ const paddingAtom = atomTree({
 
 
 
-// const atomicJSONFile = './atomic/output/atomic.json'
-// const generateLibrary = (file, obj) => {
-//   fs.outputJson(file, obj, err => {
-
-//     fs.readJson(file, (err, data) => {
-//       if (err) return console.error(err)
-//     })
-//   })
-// };
-
-// const atomicCSSFile = './atomic/output/atomic.css'
-// const generateCSS = (file, obj) => {
-//   fs.outputFile(file, obj, err => {
-
-//     fs.readFile(file, 'utf8', (err, data) => {
-//       if (err) return console.error(err)
-//     })
-//   })
-// }
-
-
-// generateLibrary(atomicJSONFile, atomList(displayConfig))
-// generateCSS(atomicCSSFile, printAtom(atomTree(displayConfig)))
-
-// you use reduce :wink:
-// just think how do i transform: `[1, 2, 3]` to `[1, 1, 2, 2, 3, 3]`
-// you can do it first in a for loop
-// if that makes it easier
-// then convert it to a reduce
-// then wrap it up in a reusable `flatMap` function
-// k?
-
-const flatMap = (arr) => {
-  return arr.reduce((ac, x) => {
-    ac.concat(x)
-    return ac
-  },[]).concat(arr)
+const atoms = {
+  padding: {
+    props: {
+      'p': 'padding'
+    },
+    subProps: {
+      't': ['top'],
+      'r': ['right'],
+      'b': ['bottom'],
+      'l': ['left'],
+      'x': ['right', 'left'],
+      'y': ['top', 'bottom']
+    },
+    mobileFirstValues: lengths({
+      values: [1,2,3,4],
+      transform: [remify, scaler],
+      valueSuffix: 'rem'
+    }),
+    perScreenValues: {
+      '-auto': 'auto'
+    }
+  },
+  display: {
+    props: {
+      '': 'display'
+    },
+    values: {
+      'table': 'table'
+    },
+    mobileFirstValues: {
+      'block': 'block',
+      'inline': 'inline',
+      'inline-block': 'inline-block',
+      'flex': 'flex'
+    },
+    perScreenValues: {
+      'hide': 'none'
+    },
+  }
 }
+const allAtoms = Object.keys(atoms).map(atom => atoms[atom]);
 
-console.log(flatMap([1,2,3]))
+const atomicLibrary = allAtoms.flatMap(atomList)
+const atomicForrest = allAtoms.flatMap(atomTree)
+
+console.log(String(atomicForrest.flatMap(printAtom)));
