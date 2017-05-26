@@ -1,5 +1,5 @@
 import entries from 'object.entries';
-import fs from 'fs';
+import fs from 'fs-extra';
 // var postcss = require('postcss');
 // var stylefmt = require('stylefmt');
 
@@ -303,8 +303,10 @@ export const atomTree = ({
 
 // atomList
 // ------------------------------------------------------------------
+// Generates an object with all classes and their associated
+// declarations
 
-const atomList = ({
+export const atomList = ({
   props,
   propSeparator = '',
   subProps = {},
@@ -338,28 +340,6 @@ const atomList = ({
     ))
   ));
 }
-
-console.log(atomList({
-  props: {
-    'p': 'padding'
-  },
-  subProps: {
-    't': ['top'],
-    'r': ['right'],
-    'b': ['bottom'],
-    'l': ['left'],
-    'x': ['right', 'left'],
-    'y': ['top', 'bottom']
-  },
-  mobileFirstValues: lengths({
-    values: [1,2,3,4],
-    transform: [remify, scaler],
-    valueSuffix: 'rem'
-  }),
-  perScreenValues: {
-    '-auto': 'auto'
-  }
-}));
 
 // mobileFirstQueries
 // ------------------------------------------------------------------
@@ -446,8 +426,8 @@ export const printClasses = (allClasses) => {
 // ------------------------------------------------------------------
 
 export const printBreakpoint = ([bp, classObjs], mediaQueryObj) => {
-  return (
-`@media ${mediaQueryObj[bp]} {\n${printClasses(classObjs)}\n}\n`)}
+  return `@media ${mediaQueryObj[bp]} {\n${printClasses(classObjs)}\n}\n`
+}
 
 // printMobileFirst
 // ------------------------------------------------------------------
@@ -487,37 +467,27 @@ export const printAtom = (obj) => {
 // ------------------------------------------------------------------
 
 
-const percentageValues = [
-  0, 5, 10, 15, 20, 25, 30, 33, 40, 50,
-  60, 66, 70, 80, 85, 90, 95, 100
-];
-const scaleMultipliers = [
-  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-  11, 12, 13, 14, 15, 16, 17, 18, 19, 20
-];
-const pixelValues = [1, 2, 3, 4];
-
-const percentageUnits = (units) => lengths({
+export const percentageValues = (units) => lengths({
   values: units,
   keySuffix: "p",
   valueSuffix: '%'
 });
 
-const viewportHeightUnits = (units) => lengths({
+export const viewportHeightValues = (units) => lengths({
   values: units,
   keySuffix: "vh",
   valueSuffix: 'vh'
 });
 
-export const pixelUnits = lengths({
-  values: pixelValues,
+export const pixelValues = (units) => lengths({
+  values: units,
   transform: [remify],
   keySuffix: "px",
   valueSuffix: 'rem'
 });
 
-export const scaleUnits = lengths({
-  values: scaleMultipliers,
+export const scaleValues = (units) => lengths({
+  values: units,
   transform: [remify, scaler],
   valueSuffix: 'rem'
 });
@@ -537,7 +507,7 @@ const backgroundColors = colors([
   'red'
 ]);
 
-const displayAtom = atomTree({
+const displayConfig = {
   props: {
     '': 'display'
   },
@@ -553,7 +523,7 @@ const displayAtom = atomTree({
   perScreenValues: {
     'hide': 'none'
   },
-});
+};
 
 
 
@@ -581,45 +551,45 @@ const paddingAtom = atomTree({
   }
 });
 
-// console.log(paddingAtom)
 
-const allClasses = (atom) => {
-  return atom[Object.keys(atom)].values.all
-    .concat(
-      Object.keys(atom[Object.keys(atom)].mobileFirstValues)
-        .map(bp => atom[Object.keys(atom)].mobileFirstValues[bp])
-    .concat(Object.keys(atom[Object.keys(atom)].perScreenValues)
-        .map(bp => atom[Object.keys(atom)].perScreenValues[bp])
-    ));
-}
 
-// const allClasses = (atom) => {
-//   const allClassnames = atom[Object.keys(atom)].values.all.map((x) => Object.keys(x))
-//   allClassnames.reduce((accum, name) => {
-//     console.log(name)
-//     accum.concat(name)
-//       return accum
-//   }, [])
-//   return allClassnames
+// const atomicJSONFile = './atomic/output/atomic.json'
+// const generateLibrary = (file, obj) => {
+//   fs.outputJson(file, obj, err => {
 
-//   // return atom[Object.keys(atom)].values.all.reduce((accum, fullClass) => {
-//   //   accum[]
-//   // })
+//     fs.readJson(file, (err, data) => {
+//       if (err) return console.error(err)
+//     })
+//   })
+// };
+
+// const atomicCSSFile = './atomic/output/atomic.css'
+// const generateCSS = (file, obj) => {
+//   fs.outputFile(file, obj, err => {
+
+//     fs.readFile(file, 'utf8', (err, data) => {
+//       if (err) return console.error(err)
+//     })
+//   })
 // }
 
-// JSONlog(allClasses(paddingAtom));
 
+// generateLibrary(atomicJSONFile, atomList(displayConfig))
+// generateCSS(atomicCSSFile, printAtom(atomTree(displayConfig)))
 
+// you use reduce :wink:
+// just think how do i transform: `[1, 2, 3]` to `[1, 1, 2, 2, 3, 3]`
+// you can do it first in a for loop
+// if that makes it easier
+// then convert it to a reduce
+// then wrap it up in a reusable `flatMap` function
+// k?
 
-// JSONlog(displayAtom);
-// JSONlog(paddingAtom);
-// console.log(printAtom(paddingAtom));
-const padding = printAtom(displayAtom);
+const flatMap = (arr) => {
+  return arr.reduce((ac, x) => {
+    ac.concat(x)
+    return ac
+  },[]).concat(arr)
+}
 
-fs.writeFile("./unprocessed-atomic.css", printAtom(paddingAtom));
-
-// var css = fs.readFileSync('./unprocessed-atomic.css', 'utf-8');
-
-// postcss([stylefmt])
-//   .process(css, { from: 'unprocessed-atomic.css' })
-//   .then(function (result) { result; });
+console.log(flatMap([1,2,3]))

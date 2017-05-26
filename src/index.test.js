@@ -1,6 +1,7 @@
 // eslint-env jest, node
 import {
   atomTree,
+  atomList,
   breakpointsClassCompile,
   breakpointClassFormat,
   breakpointsCompile,
@@ -9,7 +10,6 @@ import {
   lengths,
   mobileFirstQueries,
   perScreenQueries,
-  pixelUnits,
   printBreakpoint,
   positionCoordinateProps,
   printAtom,
@@ -22,7 +22,7 @@ import {
   propsValuesMerge,
   remify,
   scaler,
-  scaleUnits,
+  scaleValues,
   valueObjectFormat,
   valuesCompile
 } from './index';
@@ -156,9 +156,35 @@ describe('Battery', () => {
           't': ['top'],
           'x': ['right', 'left']
         },
-        mobileFirstValues: scaleUnits
+        mobileFirstValues: scaleValues([0,1,2,3,4])
       })).toMatchSnapshot();
     });
+  });
+
+  describe('atomList', () => {
+    it('matches snapshot', () => {
+      expect(atomList({
+        props: {
+          'p': 'padding'
+        },
+        subProps: {
+          't': ['top'],
+          'r': ['right'],
+          'b': ['bottom'],
+          'l': ['left'],
+          'x': ['right', 'left'],
+          'y': ['top', 'bottom']
+        },
+        mobileFirstValues: lengths({
+          values: [1,2,3,4],
+          transform: [remify, scaler],
+          valueSuffix: 'rem'
+        }),
+        perScreenValues: {
+          '-auto': 'auto'
+        }
+      })).toMatchSnapshot();
+    })
   });
 
   describe('mobileFirstQueries', () => {
