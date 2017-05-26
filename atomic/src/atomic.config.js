@@ -103,7 +103,7 @@ battery.compile({
       )
     },
 
-    // Border Co,r
+    // Border Color
     borderColors: {
       props: {
         'border': 'border-color'
