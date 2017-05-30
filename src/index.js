@@ -1,7 +1,4 @@
 import entries from 'object.entries';
-// var postcss = require('postcss');
-// var stylefmt = require('stylefmt');
-
 Object.entries = entries;
 
 // Helpers
@@ -10,6 +7,7 @@ const JSONlog = (x) => console.log(JSON.stringify(x, null, 2));
 // Utilities
 const compose = (...functions) =>
   functions.reduce((f, g) => (...xs) => f(g(...xs)));
+
 const identity = x => x;
 
 Array.prototype.flatMap = function(fn) {
@@ -17,31 +15,6 @@ Array.prototype.flatMap = function(fn) {
     .map(fn)
     .reduce((xs,x) => xs.concat(x),[])
 }
-
-const users = [
-  {
-    name: 'kilmc',
-    sessions: [
-      { client: 'iphone' },
-      { client: 'mac' }
-    ]
-  },
-  {
-    name: 'stephen',
-    sessions: []
-  },
-  {
-    name: 'tadler',
-    sessions: [
-      { client: 'droid' }
-    ]
-  }
-]
-
-const sessions = users.flatMap(user => user.sessions);
-
-JSONlog(sessions);
-
 
 // ------------------------------------------------------------------
 // Atomic Base Config
@@ -66,12 +39,26 @@ const systemColors = {
   'blue': '#0000FF',
   'navy': '#000080',
   'fuchsia': '#FF00FF',
-  'purple': '#800080'
+  'purple': '#800080',
+  'transparent': 'transparent'
 };
 
-const breakpointPrefixOrSuffix = 'suffix';
-const breakpointSeparator = '-'
+// Indicators
+// ------------------------------------------------------------------
 const negativeValueIndicator = '-'
+
+// Separators
+// ------------------------------------------------------------------
+
+const keywordValueSeparator = ''
+const integerValueSeparator = '-'
+const breakpointSeparator = '-'
+const colorValueSeparator = '-'
+
+// Breakpoints
+// ------------------------------------------------------------------
+
+const breakpointPrefixOrSuffix = 'suffix';
 
 const breakpointsConfig = {
   xs: 0,
@@ -83,9 +70,7 @@ const breakpointsConfig = {
 // ------------------------------------------------------------------
 // Atomic Functions
 // ------------------------------------------------------------------
-export const compile = (config) => {
 
-}
 export const remify = (x) => x/baseFontSize;
 export const scaler = (x) => x*baseUnit;
 export const opacify = (x) => x/10;
@@ -133,6 +118,32 @@ export const valuesCompile = (values, breakpoint, type = 'none') => (
     valueObjectFormat({name, value, type, breakpoint}))
 );
 
+
+// ------------------------------------------------------------------
+// Value Helpers
+// ------------------------------------------------------------------
+
+//
+const defaultValue = (str) => {
+  return { '': str }
+}
+
+//
+const integers = (arr, separator = integerValueSeparator) => arr.reduce((xs,x) => {
+  xs[`${separator}${x}`] = x
+  return xs
+},{});
+
+//
+const keywords = (obj, separator = keywordValueSeparator) => {
+  const newKey = (key) => separator.concat(key)
+  return Object.assign({},
+    ...Object.keys(obj)
+      .map(key => ({[newKey(key)]: obj[key]}))
+  )
+}
+
+
 // lengths
 // ------------------------------------------------------------------
 // Generates an object with length type values. The output of this
@@ -143,25 +154,53 @@ export const lengths = ({
   keySuffix = '',
   valueSuffix = '',
   transform = [identity],
-  negative = false
+  negative = false,
+  separator = ''
 }) => {
   return values.reduce((obj, value) => {
     const minus = negative ? '-' : '';
     const negativeIndicator = negative ? negativeValueIndicator : '';
 
-    obj[`${negativeIndicator}${value}${keySuffix}`] = `${minus}${compose(...transform)(value)}${valueSuffix}`;
+    obj[`${separator}${negativeIndicator}${value}${keySuffix}`]
+      = `${minus}${compose(...transform)(value)}${valueSuffix}`;
     return obj;
   },{});
 };
+
+export const percentages = (units) => lengths({
+  values: units,
+  keySuffix: "p",
+  valueSuffix: '%'
+});
+
+export const viewportHeights = (units) => lengths({
+  values: units,
+  keySuffix: "vh",
+  valueSuffix: 'vh'
+});
+
+export const pixels = (units) => lengths({
+  values: units,
+  transform: [remify],
+  keySuffix: "px",
+  valueSuffix: 'rem'
+});
+
+export const scalers = (units) => lengths({
+  values: units,
+  transform: [remify, scaler],
+  valueSuffix: 'rem'
+});
+
 
 // Color value generator
 // ------------------------------------------------------------------
 // Converts an array of color names into an object with color names
 // and color hex values.
 
-export const colors = (array) => {
+export const colors = (array, separator = colorValueSeparator) => {
   return array.reduce((obj, value) => {
-    obj[value] = systemColors[value];
+    obj[`${separator}${value}`] = systemColors[value];
     return obj
   },{});
 };
@@ -199,13 +238,14 @@ export const propsCompile = ({
   props,
   subProps = {},
   propSeparator = '',
+  subPropSeparator = '',
   root = true
 }) => Object.assign(
   ...Object.entries(props).map(([propName, prop]) => ({
     [prop]: [
       root ? { "propName": propName, "props": [prop] } : {},
       ...Object.entries(subProps).map(([subPropName, subProps]) => ({
-        "propName": `${propName}${propSeparator}${subPropName}`,
+        "propName": `${propName}${propSeparator}${subPropName}${subPropSeparator}`,
         "props": subProps.map((sp) => `${prop}-${sp}`)
       }))
     ]
@@ -342,34 +382,33 @@ export const atomList = ({
   props,
   propSeparator = '',
   subProps = {},
+  subPropSeparator = '',
   values = [],
   mobileFirstValues = [],
   perScreenValues = []
 }) => {
-  const propGroups = propsCompile({props, propSeparator, subProps})
+  const propGroups = propsCompile({props, propSeparator, subProps, subPropSeparator})
 
-  return Object.assign({}, ...Object.assign(
-    ...Object.entries(props).map(([propName, prop]) => (
-      propsValuesMerge(
-        propGroups[prop],
-        valuesCompile(Object.assign(values, mobileFirstValues))
-      ).map(classCompile)
-      .concat(
-        ...mobileFirstBreakpoints.map(bp => (
-          propsValuesMerge(
-            propGroups[prop],
-            valuesCompile(mobileFirstValues, bp)
-          ).map(classCompile)
-        ))
-      ).concat(
-        ...perScreenBreakpoints.map(bp => (
-          propsValuesMerge(
-            propGroups[prop],
-            valuesCompile(perScreenValues, bp)
-          ).map(classCompile)
-        ))
-      )
-    ))
+  return Object.entries(props).flatMap(([propName, prop]) => (
+    propsValuesMerge(
+      propGroups[prop],
+      valuesCompile(Object.assign(values, mobileFirstValues))
+    ).map(classCompile)
+    .concat(
+      ...mobileFirstBreakpoints.map(bp => (
+        propsValuesMerge(
+          propGroups[prop],
+          valuesCompile(mobileFirstValues, bp)
+        ).map(classCompile)
+      ))
+    ).concat(
+      ...perScreenBreakpoints.map(bp => (
+        propsValuesMerge(
+          propGroups[prop],
+          valuesCompile(perScreenValues, bp)
+        ).map(classCompile)
+      ))
+    )
   ));
 }
 
@@ -495,139 +534,293 @@ export const printAtom = (obj) => {
 }
 
 // ------------------------------------------------------------------
-// Values
+// Test Compile
 // ------------------------------------------------------------------
 
 
-export const percentageValues = (units) => lengths({
-  values: units,
-  keySuffix: "p",
-  valueSuffix: '%'
-});
 
-export const viewportHeightValues = (units) => lengths({
-  values: units,
-  keySuffix: "vh",
-  valueSuffix: 'vh'
-});
+const compile = (atoms) => {
+  const allAtoms = Object.keys(atoms).map(atom => atoms[atom]);
+  const atomicJSON = Object.assign({ }, ...allAtoms.flatMap(atomList));
+  const atomicCSS = allAtoms.flatMap(atomTree);
 
-export const pixelValues = (units) => lengths({
-  values: units,
-  transform: [remify],
-  keySuffix: "px",
-  valueSuffix: 'rem'
-});
-
-export const scaleValues = (units) => lengths({
-  values: units,
-  transform: [remify, scaler],
-  valueSuffix: 'rem'
-});
-
-const textColors = colors([
-  'aqua',
-  'teal',
-  'blue',
-  'navy'
-]);
-
-const backgroundColors = colors([
-  'white',
-  'silver',
-  'gray',
-  'black',
-  'red'
-]);
-
-export const displayConfig = {
-  props: {
-    '': 'display'
-  },
-  values: {
-    'table': 'table'
-  },
-  mobileFirstValues: {
-    'block': 'block',
-    'inline': 'inline',
-    'inline-block': 'inline-block',
-    'flex': 'flex'
-  },
-  perScreenValues: {
-    'hide': 'none'
-  },
-};
-
-
-
-
-
-const paddingAtom = atomTree({
-  props: {
-    'p': 'padding'
-  },
-  subProps: {
-    't': ['top'],
-    'r': ['right'],
-    'b': ['bottom'],
-    'l': ['left'],
-    'x': ['right', 'left'],
-    'y': ['top', 'bottom']
-  },
-  mobileFirstValues: lengths({
-    values: [1,2,3,4],
-    transform: [remify, scaler],
-    valueSuffix: 'rem'
-  }),
-  perScreenValues: {
-    '-auto': 'auto'
-  }
-});
-
-
-
-const atoms = {
-  padding: {
-    props: {
-      'p': 'padding'
-    },
-    subProps: {
-      't': ['top'],
-      'r': ['right'],
-      'b': ['bottom'],
-      'l': ['left'],
-      'x': ['right', 'left'],
-      'y': ['top', 'bottom']
-    },
-    mobileFirstValues: lengths({
-      values: [1,2,3,4],
-      transform: [remify, scaler],
-      valueSuffix: 'rem'
-    }),
-    perScreenValues: {
-      '-auto': 'auto'
-    }
-  },
-  display: {
-    props: {
-      '': 'display'
-    },
-    values: {
-      'table': 'table'
-    },
-    mobileFirstValues: {
-      'block': 'block',
-      'inline': 'inline',
-      'inline-block': 'inline-block',
-      'flex': 'flex'
-    },
-    perScreenValues: {
-      'hide': 'none'
-    },
-  }
+  return { css: atomicCSS, JSON: atomicJSON }
 }
-const allAtoms = Object.keys(atoms).map(atom => atoms[atom]);
 
-const atomicLibrary = allAtoms.flatMap(atomList)
-const atomicForrest = allAtoms.flatMap(atomTree)
+console.log(compile({
+// compile({
+  // background-size
+  backgroundSize: {
+    props: { 'bg': 'background-size' },
+    values: Object.assign({},
+      keywords({
+        'cover': 'cover',
+        'contain': 'contain',
+        'full-height': 'auto 100%',
+        'full-width': '100% auto'
+      },'-'),
+      percentages([10, 20, 25, 33, 34, 35, 40, 50, 60, 66, 75, 80, 100])
+    )
+  },
 
-console.log(String(atomicForrest.flatMap(printAtom)));
+  // background-image
+  backgroundImage: {
+    props: { 'bg': 'background-image' },
+    mobileFirstValues: keywords({'none': 'none !important'},'-')
+  },
+
+  // Border Radius
+  // ----------------------------------
+  borderRadius: {
+    props: { '': 'border' },
+    subProps: {
+      'top': ['top-left-radius','top-right-radius'],
+      'right': ['top-right-radius','bottom-right-radius'],
+      'bottom': ['bottom-left-radius','bottom-right-radius'],
+      'left': ['top-left-radius','bottom-left-radius'],
+      'top-right': ['top-right-radius'],
+      'bottom-right': ['bottom-right-radius'],
+      'top-left': ['top-left-radius'],
+      'bottom-left': ['bottom-left-radius']
+    },
+    subPropSeparator: '-',
+    values: keywords({
+      'no-radius': '0',
+      'rounded': '2px',
+      'rounded-medium': '4px',
+      'rounded-large': '6px',
+      'pill': '200px',
+      'circle': '100%'
+    })
+  },
+
+  // Borders
+  // ---------------------------------
+  border: {
+    props: { 'border': 'border' },
+    propSeparator: '-',
+    subProps: {
+      'top': ['top'],
+      'right': ['right'],
+      'bottom': ['bottom'],
+      'left': ['left'],
+    },
+    mobileFirstValues: Object.assign({},
+      defaultValue({ '': '0.1rem solid' }),
+      keywords({ 'none': 'none !important' }, '-')
+    )
+  },
+
+  // Border Color
+  borderColors: {
+    props: { 'border': 'border-color' },
+    values: colors(['grey','green','red'], '')
+  },
+
+  // Border Wi,h
+  borderWidths: {
+    props: { 'border': 'border-width' },
+    values: keywords({
+      'regular': '0.1rem',
+      'medium': '0.2rem',
+      'thick': '0.3rem'
+    }, '-')
+  },
+
+  // Box Sizing
+  // ---------------------------------
+  boxSizing: {
+    props: { '': 'box-sizing' },
+    values: keywords({ 'box-sizing': 'box-sizing' })
+  },
+
+  // Clear
+  // ---------------------------------
+  clear: {
+    props: { '': 'clear' },
+    values: keywords({
+      'left': 'left',
+      'right': 'right',
+      'both': 'both'
+    })
+  },
+
+  // Colors
+  // ---------------------------------
+  textColor: {
+    props: { '': 'color' },
+    values: colors(['grey', 'blue', 'orange'],''),
+    perScreenValues: keywords({ 'transparent': 'transparent' },'')
+  },
+
+  backgroundColor: {
+    props: { 'bg': 'background-color' },
+    values: colors(['grey', 'blue', 'orange']),
+    perScreenValues: colors(['transparent'])
+  },
+
+  fillColor: {
+    props: { 'fill': 'fill' },
+    values: colors(['grey', 'blue', 'orange']),
+    perScreenValues: colors(['transparent'])
+  },
+
+
+  // Cursors
+  // ---------------------------------
+  cursor: {
+    props: { '': 'cursor' },
+    values: keywords({
+      'cursor': 'pointer',
+      'cursor': 'move'
+    })
+  },
+  pointerEvents: {
+    props: { '': 'pointer-events' },
+    values: keywords({
+      'click-through': 'none',
+      'click-on': 'auto'
+    })
+  },
+
+  // Display
+  // ---------------------------------
+  display: {
+    props: { '': 'display' },
+    mobileFirstValues: keywords({
+      'block': 'block',
+      'display-inline': 'inline',
+      'inline-block': 'inline-block',
+      'flex': 'flex',
+      'inline-flex': 'inline-flex'
+    })
+  },
+
+  // Flex
+  // ----------------------------------
+  flex: {
+    props: { 'flex': 'flex'},
+    mobileFirstValues: Object.assign(
+      keywords({
+        'none': 'none'
+      }),
+      integers([0,1,2,3,4,5])
+    )
+  },
+
+  flexGrow: {
+    props: { 'grow': 'flex-grow'},
+    mobileFirstValues: integers([0,1,2,3,4,5])
+  },
+
+  flexShrink: {
+    props: { 'shrink': 'flex-shrink'},
+    mobileFirstValues: integers([0,1])
+  },
+
+  // Flex Direction
+  // ------------------------------------------------------------------
+  flexDirection: {
+    props: { 'flex': 'flex-direction'},
+    mobileFirstValues: keywords({
+      'column': 'column',
+      'column-reverse': 'column-reverse',
+      'row': 'row',
+      'row-reverse': 'row-reverse'
+    })
+  },
+
+  // Flex Wrap
+  // ------------------------------------------------------------------
+  flexWrap: {
+    props: { 'flex': 'flex-wrap'},
+    mobileFirstValues: keywords({
+      'wrap': 'wrap',
+      'nowrap': 'nowrap'
+    })
+  },
+
+  // Align Items
+  // ------------------------------------------------------------------
+  alignItems: {
+    props: { 'items': 'align-items'},
+    mobileFirstValues: keywords({
+      'start': 'flex-start',
+      'end': 'flex-end',
+      'center': 'center',
+      'baseline': 'baseline',
+      'stretch': 'stretch'
+    })
+  },
+
+  // Align Self
+  // ------------------------------------------------------------------
+  alignSelf: {
+    props: { 'self': 'align-self'},
+    mobileFirstValues: keywords({
+      'start': 'flex-start',
+      'end': 'flex-end',
+      'center': 'center',
+      'baseline': 'baseline',
+      'stretch': 'stretch'
+    })
+  },
+
+  // Justify Content
+  // ------------------------------------------------------------------
+  justifyContent: {
+    props: { 'justify': 'justify-content'},
+    mobileFirstValues: keywords({
+      'start': 'flex-start',
+      'end': 'flex-end',
+      'center': 'center',
+      'space-between': 'space-between',
+      'space-around': 'space-around'
+    })
+  },
+
+  // Align Content
+  // ------------------------------------------------------------------
+  alignContent: {
+    props: { 'content': 'align-content'},
+    mobileFirstValues: keywords({
+      'start': 'flex-start',
+      'end': 'flex-end',
+      'center': 'center',
+      'space-between': 'space-between',
+      'space-around': 'space-around',
+      'stretch': 'stretch'
+    })
+  },
+
+  // Order
+  // ------------------------------------------------------------------
+  flexOrder: {
+    props: { 'order': 'order'},
+    mobileFirstValues: integers([0,1,2,3,4,5,6,7,8,9,10,9999])
+  },
+
+  // Float
+  // ---------------------------------
+  float: {
+    props: { '': 'float' },
+    mobileFirstValues: keywords({
+      'left': 'left',
+      'right': 'right',
+      'float-none': 'none'
+    })
+  },
+
+  // Font Weight
+  // ---------------------------------
+  fontWeight: {
+    props: { '': 'font-weight' },
+    mobileFirstValues: keywords({
+      'light': '200',
+      'normal': '400',
+      'medium': '500',
+      'bold': '700'
+    })
+  },
+})
+)

@@ -62,18 +62,18 @@ battery.compile({
     // ----------------------------------
     borderRadius: {
       props: {
-        '': 'border-radius'
+        '': 'border'
       },
       subPropsPosition: 'middle',
       subProps: {
-        'top': ['top-left','top-right'],
-        'right': ['top-right','bottom-right'],
-        'bottom': ['bottom-left','bottom-right'],
-        'left': ['top-left','bottom-left'],
-        'top-right': ['top-right'],
-        'bottom-right': ['bottom-right'],
-        'top-left': ['top-left'],
-        'bottom-left': ['bottom-left']
+        'top': ['top-left-radius','top-right-radius'],
+        'right': ['top-right-radius','bottom-right-radius'],
+        'bottom': ['bottom-left-radius','bottom-right-radius'],
+        'left': ['top-left-radius','bottom-left-radius'],
+        'top-right': ['top-right-radius'],
+        'bottom-right': ['bottom-right-radius'],
+        'top-left': ['top-left-radius'],
+        'bottom-left': ['bottom-left-radius']
       },
       values: keyword({
         'no-radius': '0',
