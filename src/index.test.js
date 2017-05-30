@@ -288,12 +288,6 @@ describe('Battery', () => {
         values: {
           'table': 'table'
         },
-        mobileFirstValues: {
-          'block': 'block',
-          'inline': 'inline',
-          'inline-block': 'inline-block',
-          'flex': 'flex'
-        },
         perScreenValues: {
           'hide': 'none'
         },

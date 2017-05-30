@@ -1,6 +1,6 @@
 /* eslint-env node */
 const fs = require('fs-extra');
-const { displayConfig, atomList, atomTree, printAtom } = require('../src/index');
+const { atomic, printAtom } = require('../src/index');
 
 const atomicJSONFile = __dirname + '/../atomic/output/atomic.json'
 const generateLibrary = (file, obj) => {
@@ -23,5 +23,5 @@ const generateCSS = (file, obj) => {
   })
 }
 
-generateLibrary(atomicJSONFile, atomList(displayConfig))
-generateCSS(atomicCSSFile, printAtom(atomTree(displayConfig)))
+generateLibrary(atomicJSONFile, atomic.JSON)
+generateCSS(atomicCSSFile, String(atomic.css.map(printAtom)))

@@ -307,10 +307,10 @@ export const classCompile = ({
 
 export const breakpointsClassCompile = ({
   prop,
-  values,
+  values = [],
   breakpoints
 }) => {
-  return breakpoints.reduce((obj,bp) => {
+  return values === [] ? console.log('NO VALUES') : breakpoints.reduce((obj,bp) => {
     obj[bp] = propsValuesMerge(
       prop,
       valuesCompile(values, bp)
@@ -344,12 +344,12 @@ export const atomTree = ({
   propSeparator = '',
   subProps = {},
   values = [],
-  mobileFirstValues = [],
-  perScreenValues = []
+  mobileFirstValues = null,
+  perScreenValues = null
 }) => {
   const propGroups = propsCompile({props, propSeparator, subProps})
 
-  return Object.assign(
+  const output = Object.assign(
     ...Object.entries(props).map(([propName, prop]) => ({
       [prop]: {
         "values": {
@@ -358,19 +358,25 @@ export const atomTree = ({
                 valuesCompile(Object.assign(values, mobileFirstValues))
                 ).map(classCompile)
         },
-        "mobileFirstValues": mobileFirstValues === [] ? '' : breakpointsClassCompile({
-          prop: propGroups[prop],
-          values: mobileFirstValues,
-          breakpoints: mobileFirstBreakpoints
-        }),
-        "perScreenValues": perScreenValues === [] ? '' :  breakpointsClassCompile({
-          prop: propGroups[prop],
-          values: perScreenValues,
-          breakpoints: perScreenBreakpoints
-        })
+        "mobileFirstValues": mobileFirstValues === null
+          ? []
+          : breakpointsClassCompile({
+              prop: propGroups[prop],
+              values: mobileFirstValues,
+              breakpoints: mobileFirstBreakpoints
+            }),
+        "perScreenValues": perScreenValues === null
+          ? []
+          : breakpointsClassCompile({
+              prop: propGroups[prop],
+              values: perScreenValues,
+              breakpoints: perScreenBreakpoints
+            })
       }
     })
   ))
+  // console.log('OUTPUT',output)
+  return output
 };
 
 // atomList
@@ -523,14 +529,40 @@ export const printPerScreen = (obj) => {
 // printAtom
 // ------------------------------------------------------------------
 
-export const printAtom = (obj) => {
-  const everyClass = Object.keys(obj).map(propGroup => {
-    return printClasses(obj[propGroup].values.all).concat('\n')
-      .concat('\n',printMobileFirst(obj[propGroup].mobileFirstValues))
-      .concat('\n',printPerScreen(obj[propGroup].perScreenValues));
-  })
+// export const printAtom = (obj) => {
+//   const everyClass = Object.keys(obj).map(propGroup => {
+//     return printClasses(obj[propGroup].values.all).concat('\n')
+//       .concat('\n',printMobileFirst(obj[propGroup].mobileFirstValues))
+//       .concat('\n',printPerScreen(obj[propGroup].perScreenValues));
+//   })
 
-  return String(everyClass).replace(/,@/g,'\n@')
+//   return String(everyClass).replace(/,@/g,'\n@')
+// }
+
+export const printAtom = (obj) => {
+  const allValues = Object.keys(obj).map(propGroup => {
+    return printClasses(obj[propGroup].values.all)
+  });
+
+  const allMobileFirst = Object.keys(obj).map(propGroup =>
+    obj[propGroup].mobileFirstValues) === [[]]
+    ? ''
+    : Object.keys(obj)
+      .map(propGroup => printMobileFirst(obj[propGroup].mobileFirstValues)
+  );
+
+  const allPerScreen = Object.keys(obj).map(propGroup =>
+    obj[propGroup].perScreenValues) === [[]]
+    ? ''
+    : Object.keys(obj)
+      .map(propGroup => printPerScreen(obj[propGroup].perScreenValues)
+  );
+
+  return String(
+    allValues
+    .concat(allMobileFirst)
+    .concat(allPerScreen)
+  ).replace(/,@/g,'\n@')
 }
 
 // ------------------------------------------------------------------
@@ -547,7 +579,7 @@ const compile = (atoms) => {
   return { css: atomicCSS, JSON: atomicJSON }
 }
 
-console.log(compile({
+export const atomic = compile({
 // compile({
   // background-size
   backgroundSize: {
@@ -606,7 +638,7 @@ console.log(compile({
       'left': ['left'],
     },
     mobileFirstValues: Object.assign({},
-      defaultValue({ '': '0.1rem solid' }),
+      defaultValue('0.1rem solid #fff000'),
       keywords({ 'none': 'none !important' }, '-')
     )
   },
@@ -614,7 +646,7 @@ console.log(compile({
   // Border Color
   borderColors: {
     props: { 'border': 'border-color' },
-    values: colors(['grey','green','red'], '')
+    values: colors(['gray','green','red'], '')
   },
 
   // Border Wi,h
@@ -649,19 +681,19 @@ console.log(compile({
   // ---------------------------------
   textColor: {
     props: { '': 'color' },
-    values: colors(['grey', 'blue', 'orange'],''),
+    values: colors(['gray', 'blue', 'orange'],''),
     perScreenValues: keywords({ 'transparent': 'transparent' },'')
   },
 
   backgroundColor: {
     props: { 'bg': 'background-color' },
-    values: colors(['grey', 'blue', 'orange']),
+    values: colors(['gray', 'blue', 'orange']),
     perScreenValues: colors(['transparent'])
   },
 
   fillColor: {
     props: { 'fill': 'fill' },
-    values: colors(['grey', 'blue', 'orange']),
+    values: colors(['gray', 'blue', 'orange']),
     perScreenValues: colors(['transparent'])
   },
 
@@ -822,5 +854,4 @@ console.log(compile({
       'bold': '700'
     })
   },
-})
-)
+});

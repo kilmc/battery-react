@@ -1555,7 +1555,6 @@ exports[`Battery printAtom matches snapshot 1`] = `
 .inline { display: inline }
 .inline-block { display: inline-block }
 .flex { display: flex }
-
 @media (min-width: 600px) {
 .block-sm { display: block }
 .inline-sm { display: inline }
