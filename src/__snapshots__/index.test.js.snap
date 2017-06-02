@@ -1,1756 +1,288 @@
-exports[`Battery atomList matches snapshot 1`] = `
-Array [
-  Object {
-    "p1": Object {
-      "padding": "0.6rem",
-    },
-  },
-  Object {
-    "p2": Object {
-      "padding": "1.2rem",
-    },
-  },
-  Object {
-    "p3": Object {
-      "padding": "1.8rem",
-    },
-  },
-  Object {
-    "p4": Object {
-      "padding": "2.4rem",
-    },
-  },
-  Object {
-    "pt1": Object {
-      "padding-top": "0.6rem",
-    },
-  },
-  Object {
-    "pt2": Object {
-      "padding-top": "1.2rem",
-    },
-  },
-  Object {
-    "pt3": Object {
-      "padding-top": "1.8rem",
-    },
-  },
-  Object {
-    "pt4": Object {
-      "padding-top": "2.4rem",
-    },
-  },
-  Object {
-    "pr1": Object {
-      "padding-right": "0.6rem",
-    },
-  },
-  Object {
-    "pr2": Object {
-      "padding-right": "1.2rem",
-    },
-  },
-  Object {
-    "pr3": Object {
-      "padding-right": "1.8rem",
-    },
-  },
-  Object {
-    "pr4": Object {
-      "padding-right": "2.4rem",
-    },
-  },
-  Object {
-    "pb1": Object {
-      "padding-bottom": "0.6rem",
-    },
-  },
-  Object {
-    "pb2": Object {
-      "padding-bottom": "1.2rem",
-    },
-  },
-  Object {
-    "pb3": Object {
-      "padding-bottom": "1.8rem",
-    },
-  },
-  Object {
-    "pb4": Object {
-      "padding-bottom": "2.4rem",
-    },
-  },
-  Object {
-    "pl1": Object {
-      "padding-left": "0.6rem",
-    },
-  },
-  Object {
-    "pl2": Object {
-      "padding-left": "1.2rem",
-    },
-  },
-  Object {
-    "pl3": Object {
-      "padding-left": "1.8rem",
-    },
-  },
-  Object {
-    "pl4": Object {
-      "padding-left": "2.4rem",
-    },
-  },
-  Object {
-    "px1": Object {
-      "padding-left": "0.6rem",
-      "padding-right": "0.6rem",
-    },
-  },
-  Object {
-    "px2": Object {
-      "padding-left": "1.2rem",
-      "padding-right": "1.2rem",
-    },
-  },
-  Object {
-    "px3": Object {
-      "padding-left": "1.8rem",
-      "padding-right": "1.8rem",
-    },
-  },
-  Object {
-    "px4": Object {
-      "padding-left": "2.4rem",
-      "padding-right": "2.4rem",
-    },
-  },
-  Object {
-    "py1": Object {
-      "padding-bottom": "0.6rem",
-      "padding-top": "0.6rem",
-    },
-  },
-  Object {
-    "py2": Object {
-      "padding-bottom": "1.2rem",
-      "padding-top": "1.2rem",
-    },
-  },
-  Object {
-    "py3": Object {
-      "padding-bottom": "1.8rem",
-      "padding-top": "1.8rem",
-    },
-  },
-  Object {
-    "py4": Object {
-      "padding-bottom": "2.4rem",
-      "padding-top": "2.4rem",
-    },
-  },
-  Object {
-    "p1-sm": Object {
-      "padding": "0.6rem",
-    },
-  },
-  Object {
-    "p2-sm": Object {
-      "padding": "1.2rem",
-    },
-  },
-  Object {
-    "p3-sm": Object {
-      "padding": "1.8rem",
-    },
-  },
-  Object {
-    "p4-sm": Object {
-      "padding": "2.4rem",
-    },
-  },
-  Object {
-    "pt1-sm": Object {
-      "padding-top": "0.6rem",
-    },
-  },
-  Object {
-    "pt2-sm": Object {
-      "padding-top": "1.2rem",
-    },
-  },
-  Object {
-    "pt3-sm": Object {
-      "padding-top": "1.8rem",
-    },
-  },
-  Object {
-    "pt4-sm": Object {
-      "padding-top": "2.4rem",
-    },
-  },
-  Object {
-    "pr1-sm": Object {
-      "padding-right": "0.6rem",
-    },
-  },
-  Object {
-    "pr2-sm": Object {
-      "padding-right": "1.2rem",
-    },
-  },
-  Object {
-    "pr3-sm": Object {
-      "padding-right": "1.8rem",
-    },
-  },
-  Object {
-    "pr4-sm": Object {
-      "padding-right": "2.4rem",
-    },
-  },
-  Object {
-    "pb1-sm": Object {
-      "padding-bottom": "0.6rem",
-    },
-  },
-  Object {
-    "pb2-sm": Object {
-      "padding-bottom": "1.2rem",
-    },
-  },
-  Object {
-    "pb3-sm": Object {
-      "padding-bottom": "1.8rem",
-    },
-  },
-  Object {
-    "pb4-sm": Object {
-      "padding-bottom": "2.4rem",
-    },
-  },
-  Object {
-    "pl1-sm": Object {
-      "padding-left": "0.6rem",
-    },
-  },
-  Object {
-    "pl2-sm": Object {
-      "padding-left": "1.2rem",
-    },
-  },
-  Object {
-    "pl3-sm": Object {
-      "padding-left": "1.8rem",
-    },
-  },
-  Object {
-    "pl4-sm": Object {
-      "padding-left": "2.4rem",
-    },
-  },
-  Object {
-    "px1-sm": Object {
-      "padding-left": "0.6rem",
-      "padding-right": "0.6rem",
-    },
-  },
-  Object {
-    "px2-sm": Object {
-      "padding-left": "1.2rem",
-      "padding-right": "1.2rem",
-    },
-  },
-  Object {
-    "px3-sm": Object {
-      "padding-left": "1.8rem",
-      "padding-right": "1.8rem",
-    },
-  },
-  Object {
-    "px4-sm": Object {
-      "padding-left": "2.4rem",
-      "padding-right": "2.4rem",
-    },
-  },
-  Object {
-    "py1-sm": Object {
-      "padding-bottom": "0.6rem",
-      "padding-top": "0.6rem",
-    },
-  },
-  Object {
-    "py2-sm": Object {
-      "padding-bottom": "1.2rem",
-      "padding-top": "1.2rem",
-    },
-  },
-  Object {
-    "py3-sm": Object {
-      "padding-bottom": "1.8rem",
-      "padding-top": "1.8rem",
-    },
-  },
-  Object {
-    "py4-sm": Object {
-      "padding-bottom": "2.4rem",
-      "padding-top": "2.4rem",
-    },
-  },
-  Object {
-    "p1-md": Object {
-      "padding": "0.6rem",
-    },
-  },
-  Object {
-    "p2-md": Object {
-      "padding": "1.2rem",
-    },
-  },
-  Object {
-    "p3-md": Object {
-      "padding": "1.8rem",
-    },
-  },
-  Object {
-    "p4-md": Object {
-      "padding": "2.4rem",
-    },
-  },
-  Object {
-    "pt1-md": Object {
-      "padding-top": "0.6rem",
-    },
-  },
-  Object {
-    "pt2-md": Object {
-      "padding-top": "1.2rem",
-    },
-  },
-  Object {
-    "pt3-md": Object {
-      "padding-top": "1.8rem",
-    },
-  },
-  Object {
-    "pt4-md": Object {
-      "padding-top": "2.4rem",
-    },
-  },
-  Object {
-    "pr1-md": Object {
-      "padding-right": "0.6rem",
-    },
-  },
-  Object {
-    "pr2-md": Object {
-      "padding-right": "1.2rem",
-    },
-  },
-  Object {
-    "pr3-md": Object {
-      "padding-right": "1.8rem",
-    },
-  },
-  Object {
-    "pr4-md": Object {
-      "padding-right": "2.4rem",
-    },
-  },
-  Object {
-    "pb1-md": Object {
-      "padding-bottom": "0.6rem",
-    },
-  },
-  Object {
-    "pb2-md": Object {
-      "padding-bottom": "1.2rem",
-    },
-  },
-  Object {
-    "pb3-md": Object {
-      "padding-bottom": "1.8rem",
-    },
-  },
-  Object {
-    "pb4-md": Object {
-      "padding-bottom": "2.4rem",
-    },
-  },
-  Object {
-    "pl1-md": Object {
-      "padding-left": "0.6rem",
-    },
-  },
-  Object {
-    "pl2-md": Object {
-      "padding-left": "1.2rem",
-    },
-  },
-  Object {
-    "pl3-md": Object {
-      "padding-left": "1.8rem",
-    },
-  },
-  Object {
-    "pl4-md": Object {
-      "padding-left": "2.4rem",
-    },
-  },
-  Object {
-    "px1-md": Object {
-      "padding-left": "0.6rem",
-      "padding-right": "0.6rem",
-    },
-  },
-  Object {
-    "px2-md": Object {
-      "padding-left": "1.2rem",
-      "padding-right": "1.2rem",
-    },
-  },
-  Object {
-    "px3-md": Object {
-      "padding-left": "1.8rem",
-      "padding-right": "1.8rem",
-    },
-  },
-  Object {
-    "px4-md": Object {
-      "padding-left": "2.4rem",
-      "padding-right": "2.4rem",
-    },
-  },
-  Object {
-    "py1-md": Object {
-      "padding-bottom": "0.6rem",
-      "padding-top": "0.6rem",
-    },
-  },
-  Object {
-    "py2-md": Object {
-      "padding-bottom": "1.2rem",
-      "padding-top": "1.2rem",
-    },
-  },
-  Object {
-    "py3-md": Object {
-      "padding-bottom": "1.8rem",
-      "padding-top": "1.8rem",
-    },
-  },
-  Object {
-    "py4-md": Object {
-      "padding-bottom": "2.4rem",
-      "padding-top": "2.4rem",
-    },
-  },
-  Object {
-    "p1-lg": Object {
-      "padding": "0.6rem",
-    },
-  },
-  Object {
-    "p2-lg": Object {
-      "padding": "1.2rem",
-    },
-  },
-  Object {
-    "p3-lg": Object {
-      "padding": "1.8rem",
-    },
-  },
-  Object {
-    "p4-lg": Object {
-      "padding": "2.4rem",
-    },
-  },
-  Object {
-    "pt1-lg": Object {
-      "padding-top": "0.6rem",
-    },
-  },
-  Object {
-    "pt2-lg": Object {
-      "padding-top": "1.2rem",
-    },
-  },
-  Object {
-    "pt3-lg": Object {
-      "padding-top": "1.8rem",
-    },
-  },
-  Object {
-    "pt4-lg": Object {
-      "padding-top": "2.4rem",
-    },
-  },
-  Object {
-    "pr1-lg": Object {
-      "padding-right": "0.6rem",
-    },
-  },
-  Object {
-    "pr2-lg": Object {
-      "padding-right": "1.2rem",
-    },
-  },
-  Object {
-    "pr3-lg": Object {
-      "padding-right": "1.8rem",
-    },
-  },
-  Object {
-    "pr4-lg": Object {
-      "padding-right": "2.4rem",
-    },
-  },
-  Object {
-    "pb1-lg": Object {
-      "padding-bottom": "0.6rem",
-    },
-  },
-  Object {
-    "pb2-lg": Object {
-      "padding-bottom": "1.2rem",
-    },
-  },
-  Object {
-    "pb3-lg": Object {
-      "padding-bottom": "1.8rem",
-    },
-  },
-  Object {
-    "pb4-lg": Object {
-      "padding-bottom": "2.4rem",
-    },
-  },
-  Object {
-    "pl1-lg": Object {
-      "padding-left": "0.6rem",
-    },
-  },
-  Object {
-    "pl2-lg": Object {
-      "padding-left": "1.2rem",
-    },
-  },
-  Object {
-    "pl3-lg": Object {
-      "padding-left": "1.8rem",
-    },
-  },
-  Object {
-    "pl4-lg": Object {
-      "padding-left": "2.4rem",
-    },
-  },
-  Object {
-    "px1-lg": Object {
-      "padding-left": "0.6rem",
-      "padding-right": "0.6rem",
-    },
-  },
-  Object {
-    "px2-lg": Object {
-      "padding-left": "1.2rem",
-      "padding-right": "1.2rem",
-    },
-  },
-  Object {
-    "px3-lg": Object {
-      "padding-left": "1.8rem",
-      "padding-right": "1.8rem",
-    },
-  },
-  Object {
-    "px4-lg": Object {
-      "padding-left": "2.4rem",
-      "padding-right": "2.4rem",
-    },
-  },
-  Object {
-    "py1-lg": Object {
-      "padding-bottom": "0.6rem",
-      "padding-top": "0.6rem",
-    },
-  },
-  Object {
-    "py2-lg": Object {
-      "padding-bottom": "1.2rem",
-      "padding-top": "1.2rem",
-    },
-  },
-  Object {
-    "py3-lg": Object {
-      "padding-bottom": "1.8rem",
-      "padding-top": "1.8rem",
-    },
-  },
-  Object {
-    "py4-lg": Object {
-      "padding-bottom": "2.4rem",
-      "padding-top": "2.4rem",
-    },
-  },
-  Object {
-    "p-auto-xs": Object {
-      "padding": "auto",
-    },
-  },
-  Object {
-    "pt-auto-xs": Object {
-      "padding-top": "auto",
-    },
-  },
-  Object {
-    "pr-auto-xs": Object {
-      "padding-right": "auto",
-    },
-  },
-  Object {
-    "pb-auto-xs": Object {
-      "padding-bottom": "auto",
-    },
-  },
-  Object {
-    "pl-auto-xs": Object {
-      "padding-left": "auto",
-    },
-  },
-  Object {
-    "px-auto-xs": Object {
-      "padding-left": "auto",
-      "padding-right": "auto",
-    },
-  },
-  Object {
-    "py-auto-xs": Object {
-      "padding-bottom": "auto",
-      "padding-top": "auto",
-    },
-  },
-  Object {
-    "p-auto-sm": Object {
-      "padding": "auto",
-    },
-  },
-  Object {
-    "pt-auto-sm": Object {
-      "padding-top": "auto",
-    },
-  },
-  Object {
-    "pr-auto-sm": Object {
-      "padding-right": "auto",
-    },
-  },
-  Object {
-    "pb-auto-sm": Object {
-      "padding-bottom": "auto",
-    },
-  },
-  Object {
-    "pl-auto-sm": Object {
-      "padding-left": "auto",
-    },
-  },
-  Object {
-    "px-auto-sm": Object {
-      "padding-left": "auto",
-      "padding-right": "auto",
-    },
-  },
-  Object {
-    "py-auto-sm": Object {
-      "padding-bottom": "auto",
-      "padding-top": "auto",
-    },
-  },
-  Object {
-    "p-auto-md": Object {
-      "padding": "auto",
-    },
-  },
-  Object {
-    "pt-auto-md": Object {
-      "padding-top": "auto",
-    },
-  },
-  Object {
-    "pr-auto-md": Object {
-      "padding-right": "auto",
-    },
-  },
-  Object {
-    "pb-auto-md": Object {
-      "padding-bottom": "auto",
-    },
-  },
-  Object {
-    "pl-auto-md": Object {
-      "padding-left": "auto",
-    },
-  },
-  Object {
-    "px-auto-md": Object {
-      "padding-left": "auto",
-      "padding-right": "auto",
-    },
-  },
-  Object {
-    "py-auto-md": Object {
-      "padding-bottom": "auto",
-      "padding-top": "auto",
-    },
-  },
-  Object {
-    "p-auto-lg": Object {
-      "padding": "auto",
-    },
-  },
-  Object {
-    "pt-auto-lg": Object {
-      "padding-top": "auto",
-    },
-  },
-  Object {
-    "pr-auto-lg": Object {
-      "padding-right": "auto",
-    },
-  },
-  Object {
-    "pb-auto-lg": Object {
-      "padding-bottom": "auto",
-    },
-  },
-  Object {
-    "pl-auto-lg": Object {
-      "padding-left": "auto",
-    },
-  },
-  Object {
-    "px-auto-lg": Object {
-      "padding-left": "auto",
-      "padding-right": "auto",
-    },
-  },
-  Object {
-    "py-auto-lg": Object {
-      "padding-bottom": "auto",
-      "padding-top": "auto",
-    },
-  },
-]
-`;
-
-exports[`Battery atomTree matches expectations 1`] = `
+exports[`Battery Battery matches snapshot 1`] = `
 Object {
-  "margin": Object {
-    "mobileFirstValues": Object {
-      "lg": Array [
-        Object {
-          "m0-lg": Object {
-            "margin": "0rem",
-          },
-        },
-        Object {
-          "m1-lg": Object {
-            "margin": "0.6rem",
-          },
-        },
-        Object {
-          "m2-lg": Object {
-            "margin": "1.2rem",
-          },
-        },
-        Object {
-          "m3-lg": Object {
-            "margin": "1.8rem",
-          },
-        },
-        Object {
-          "m4-lg": Object {
-            "margin": "2.4rem",
-          },
-        },
-        Object {
-          "mt0-lg": Object {
-            "margin-top": "0rem",
-          },
-        },
-        Object {
-          "mt1-lg": Object {
-            "margin-top": "0.6rem",
-          },
-        },
-        Object {
-          "mt2-lg": Object {
-            "margin-top": "1.2rem",
-          },
-        },
-        Object {
-          "mt3-lg": Object {
-            "margin-top": "1.8rem",
-          },
-        },
-        Object {
-          "mt4-lg": Object {
-            "margin-top": "2.4rem",
-          },
-        },
-        Object {
-          "mx0-lg": Object {
-            "margin-left": "0rem",
-            "margin-right": "0rem",
-          },
-        },
-        Object {
-          "mx1-lg": Object {
-            "margin-left": "0.6rem",
-            "margin-right": "0.6rem",
-          },
-        },
-        Object {
-          "mx2-lg": Object {
-            "margin-left": "1.2rem",
-            "margin-right": "1.2rem",
-          },
-        },
-        Object {
-          "mx3-lg": Object {
-            "margin-left": "1.8rem",
-            "margin-right": "1.8rem",
-          },
-        },
-        Object {
-          "mx4-lg": Object {
-            "margin-left": "2.4rem",
-            "margin-right": "2.4rem",
-          },
-        },
-      ],
-      "md": Array [
-        Object {
-          "m0-md": Object {
-            "margin": "0rem",
-          },
-        },
-        Object {
-          "m1-md": Object {
-            "margin": "0.6rem",
-          },
-        },
-        Object {
-          "m2-md": Object {
-            "margin": "1.2rem",
-          },
-        },
-        Object {
-          "m3-md": Object {
-            "margin": "1.8rem",
-          },
-        },
-        Object {
-          "m4-md": Object {
-            "margin": "2.4rem",
-          },
-        },
-        Object {
-          "mt0-md": Object {
-            "margin-top": "0rem",
-          },
-        },
-        Object {
-          "mt1-md": Object {
-            "margin-top": "0.6rem",
-          },
-        },
-        Object {
-          "mt2-md": Object {
-            "margin-top": "1.2rem",
-          },
-        },
-        Object {
-          "mt3-md": Object {
-            "margin-top": "1.8rem",
-          },
-        },
-        Object {
-          "mt4-md": Object {
-            "margin-top": "2.4rem",
-          },
-        },
-        Object {
-          "mx0-md": Object {
-            "margin-left": "0rem",
-            "margin-right": "0rem",
-          },
-        },
-        Object {
-          "mx1-md": Object {
-            "margin-left": "0.6rem",
-            "margin-right": "0.6rem",
-          },
-        },
-        Object {
-          "mx2-md": Object {
-            "margin-left": "1.2rem",
-            "margin-right": "1.2rem",
-          },
-        },
-        Object {
-          "mx3-md": Object {
-            "margin-left": "1.8rem",
-            "margin-right": "1.8rem",
-          },
-        },
-        Object {
-          "mx4-md": Object {
-            "margin-left": "2.4rem",
-            "margin-right": "2.4rem",
-          },
-        },
-      ],
-      "sm": Array [
-        Object {
-          "m0-sm": Object {
-            "margin": "0rem",
-          },
-        },
-        Object {
-          "m1-sm": Object {
-            "margin": "0.6rem",
-          },
-        },
-        Object {
-          "m2-sm": Object {
-            "margin": "1.2rem",
-          },
-        },
-        Object {
-          "m3-sm": Object {
-            "margin": "1.8rem",
-          },
-        },
-        Object {
-          "m4-sm": Object {
-            "margin": "2.4rem",
-          },
-        },
-        Object {
-          "mt0-sm": Object {
-            "margin-top": "0rem",
-          },
-        },
-        Object {
-          "mt1-sm": Object {
-            "margin-top": "0.6rem",
-          },
-        },
-        Object {
-          "mt2-sm": Object {
-            "margin-top": "1.2rem",
-          },
-        },
-        Object {
-          "mt3-sm": Object {
-            "margin-top": "1.8rem",
-          },
-        },
-        Object {
-          "mt4-sm": Object {
-            "margin-top": "2.4rem",
-          },
-        },
-        Object {
-          "mx0-sm": Object {
-            "margin-left": "0rem",
-            "margin-right": "0rem",
-          },
-        },
-        Object {
-          "mx1-sm": Object {
-            "margin-left": "0.6rem",
-            "margin-right": "0.6rem",
-          },
-        },
-        Object {
-          "mx2-sm": Object {
-            "margin-left": "1.2rem",
-            "margin-right": "1.2rem",
-          },
-        },
-        Object {
-          "mx3-sm": Object {
-            "margin-left": "1.8rem",
-            "margin-right": "1.8rem",
-          },
-        },
-        Object {
-          "mx4-sm": Object {
-            "margin-left": "2.4rem",
-            "margin-right": "2.4rem",
-          },
-        },
-      ],
+  "JSON": Object {
+    "bg-contain": Object {
+      "background-size": "contain",
     },
-    "perScreenValues": Object {
-      "lg": Array [],
-      "md": Array [],
-      "sm": Array [],
-      "xs": Array [],
+    "bg-contain-lg": Object {
+      "background-size": "contain",
     },
-    "values": Object {
-      "all": Array [
-        Object {
-          "m0": Object {
-            "margin": "0rem",
-          },
-        },
-        Object {
-          "m1": Object {
-            "margin": "0.6rem",
-          },
-        },
-        Object {
-          "m2": Object {
-            "margin": "1.2rem",
-          },
-        },
-        Object {
-          "m3": Object {
-            "margin": "1.8rem",
-          },
-        },
-        Object {
-          "m4": Object {
-            "margin": "2.4rem",
-          },
-        },
-        Object {
-          "mt0": Object {
-            "margin-top": "0rem",
-          },
-        },
-        Object {
-          "mt1": Object {
-            "margin-top": "0.6rem",
-          },
-        },
-        Object {
-          "mt2": Object {
-            "margin-top": "1.2rem",
-          },
-        },
-        Object {
-          "mt3": Object {
-            "margin-top": "1.8rem",
-          },
-        },
-        Object {
-          "mt4": Object {
-            "margin-top": "2.4rem",
-          },
-        },
-        Object {
-          "mx0": Object {
-            "margin-left": "0rem",
-            "margin-right": "0rem",
-          },
-        },
-        Object {
-          "mx1": Object {
-            "margin-left": "0.6rem",
-            "margin-right": "0.6rem",
-          },
-        },
-        Object {
-          "mx2": Object {
-            "margin-left": "1.2rem",
-            "margin-right": "1.2rem",
-          },
-        },
-        Object {
-          "mx3": Object {
-            "margin-left": "1.8rem",
-            "margin-right": "1.8rem",
-          },
-        },
-        Object {
-          "mx4": Object {
-            "margin-left": "2.4rem",
-            "margin-right": "2.4rem",
-          },
-        },
-      ],
+    "bg-contain-md": Object {
+      "background-size": "contain",
+    },
+    "bg-contain-sm": Object {
+      "background-size": "contain",
+    },
+    "bg-cover": Object {
+      "background-size": "cover",
+    },
+    "bg-cover-lg": Object {
+      "background-size": "cover",
+    },
+    "bg-cover-md": Object {
+      "background-size": "cover",
+    },
+    "bg-cover-sm": Object {
+      "background-size": "cover",
+    },
+    "bg-full-height": Object {
+      "background-size": "auto 100%",
+    },
+    "bg-full-height-lg": Object {
+      "background-size": "auto 100%",
+    },
+    "bg-full-height-md": Object {
+      "background-size": "auto 100%",
+    },
+    "bg-full-height-sm": Object {
+      "background-size": "auto 100%",
+    },
+    "bg-full-width": Object {
+      "background-size": "100% auto",
+    },
+    "bg-full-width-lg": Object {
+      "background-size": "100% auto",
+    },
+    "bg-full-width-md": Object {
+      "background-size": "100% auto",
+    },
+    "bg-full-width-sm": Object {
+      "background-size": "100% auto",
+    },
+    "bg100p": Object {
+      "background-size": "100%",
+    },
+    "bg100p-lg": Object {
+      "background-size": "100%",
+    },
+    "bg100p-md": Object {
+      "background-size": "100%",
+    },
+    "bg100p-sm": Object {
+      "background-size": "100%",
+    },
+    "bg10p": Object {
+      "background-size": "10%",
+    },
+    "bg10p-lg": Object {
+      "background-size": "10%",
+    },
+    "bg10p-md": Object {
+      "background-size": "10%",
+    },
+    "bg10p-sm": Object {
+      "background-size": "10%",
+    },
+    "bg20p": Object {
+      "background-size": "20%",
+    },
+    "bg20p-lg": Object {
+      "background-size": "20%",
+    },
+    "bg20p-md": Object {
+      "background-size": "20%",
+    },
+    "bg20p-sm": Object {
+      "background-size": "20%",
+    },
+    "bg25p": Object {
+      "background-size": "25%",
+    },
+    "bg25p-lg": Object {
+      "background-size": "25%",
+    },
+    "bg25p-md": Object {
+      "background-size": "25%",
+    },
+    "bg25p-sm": Object {
+      "background-size": "25%",
+    },
+    "bg33p": Object {
+      "background-size": "33%",
+    },
+    "bg33p-lg": Object {
+      "background-size": "33%",
+    },
+    "bg33p-md": Object {
+      "background-size": "33%",
+    },
+    "bg33p-sm": Object {
+      "background-size": "33%",
+    },
+    "bg34p": Object {
+      "background-size": "34%",
+    },
+    "bg34p-lg": Object {
+      "background-size": "34%",
+    },
+    "bg34p-md": Object {
+      "background-size": "34%",
+    },
+    "bg34p-sm": Object {
+      "background-size": "34%",
+    },
+    "bg35p": Object {
+      "background-size": "35%",
+    },
+    "bg35p-lg": Object {
+      "background-size": "35%",
+    },
+    "bg35p-md": Object {
+      "background-size": "35%",
+    },
+    "bg35p-sm": Object {
+      "background-size": "35%",
+    },
+    "bg40p": Object {
+      "background-size": "40%",
+    },
+    "bg40p-lg": Object {
+      "background-size": "40%",
+    },
+    "bg40p-md": Object {
+      "background-size": "40%",
+    },
+    "bg40p-sm": Object {
+      "background-size": "40%",
+    },
+    "bg50p": Object {
+      "background-size": "50%",
+    },
+    "bg50p-lg": Object {
+      "background-size": "50%",
+    },
+    "bg50p-md": Object {
+      "background-size": "50%",
+    },
+    "bg50p-sm": Object {
+      "background-size": "50%",
+    },
+    "bg60p": Object {
+      "background-size": "60%",
+    },
+    "bg60p-lg": Object {
+      "background-size": "60%",
+    },
+    "bg60p-md": Object {
+      "background-size": "60%",
+    },
+    "bg60p-sm": Object {
+      "background-size": "60%",
+    },
+    "bg66p": Object {
+      "background-size": "66%",
+    },
+    "bg66p-lg": Object {
+      "background-size": "66%",
+    },
+    "bg66p-md": Object {
+      "background-size": "66%",
+    },
+    "bg66p-sm": Object {
+      "background-size": "66%",
+    },
+    "bg75p": Object {
+      "background-size": "75%",
+    },
+    "bg75p-lg": Object {
+      "background-size": "75%",
+    },
+    "bg75p-md": Object {
+      "background-size": "75%",
+    },
+    "bg75p-sm": Object {
+      "background-size": "75%",
+    },
+    "bg80p": Object {
+      "background-size": "80%",
+    },
+    "bg80p-lg": Object {
+      "background-size": "80%",
+    },
+    "bg80p-md": Object {
+      "background-size": "80%",
+    },
+    "bg80p-sm": Object {
+      "background-size": "80%",
     },
   },
-  "padding": Object {
-    "mobileFirstValues": Object {
-      "lg": Array [
-        Object {
-          "p0-lg": Object {
-            "padding": "0rem",
-          },
-        },
-        Object {
-          "p1-lg": Object {
-            "padding": "0.6rem",
-          },
-        },
-        Object {
-          "p2-lg": Object {
-            "padding": "1.2rem",
-          },
-        },
-        Object {
-          "p3-lg": Object {
-            "padding": "1.8rem",
-          },
-        },
-        Object {
-          "p4-lg": Object {
-            "padding": "2.4rem",
-          },
-        },
-        Object {
-          "pt0-lg": Object {
-            "padding-top": "0rem",
-          },
-        },
-        Object {
-          "pt1-lg": Object {
-            "padding-top": "0.6rem",
-          },
-        },
-        Object {
-          "pt2-lg": Object {
-            "padding-top": "1.2rem",
-          },
-        },
-        Object {
-          "pt3-lg": Object {
-            "padding-top": "1.8rem",
-          },
-        },
-        Object {
-          "pt4-lg": Object {
-            "padding-top": "2.4rem",
-          },
-        },
-        Object {
-          "px0-lg": Object {
-            "padding-left": "0rem",
-            "padding-right": "0rem",
-          },
-        },
-        Object {
-          "px1-lg": Object {
-            "padding-left": "0.6rem",
-            "padding-right": "0.6rem",
-          },
-        },
-        Object {
-          "px2-lg": Object {
-            "padding-left": "1.2rem",
-            "padding-right": "1.2rem",
-          },
-        },
-        Object {
-          "px3-lg": Object {
-            "padding-left": "1.8rem",
-            "padding-right": "1.8rem",
-          },
-        },
-        Object {
-          "px4-lg": Object {
-            "padding-left": "2.4rem",
-            "padding-right": "2.4rem",
-          },
-        },
-      ],
-      "md": Array [
-        Object {
-          "p0-md": Object {
-            "padding": "0rem",
-          },
-        },
-        Object {
-          "p1-md": Object {
-            "padding": "0.6rem",
-          },
-        },
-        Object {
-          "p2-md": Object {
-            "padding": "1.2rem",
-          },
-        },
-        Object {
-          "p3-md": Object {
-            "padding": "1.8rem",
-          },
-        },
-        Object {
-          "p4-md": Object {
-            "padding": "2.4rem",
-          },
-        },
-        Object {
-          "pt0-md": Object {
-            "padding-top": "0rem",
-          },
-        },
-        Object {
-          "pt1-md": Object {
-            "padding-top": "0.6rem",
-          },
-        },
-        Object {
-          "pt2-md": Object {
-            "padding-top": "1.2rem",
-          },
-        },
-        Object {
-          "pt3-md": Object {
-            "padding-top": "1.8rem",
-          },
-        },
-        Object {
-          "pt4-md": Object {
-            "padding-top": "2.4rem",
-          },
-        },
-        Object {
-          "px0-md": Object {
-            "padding-left": "0rem",
-            "padding-right": "0rem",
-          },
-        },
-        Object {
-          "px1-md": Object {
-            "padding-left": "0.6rem",
-            "padding-right": "0.6rem",
-          },
-        },
-        Object {
-          "px2-md": Object {
-            "padding-left": "1.2rem",
-            "padding-right": "1.2rem",
-          },
-        },
-        Object {
-          "px3-md": Object {
-            "padding-left": "1.8rem",
-            "padding-right": "1.8rem",
-          },
-        },
-        Object {
-          "px4-md": Object {
-            "padding-left": "2.4rem",
-            "padding-right": "2.4rem",
-          },
-        },
-      ],
-      "sm": Array [
-        Object {
-          "p0-sm": Object {
-            "padding": "0rem",
-          },
-        },
-        Object {
-          "p1-sm": Object {
-            "padding": "0.6rem",
-          },
-        },
-        Object {
-          "p2-sm": Object {
-            "padding": "1.2rem",
-          },
-        },
-        Object {
-          "p3-sm": Object {
-            "padding": "1.8rem",
-          },
-        },
-        Object {
-          "p4-sm": Object {
-            "padding": "2.4rem",
-          },
-        },
-        Object {
-          "pt0-sm": Object {
-            "padding-top": "0rem",
-          },
-        },
-        Object {
-          "pt1-sm": Object {
-            "padding-top": "0.6rem",
-          },
-        },
-        Object {
-          "pt2-sm": Object {
-            "padding-top": "1.2rem",
-          },
-        },
-        Object {
-          "pt3-sm": Object {
-            "padding-top": "1.8rem",
-          },
-        },
-        Object {
-          "pt4-sm": Object {
-            "padding-top": "2.4rem",
-          },
-        },
-        Object {
-          "px0-sm": Object {
-            "padding-left": "0rem",
-            "padding-right": "0rem",
-          },
-        },
-        Object {
-          "px1-sm": Object {
-            "padding-left": "0.6rem",
-            "padding-right": "0.6rem",
-          },
-        },
-        Object {
-          "px2-sm": Object {
-            "padding-left": "1.2rem",
-            "padding-right": "1.2rem",
-          },
-        },
-        Object {
-          "px3-sm": Object {
-            "padding-left": "1.8rem",
-            "padding-right": "1.8rem",
-          },
-        },
-        Object {
-          "px4-sm": Object {
-            "padding-left": "2.4rem",
-            "padding-right": "2.4rem",
-          },
-        },
-      ],
-    },
-    "perScreenValues": Object {
-      "lg": Array [],
-      "md": Array [],
-      "sm": Array [],
-      "xs": Array [],
-    },
-    "values": Object {
-      "all": Array [
-        Object {
-          "p0": Object {
-            "padding": "0rem",
-          },
-        },
-        Object {
-          "p1": Object {
-            "padding": "0.6rem",
-          },
-        },
-        Object {
-          "p2": Object {
-            "padding": "1.2rem",
-          },
-        },
-        Object {
-          "p3": Object {
-            "padding": "1.8rem",
-          },
-        },
-        Object {
-          "p4": Object {
-            "padding": "2.4rem",
-          },
-        },
-        Object {
-          "pt0": Object {
-            "padding-top": "0rem",
-          },
-        },
-        Object {
-          "pt1": Object {
-            "padding-top": "0.6rem",
-          },
-        },
-        Object {
-          "pt2": Object {
-            "padding-top": "1.2rem",
-          },
-        },
-        Object {
-          "pt3": Object {
-            "padding-top": "1.8rem",
-          },
-        },
-        Object {
-          "pt4": Object {
-            "padding-top": "2.4rem",
-          },
-        },
-        Object {
-          "px0": Object {
-            "padding-left": "0rem",
-            "padding-right": "0rem",
-          },
-        },
-        Object {
-          "px1": Object {
-            "padding-left": "0.6rem",
-            "padding-right": "0.6rem",
-          },
-        },
-        Object {
-          "px2": Object {
-            "padding-left": "1.2rem",
-            "padding-right": "1.2rem",
-          },
-        },
-        Object {
-          "px3": Object {
-            "padding-left": "1.8rem",
-            "padding-right": "1.8rem",
-          },
-        },
-        Object {
-          "px4": Object {
-            "padding-left": "2.4rem",
-            "padding-right": "2.4rem",
-          },
-        },
-      ],
-    },
-  },
-}
-`;
+  "css": ".bg-cover { background-size: cover }
+.bg-contain { background-size: contain }
+.bg-full-height { background-size: auto 100% }
+.bg-full-width { background-size: 100% auto }
+.bg10p { background-size: 10% }
+.bg20p { background-size: 20% }
+.bg25p { background-size: 25% }
+.bg33p { background-size: 33% }
+.bg34p { background-size: 34% }
+.bg35p { background-size: 35% }
+.bg40p { background-size: 40% }
+.bg50p { background-size: 50% }
+.bg60p { background-size: 60% }
+.bg66p { background-size: 66% }
+.bg75p { background-size: 75% }
+.bg80p { background-size: 80% }
+.bg100p { background-size: 100% }
 
-exports[`Battery breakpointClassFormat matches snapshot 1`] = `"pt2-sm"`;
-
-exports[`Battery breakpointsClassCompile matches snapshot 1`] = `
-Object {
-  "lg": Array [
-    Object {
-      "p1px-lg": Object {
-        "padding": "0.1rem",
-      },
-    },
-    Object {
-      "p2px-lg": Object {
-        "padding": "0.2rem",
-      },
-    },
-    Object {
-      "py1px-lg": Object {
-        "padding-bottom": "0.1rem",
-        "padding-top": "0.1rem",
-      },
-    },
-    Object {
-      "py2px-lg": Object {
-        "padding-bottom": "0.2rem",
-        "padding-top": "0.2rem",
-      },
-    },
-  ],
-  "md": Array [
-    Object {
-      "p1px-md": Object {
-        "padding": "0.1rem",
-      },
-    },
-    Object {
-      "p2px-md": Object {
-        "padding": "0.2rem",
-      },
-    },
-    Object {
-      "py1px-md": Object {
-        "padding-bottom": "0.1rem",
-        "padding-top": "0.1rem",
-      },
-    },
-    Object {
-      "py2px-md": Object {
-        "padding-bottom": "0.2rem",
-        "padding-top": "0.2rem",
-      },
-    },
-  ],
-  "sm": Array [
-    Object {
-      "p1px-sm": Object {
-        "padding": "0.1rem",
-      },
-    },
-    Object {
-      "p2px-sm": Object {
-        "padding": "0.2rem",
-      },
-    },
-    Object {
-      "py1px-sm": Object {
-        "padding-bottom": "0.1rem",
-        "padding-top": "0.1rem",
-      },
-    },
-    Object {
-      "py2px-sm": Object {
-        "padding-bottom": "0.2rem",
-        "padding-top": "0.2rem",
-      },
-    },
-  ],
-}
-`;
-
-exports[`Battery classCompile matches snapshot 1`] = `
-Object {
-  "py1": Object {
-    "padding-bottom": "0.6rem",
-    "padding-top": "0.6rem",
-  },
-}
-`;
-
-exports[`Battery colors matches snapshot 1`] = `
-Object {
-  "-lime": "#00FF00",
-  "-navy": "#000080",
-}
-`;
-
-exports[`Battery lengths matches snapshot 1`] = `
-Object {
-  "1px": "0.1rem",
-  "2px": "0.2rem",
-  "3px": "0.3rem",
-  "4px": "0.4rem",
-}
-`;
-
-exports[`Battery mobileFirstQueries matches snapshot 1`] = `
-Object {
-  "lg": "(min-width: 1100px)",
-  "md": "(min-width: 900px)",
-  "sm": "(min-width: 600px)",
-}
-`;
-
-exports[`Battery perScreenQueries matches snapshot 1`] = `
-Object {
-  "lg": "(min-width: 1100px)",
-  "md": "(min-width: 900px) and (max-width: 1099px)",
-  "sm": "(min-width: 600px) and (max-width: 899px)",
-  "xs": "(max-width: 599px)",
-}
-`;
-
-exports[`Battery printAtom matches snapshot 1`] = `
-".table { display: table }
-.block { display: block }
-.inline { display: inline }
-.inline-block { display: inline-block }
-.flex { display: flex }
 @media (min-width: 600px) {
-.block-sm { display: block }
-.inline-sm { display: inline }
-.inline-block-sm { display: inline-block }
-.flex-sm { display: flex }
+.bg-cover-sm { background-size: cover }
+.bg-contain-sm { background-size: contain }
+.bg-full-height-sm { background-size: auto 100% }
+.bg-full-width-sm { background-size: 100% auto }
+.bg10p-sm { background-size: 10% }
+.bg20p-sm { background-size: 20% }
+.bg25p-sm { background-size: 25% }
+.bg33p-sm { background-size: 33% }
+.bg34p-sm { background-size: 34% }
+.bg35p-sm { background-size: 35% }
+.bg40p-sm { background-size: 40% }
+.bg50p-sm { background-size: 50% }
+.bg60p-sm { background-size: 60% }
+.bg66p-sm { background-size: 66% }
+.bg75p-sm { background-size: 75% }
+.bg80p-sm { background-size: 80% }
+.bg100p-sm { background-size: 100% }
 }
 
 @media (min-width: 900px) {
-.block-md { display: block }
-.inline-md { display: inline }
-.inline-block-md { display: inline-block }
-.flex-md { display: flex }
+.bg-cover-md { background-size: cover }
+.bg-contain-md { background-size: contain }
+.bg-full-height-md { background-size: auto 100% }
+.bg-full-width-md { background-size: 100% auto }
+.bg10p-md { background-size: 10% }
+.bg20p-md { background-size: 20% }
+.bg25p-md { background-size: 25% }
+.bg33p-md { background-size: 33% }
+.bg34p-md { background-size: 34% }
+.bg35p-md { background-size: 35% }
+.bg40p-md { background-size: 40% }
+.bg50p-md { background-size: 50% }
+.bg60p-md { background-size: 60% }
+.bg66p-md { background-size: 66% }
+.bg75p-md { background-size: 75% }
+.bg80p-md { background-size: 80% }
+.bg100p-md { background-size: 100% }
 }
 
 @media (min-width: 1100px) {
-.block-lg { display: block }
-.inline-lg { display: inline }
-.inline-block-lg { display: inline-block }
-.flex-lg { display: flex }
+.bg-cover-lg { background-size: cover }
+.bg-contain-lg { background-size: contain }
+.bg-full-height-lg { background-size: auto 100% }
+.bg-full-width-lg { background-size: 100% auto }
+.bg10p-lg { background-size: 10% }
+.bg20p-lg { background-size: 20% }
+.bg25p-lg { background-size: 25% }
+.bg33p-lg { background-size: 33% }
+.bg34p-lg { background-size: 34% }
+.bg35p-lg { background-size: 35% }
+.bg40p-lg { background-size: 40% }
+.bg50p-lg { background-size: 50% }
+.bg60p-lg { background-size: 60% }
+.bg66p-lg { background-size: 66% }
+.bg75p-lg { background-size: 75% }
+.bg80p-lg { background-size: 80% }
+.bg100p-lg { background-size: 100% }
 }
-
-@media (max-width: 599px) {
-.hide-xs { display: none }
+",
 }
-
-@media (min-width: 600px) and (max-width: 899px) {
-.hide-sm { display: none }
-}
-
-@media (min-width: 900px) and (max-width: 1099px) {
-.hide-md { display: none }
-}
-
-@media (min-width: 1100px) {
-.hide-lg { display: none }
-}
-"
-`;
-
-exports[`Battery printBreakpoint matches snapshot 1`] = `
-"@media (min-width: 600px) {
-.rounded { border-radius: 0.2rem }
-.rounded-medium { border-radius: 0.4rem }
-}
-"
-`;
-
-exports[`Battery printClass matches snapshot 1`] = `".rounded { border-radius: 0.2rem }"`;
-
-exports[`Battery printClasses matches snapshot 1`] = `
-".rounded { border-radius: 0.2rem }
-.rounded-medium { border-radius: 0.4rem }"
-`;
-
-exports[`Battery printMobileFirst matches snapshot 1`] = `
-"@media (min-width: 600px) {
-.block-sm { display: block }
-.inline-sm { display: inline }
-}
-,@media (min-width: 900px) {
-.block-md { display: block }
-.inline-md { display: inline }
-}
-,@media (min-width: 1100px) {
-.block-lg { display: block }
-.inline-lg { display: inline }
-}
-"
-`;
-
-exports[`Battery printPerScreen matches snapshot 1`] = `
-"@media (max-width: 599px) {
-.hide-xs { display: none }
-}
-,@media (min-width: 600px) and (max-width: 899px) {
-.hide-sm { display: none }
-}
-,@media (min-width: 900px) and (max-width: 1099px) {
-.hide-md { display: none }
-}
-,@media (min-width: 1100px) {
-.hide-lg { display: none }
-}
-"
-`;
-
-exports[`Battery printProps matches snapshot 1`] = `"border-radius: 0.2rem"`;
-
-exports[`Battery propsCompile matches snapshot 1`] = `
-Object {
-  "margin": Array [
-    Object {
-      "propName": "m",
-      "props": Array [
-        "margin",
-      ],
-    },
-    Object {
-      "propName": "mt",
-      "props": Array [
-        "margin-top",
-      ],
-    },
-    Object {
-      "propName": "mx",
-      "props": Array [
-        "margin-right",
-        "margin-left",
-      ],
-    },
-  ],
-  "padding": Array [
-    Object {
-      "propName": "p",
-      "props": Array [
-        "padding",
-      ],
-    },
-    Object {
-      "propName": "pt",
-      "props": Array [
-        "padding-top",
-      ],
-    },
-    Object {
-      "propName": "px",
-      "props": Array [
-        "padding-right",
-        "padding-left",
-      ],
-    },
-  ],
-}
-`;
-
-exports[`Battery propsValuesMerge matches expectations 1`] = `
-Array [
-  Object {
-    "propName": "p",
-    "props": Array [
-      "padding",
-    ],
-    "value": "0.1rem",
-    "valueName": "1px",
-  },
-  Object {
-    "propName": "p",
-    "props": Array [
-      "padding",
-    ],
-    "value": "0.2rem",
-    "valueName": "2px",
-  },
-  Object {
-    "propName": "py",
-    "props": Array [
-      "padding-top",
-      "padding-bottom",
-    ],
-    "value": "0.1rem",
-    "valueName": "1px",
-  },
-  Object {
-    "propName": "py",
-    "props": Array [
-      "padding-top",
-      "padding-bottom",
-    ],
-    "value": "0.2rem",
-    "valueName": "2px",
-  },
-]
-`;
-
-exports[`Battery valueObjectFormat matches snapshot 1`] = `
-Object {
-  "breakpoint": "",
-  "value": "0.6rem",
-  "valueName": "1",
-  "valueType": "none",
-}
-`;
-
-exports[`Battery valuesCompile matches snapshot 1`] = `
-Array [
-  Object {
-    "breakpoint": "sm",
-    "value": "#00FF00",
-    "valueName": "lime",
-    "valueType": "none",
-  },
-  Object {
-    "breakpoint": "sm",
-    "value": "#000080",
-    "valueName": "navy",
-    "valueType": "none",
-  },
-]
 `;
