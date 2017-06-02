@@ -37,8 +37,8 @@ const keywords = baseKeywords(config)
 
 export const percentages = (units) => lengths({
   values: units,
-  keySuffix: "p",
-  valueSuffix: '%'
+  unitIndicator: "p",
+  lengthUnit: '%'
 });
 
 const compile = baseCompile(config);

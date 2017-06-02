@@ -80,7 +80,7 @@ describe('Battery', () => {
   });
 
   describe('propsValuesMerge', () => {
-    it('matches expectations', () => {
+    fit('matches expectations', () => {
       expect(propsValuesMerge(
         [
           {
