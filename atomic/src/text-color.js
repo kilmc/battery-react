@@ -1,7 +1,7 @@
 import {
   colors,
   keywords
-} from './atomic.config.js';
+} from '../atomic.config.js';
 
 export const textColor = {
   props: { '': 'color' },

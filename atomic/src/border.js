@@ -1,7 +1,7 @@
 import {
   keywords,
   defaultValue
-} from './atomic.config.js';
+} from '../atomic.config.js';
 
 export const border = {
   props: { 'border': 'border' },

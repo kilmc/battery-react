@@ -1,6 +1,6 @@
 import {
   colors
-} from './atomic.config.js';
+} from '../atomic.config.js';
 
 export const fillColor = {
   props: { 'fill': 'fill' },

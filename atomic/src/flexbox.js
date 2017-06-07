@@ -1,7 +1,7 @@
 import {
   integers,
   keywords
-} from './atomic.config.js';
+} from '../atomic.config.js';
 
 // flex
 // ------------------------------------------------------------------

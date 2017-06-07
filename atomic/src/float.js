@@ -1,6 +1,6 @@
 import {
   keywords
-} from './atomic.config.js';
+} from '../atomic.config.js';
 
 export const float = {
   props: { '': 'float' },

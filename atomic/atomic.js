@@ -2,18 +2,19 @@ import {
   compile
 } from './atomic.config';
 
+import { spacing } from './src/spacing';
 // Background
-import backgroundSize from './background-size';
-import backgroundImage from './background-image';
-import backgroundColor from './background-color';
+import { backgroundSize } from './src/background-size';
+import { backgroundImage } from './src/background-image';
+import { backgroundColor } from './src/background-color';
 
 // Border
-import border from './border';
-import borderColor from './border-color';
-import borderWidth from './border-width';
+import { border } from './src/border';
+import { borderColor } from './src/border-color';
+import { borderWidth } from './src/border-width';
 
 // Border Radius
-import borderRadius from './border-radius';
+import { borderRadius } from './src/border-radius';
 
 // Flexbox
 import {
@@ -25,18 +26,18 @@ import {
   justifyContent,
   alignContent,
   flexOrder
-} from './flexbox'
+} from './src/flexbox'
 
 // Misc
-import boxSizing from './box-sizing';
-import clear from './clear';
-import textColor from './text-color';
-import cursor from './cursor';
-import display from './display';
-import fill from './fill';
-import pointerEvents from './pointer-events';
-import float from './float'
-import fontWeight from './font-weight'
+import { boxSizing } from './src/box-sizing';
+import { clear } from './src/clear';
+import { textColor } from './src/text-color';
+import { cursor } from './src/cursor';
+import { display } from './src/display';
+import { fillColor } from './src/fillColor';
+import { pointerEvents } from './src/pointer-events';
+import { float } from './src/float'
+import { fontWeight } from './src/font-weight'
 
 
 // Compiler
@@ -57,7 +58,7 @@ export const compiled = compile({
   clear,
   cursor,
   display,
-  fill,
+  fillColor,
   flex,
   flexDirection,
   flexOrder,
@@ -66,5 +67,6 @@ export const compiled = compile({
   fontWeight,
   justifyContent,
   pointerEvents,
-  textColor
+  textColor,
+  spacing
 })

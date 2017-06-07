@@ -1,7 +1,7 @@
 import {
   keywords,
   percentages
-} from './atomic.config.js';
+} from '../atomic.config.js';
 
 export const backgroundSize = {
   props: { 'bg': 'background-size' },

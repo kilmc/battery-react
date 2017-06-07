@@ -59,6 +59,8 @@ export const config = {
   outputChangelog: true
 };
 
+export const compile = battery.baseCompile(config);
+
 // ------------------------------------------------------------------
 // Base Value Helper Functions
 // ------------------------------------------------------------------
