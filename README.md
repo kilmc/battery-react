@@ -1,9 +1,53 @@
 # Battery
-An atomic CSS generator
+Battery is a JavaScript-based tool to create, monitor and document your Atomic CSS library. By generating all your atomic classes via Javascript, your system has a greater awareness of your styles, while your team can continue to use class names for style declaration throughout your codebase.
+
+Core features:
+- Generate an Atomic CSS library
+- Generate a JSON object with all classes and values
+- Generate documentation for your CSS library
+- Generate a changelog when classes are added, removed or renamed
 
 ## Setup
+Install Battery locally
 ```
 npm install --dev bttry
+```
+
+
+**Creating your library**
+Navigate to the folder where you want your library to live and run the following command, adding your library name.
+```
+bttry create [library-name]
+```
+
+**Adding a CSS property**
+You can quickly add a config file for any CSS property by typing the following
+```
+~/your-lbrary-directory $ bttry add background-color
+```
+This will add a new file called `_background-color.js` to your `atomic/src` directory as well as
+
+### Configure Battery
+Open the `[library-name].config.js` file which lives at the root of your new library directory. This will contain all the initial config information to render a basic set of CSS properties into your new library.
+
+#### The Config Object
+This object contains all of your configuration options
+
+#### The Compile Function
+
+```
+atomic/
+  atomic.config.js
+  output/
+    atomic.min.css.gz
+    atomic.list.json
+    atomic.docs.html
+    atomic.changelog.md
+  src/
+    _background-color.js
+    _float.js
+    _padding.js
+    ...
 ```
 
 ## Class Config
@@ -48,6 +92,7 @@ props: {
 ```
 
 **Sub Props (`object`)**
+These are properties which are added to the prop to target a sub set of the css property. Note that the values in the subProps object are defined as an array to allow you to target multiple css properties and roll them up into a single classname.
 ```javascript
 props: { border: 'border' }
 subProps: {
@@ -88,18 +133,18 @@ values: defaultValue('1px solid #000')
 ```
 
 **keywords**
-export const keywords = battery.baseKeywords(config)
+
 
 **colors**
-export const colors = battery.baseColors(config)
+
 
 **integers**
-export const integers = battery.baseIntegers(config)
+
 
 **colorHex**
 Takes a color name that exists in the systemColors object in your config and returns its hex value. This is useful when used in conjunction with defaultValue.
 
-**lengths**
+#### lengths
 A universal function which takes some configuration parameters and an array of numbers to generate an object with key-values pairs of the classname indicator and corresponding css value.
 
 Configurable parameters:
