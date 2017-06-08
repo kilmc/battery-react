@@ -3,7 +3,7 @@ import {
   baseCompile,
   baseLengths,
   baseKeywords
-} from './battery';
+} from '../atomic/battery';
 const config = {
   baseFontSize: 10,
   baseUnit: 6,

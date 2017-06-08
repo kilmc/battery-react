@@ -206,83 +206,364 @@ Object {
       "background-size": "80%",
     },
   },
-  "css": ".bg-cover { background-size: cover }
-.bg-contain { background-size: contain }
-.bg-full-height { background-size: auto 100% }
-.bg-full-width { background-size: 100% auto }
-.bg10p { background-size: 10% }
-.bg20p { background-size: 20% }
-.bg25p { background-size: 25% }
-.bg33p { background-size: 33% }
-.bg34p { background-size: 34% }
-.bg35p { background-size: 35% }
-.bg40p { background-size: 40% }
-.bg50p { background-size: 50% }
-.bg60p { background-size: 60% }
-.bg66p { background-size: 66% }
-.bg75p { background-size: 75% }
-.bg80p { background-size: 80% }
-.bg100p { background-size: 100% }
-
-@media (min-width: 600px) {
-.bg-cover-sm { background-size: cover }
-.bg-contain-sm { background-size: contain }
-.bg-full-height-sm { background-size: auto 100% }
-.bg-full-width-sm { background-size: 100% auto }
-.bg10p-sm { background-size: 10% }
-.bg20p-sm { background-size: 20% }
-.bg25p-sm { background-size: 25% }
-.bg33p-sm { background-size: 33% }
-.bg34p-sm { background-size: 34% }
-.bg35p-sm { background-size: 35% }
-.bg40p-sm { background-size: 40% }
-.bg50p-sm { background-size: 50% }
-.bg60p-sm { background-size: 60% }
-.bg66p-sm { background-size: 66% }
-.bg75p-sm { background-size: 75% }
-.bg80p-sm { background-size: 80% }
-.bg100p-sm { background-size: 100% }
-}
-
-@media (min-width: 900px) {
-.bg-cover-md { background-size: cover }
-.bg-contain-md { background-size: contain }
-.bg-full-height-md { background-size: auto 100% }
-.bg-full-width-md { background-size: 100% auto }
-.bg10p-md { background-size: 10% }
-.bg20p-md { background-size: 20% }
-.bg25p-md { background-size: 25% }
-.bg33p-md { background-size: 33% }
-.bg34p-md { background-size: 34% }
-.bg35p-md { background-size: 35% }
-.bg40p-md { background-size: 40% }
-.bg50p-md { background-size: 50% }
-.bg60p-md { background-size: 60% }
-.bg66p-md { background-size: 66% }
-.bg75p-md { background-size: 75% }
-.bg80p-md { background-size: 80% }
-.bg100p-md { background-size: 100% }
-}
-
-@media (min-width: 1100px) {
-.bg-cover-lg { background-size: cover }
-.bg-contain-lg { background-size: contain }
-.bg-full-height-lg { background-size: auto 100% }
-.bg-full-width-lg { background-size: 100% auto }
-.bg10p-lg { background-size: 10% }
-.bg20p-lg { background-size: 20% }
-.bg25p-lg { background-size: 25% }
-.bg33p-lg { background-size: 33% }
-.bg34p-lg { background-size: 34% }
-.bg35p-lg { background-size: 35% }
-.bg40p-lg { background-size: 40% }
-.bg50p-lg { background-size: 50% }
-.bg60p-lg { background-size: 60% }
-.bg66p-lg { background-size: 66% }
-.bg75p-lg { background-size: 75% }
-.bg80p-lg { background-size: 80% }
-.bg100p-lg { background-size: 100% }
-}
-",
+  "css": Array [
+    Object {
+      "background-size": Object {
+        "mobileFirstValues": Object {
+          "lg": Array [
+            Object {
+              "bg-cover-lg": Object {
+                "background-size": "cover",
+              },
+            },
+            Object {
+              "bg-contain-lg": Object {
+                "background-size": "contain",
+              },
+            },
+            Object {
+              "bg-full-height-lg": Object {
+                "background-size": "auto 100%",
+              },
+            },
+            Object {
+              "bg-full-width-lg": Object {
+                "background-size": "100% auto",
+              },
+            },
+            Object {
+              "bg10p-lg": Object {
+                "background-size": "10%",
+              },
+            },
+            Object {
+              "bg20p-lg": Object {
+                "background-size": "20%",
+              },
+            },
+            Object {
+              "bg25p-lg": Object {
+                "background-size": "25%",
+              },
+            },
+            Object {
+              "bg33p-lg": Object {
+                "background-size": "33%",
+              },
+            },
+            Object {
+              "bg34p-lg": Object {
+                "background-size": "34%",
+              },
+            },
+            Object {
+              "bg35p-lg": Object {
+                "background-size": "35%",
+              },
+            },
+            Object {
+              "bg40p-lg": Object {
+                "background-size": "40%",
+              },
+            },
+            Object {
+              "bg50p-lg": Object {
+                "background-size": "50%",
+              },
+            },
+            Object {
+              "bg60p-lg": Object {
+                "background-size": "60%",
+              },
+            },
+            Object {
+              "bg66p-lg": Object {
+                "background-size": "66%",
+              },
+            },
+            Object {
+              "bg75p-lg": Object {
+                "background-size": "75%",
+              },
+            },
+            Object {
+              "bg80p-lg": Object {
+                "background-size": "80%",
+              },
+            },
+            Object {
+              "bg100p-lg": Object {
+                "background-size": "100%",
+              },
+            },
+          ],
+          "md": Array [
+            Object {
+              "bg-cover-md": Object {
+                "background-size": "cover",
+              },
+            },
+            Object {
+              "bg-contain-md": Object {
+                "background-size": "contain",
+              },
+            },
+            Object {
+              "bg-full-height-md": Object {
+                "background-size": "auto 100%",
+              },
+            },
+            Object {
+              "bg-full-width-md": Object {
+                "background-size": "100% auto",
+              },
+            },
+            Object {
+              "bg10p-md": Object {
+                "background-size": "10%",
+              },
+            },
+            Object {
+              "bg20p-md": Object {
+                "background-size": "20%",
+              },
+            },
+            Object {
+              "bg25p-md": Object {
+                "background-size": "25%",
+              },
+            },
+            Object {
+              "bg33p-md": Object {
+                "background-size": "33%",
+              },
+            },
+            Object {
+              "bg34p-md": Object {
+                "background-size": "34%",
+              },
+            },
+            Object {
+              "bg35p-md": Object {
+                "background-size": "35%",
+              },
+            },
+            Object {
+              "bg40p-md": Object {
+                "background-size": "40%",
+              },
+            },
+            Object {
+              "bg50p-md": Object {
+                "background-size": "50%",
+              },
+            },
+            Object {
+              "bg60p-md": Object {
+                "background-size": "60%",
+              },
+            },
+            Object {
+              "bg66p-md": Object {
+                "background-size": "66%",
+              },
+            },
+            Object {
+              "bg75p-md": Object {
+                "background-size": "75%",
+              },
+            },
+            Object {
+              "bg80p-md": Object {
+                "background-size": "80%",
+              },
+            },
+            Object {
+              "bg100p-md": Object {
+                "background-size": "100%",
+              },
+            },
+          ],
+          "sm": Array [
+            Object {
+              "bg-cover-sm": Object {
+                "background-size": "cover",
+              },
+            },
+            Object {
+              "bg-contain-sm": Object {
+                "background-size": "contain",
+              },
+            },
+            Object {
+              "bg-full-height-sm": Object {
+                "background-size": "auto 100%",
+              },
+            },
+            Object {
+              "bg-full-width-sm": Object {
+                "background-size": "100% auto",
+              },
+            },
+            Object {
+              "bg10p-sm": Object {
+                "background-size": "10%",
+              },
+            },
+            Object {
+              "bg20p-sm": Object {
+                "background-size": "20%",
+              },
+            },
+            Object {
+              "bg25p-sm": Object {
+                "background-size": "25%",
+              },
+            },
+            Object {
+              "bg33p-sm": Object {
+                "background-size": "33%",
+              },
+            },
+            Object {
+              "bg34p-sm": Object {
+                "background-size": "34%",
+              },
+            },
+            Object {
+              "bg35p-sm": Object {
+                "background-size": "35%",
+              },
+            },
+            Object {
+              "bg40p-sm": Object {
+                "background-size": "40%",
+              },
+            },
+            Object {
+              "bg50p-sm": Object {
+                "background-size": "50%",
+              },
+            },
+            Object {
+              "bg60p-sm": Object {
+                "background-size": "60%",
+              },
+            },
+            Object {
+              "bg66p-sm": Object {
+                "background-size": "66%",
+              },
+            },
+            Object {
+              "bg75p-sm": Object {
+                "background-size": "75%",
+              },
+            },
+            Object {
+              "bg80p-sm": Object {
+                "background-size": "80%",
+              },
+            },
+            Object {
+              "bg100p-sm": Object {
+                "background-size": "100%",
+              },
+            },
+          ],
+        },
+        "perScreenValues": Array [],
+        "values": Object {
+          "all": Array [
+            Object {
+              "bg-cover": Object {
+                "background-size": "cover",
+              },
+            },
+            Object {
+              "bg-contain": Object {
+                "background-size": "contain",
+              },
+            },
+            Object {
+              "bg-full-height": Object {
+                "background-size": "auto 100%",
+              },
+            },
+            Object {
+              "bg-full-width": Object {
+                "background-size": "100% auto",
+              },
+            },
+            Object {
+              "bg10p": Object {
+                "background-size": "10%",
+              },
+            },
+            Object {
+              "bg20p": Object {
+                "background-size": "20%",
+              },
+            },
+            Object {
+              "bg25p": Object {
+                "background-size": "25%",
+              },
+            },
+            Object {
+              "bg33p": Object {
+                "background-size": "33%",
+              },
+            },
+            Object {
+              "bg34p": Object {
+                "background-size": "34%",
+              },
+            },
+            Object {
+              "bg35p": Object {
+                "background-size": "35%",
+              },
+            },
+            Object {
+              "bg40p": Object {
+                "background-size": "40%",
+              },
+            },
+            Object {
+              "bg50p": Object {
+                "background-size": "50%",
+              },
+            },
+            Object {
+              "bg60p": Object {
+                "background-size": "60%",
+              },
+            },
+            Object {
+              "bg66p": Object {
+                "background-size": "66%",
+              },
+            },
+            Object {
+              "bg75p": Object {
+                "background-size": "75%",
+              },
+            },
+            Object {
+              "bg80p": Object {
+                "background-size": "80%",
+              },
+            },
+            Object {
+              "bg100p": Object {
+                "background-size": "100%",
+              },
+            },
+          ],
+        },
+      },
+    },
+  ],
 }
 `;

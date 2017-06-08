@@ -15,6 +15,5 @@ export const spacing = {
     x: ['left', 'right'],
     y: ['top', 'bottom'],
   },
-  mobileFirstValues: scalers([0,1,2,3,4,5]),
-  perScreenValues: scalers([22])
+  mobileFirstValues: scalers([0,1,2,3,4,5])
 };

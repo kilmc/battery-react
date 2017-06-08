@@ -4,6 +4,14 @@ import {
 
 export const borderRadius = {
   props: { '': 'border' },
+  values: keywords({
+    'pill': '200px',
+    'circle': '100%'
+  })
+};
+
+export const borderRadiusFull = {
+  props: { '': 'border' },
   subProps: {
     'top': ['top-left-radius','top-right-radius'],
     'right': ['top-right-radius','bottom-right-radius'],
@@ -19,8 +27,6 @@ export const borderRadius = {
     'no-radius': '0',
     'rounded': '2px',
     'rounded-medium': '4px',
-    'rounded-large': '6px',
-    'pill': '200px',
-    'circle': '100%'
+    'rounded-large': '6px'
   })
 };

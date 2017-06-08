@@ -1,12 +1,13 @@
 import {
-  compile
+  compile,
 } from './atomic.config';
 
 import { spacing } from './src/spacing';
 // Background
-import { backgroundSize } from './src/background-size';
-import { backgroundImage } from './src/background-image';
 import { backgroundColor } from './src/background-color';
+import { backgroundImage } from './src/background-image';
+import { backgroundPosition } from './src/background-position';
+import { backgroundSize } from './src/background-size';
 
 // Border
 import { border } from './src/border';
@@ -14,7 +15,10 @@ import { borderColor } from './src/border-color';
 import { borderWidth } from './src/border-width';
 
 // Border Radius
-import { borderRadius } from './src/border-radius';
+import {
+  borderRadius,
+  borderRadiusFull
+} from './src/border-radius';
 
 // Flexbox
 import {
@@ -34,7 +38,7 @@ import { clear } from './src/clear';
 import { textColor } from './src/text-color';
 import { cursor } from './src/cursor';
 import { display } from './src/display';
-import { fillColor } from './src/fillColor';
+import { fillColor } from './src/fill';
 import { pointerEvents } from './src/pointer-events';
 import { float } from './src/float'
 import { fontWeight } from './src/font-weight'
@@ -50,9 +54,11 @@ export const compiled = compile({
   backgroundColor,
   backgroundImage,
   backgroundSize,
+  backgroundPosition,
   border,
   borderColor,
   borderRadius,
+  borderRadiusFull,
   borderWidth,
   boxSizing,
   clear,
@@ -70,3 +76,7 @@ export const compiled = compile({
   textColor,
   spacing
 })
+
+export const molecules = {
+  'sweet-molecule': ['pt5-lg','pr1-lg']
+}

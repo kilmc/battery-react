@@ -1,7 +1,11 @@
 /* eslint-env node */
 const fs = require('fs-extra');
-const { printAtom } = require('../atomic/atomic.js');
-const { compiled } = require('../atomic/atomic.js');
+const { printAtom } = require('../atomic/atomic.config.js');
+const {
+  compiled,
+  molecules
+ } = require('../atomic/atomic.js');
+const { compileMolecules } = require('../atomic/battery.js');
 
 const atomicJSONFile = __dirname + '/../atomic/output/atomic.json'
 const generateLibrary = (file, obj) => {
@@ -13,9 +17,9 @@ const generateLibrary = (file, obj) => {
   })
 };
 
-const atomicCSSFile = __dirname + '/../atomic/output/atomic.css'
-console.log('Writing this file',atomicCSSFile)
-const generateCSS = (file, obj) => {
+const atomsCSSFile = __dirname + '/../atomic/output/atoms.css'
+console.log('Writing this file',atomsCSSFile)
+const generateAtoms = (file, obj) => {
   fs.outputFile(file, obj, err => {
 
     fs.readFile(file, 'utf8', (err, data) => {
@@ -24,5 +28,23 @@ const generateCSS = (file, obj) => {
   })
 }
 
-generateLibrary(atomicJSONFile, compiled.JSON)
-generateCSS(atomicCSSFile, compiled.css)
+const moleculesCSSFile = __dirname + '/../atomic/output/molecules.css'
+console.log('Writing this file',moleculesCSSFile)
+const generateMolecules = (file, obj) => {
+  fs.outputFile(file, obj, err => {
+
+    fs.readFile(file, 'utf8', (err, data) => {
+      if (err) return console.error(err)
+    })
+  })
+}
+
+const compiledJSON = fs.readFileSync(__dirname + '/../atomic/output/atomic.json');
+
+
+generateLibrary(atomicJSONFile, compiled.JSON);
+generateAtoms(atomsCSSFile, compiled.css.map(printAtom));
+generateMolecules(
+  moleculesCSSFile,
+  compileMolecules(molecules, JSON.parse(compiledJSON))
+);

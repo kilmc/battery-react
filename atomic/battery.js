@@ -51,7 +51,7 @@ export const baseLengths = config => ({
 
 export const baseColors = config => (
   array,
-  separator = config.colorValueSeparator || ''
+  separator = config.colorValueSeparator
 ) => {
   return array.reduce((obj, value) => {
     obj[`${separator}${value}`] = config.systemColors[value];
@@ -150,6 +150,172 @@ export const propsValuesMerge = (props, values) =>
   props.flatMap(prop => values.map(value => ({ ...prop, ...value })))
 
 
+
+// Print Atom
+// ------------------------------------------------------------------
+
+// printAtom
+// ------------------------------------------------------------------
+
+export const basePrintAtom = config => obj => {
+  const {
+    breakpointsConfig,
+  } = config;
+
+  // perScreenBreakpoints
+  // ------------------------------------------------------------------
+  // An array of breakpoint identifiers exctracted from the
+  // breakpointsConfig to be used to compile perScreen media queries
+
+  const perScreenBreakpoints = Object.entries(breakpointsConfig).map(
+    ([bp, val]) => bp
+  );
+
+  // mobileFirstBreakpoints
+  // ------------------------------------------------------------------
+  // An array of breakpoint identifiers exctracted from the
+  // breakpointsConfig to be used to compile mobileFirst media queries
+
+  const mobileFirstBreakpoints = perScreenBreakpoints.slice(1);
+  // mobileFirstQueries
+  // ------------------------------------------------------------------
+  // Creates an object with mobileFirst media query params
+
+  const mobileFirstQueries = mobileFirstBreakpoints.reduce((accum, bp) => {
+    accum[bp] = `(min-width: ${breakpointsConfig[bp]}px)`;
+    return accum;
+  }, {});
+
+  // perScreenQueries
+  // ------------------------------------------------------------------
+  // Creates an object with media query arguments per screen
+
+  const perScreenQueries = () => {
+    const min = perScreenBreakpoints.slice(1);
+    const max = perScreenBreakpoints.slice(0, -1);
+    const both = min.filter(n => max.indexOf(n) !== -1)
+    const allQueries = Object.keys(breakpointsConfig).reduce((accum, bp) => {
+      accum[bp] = '';
+      return accum;
+    }, {});
+
+    min.map(bp => (allQueries[bp] = `(min-width: ${breakpointsConfig[bp]}px)`));
+
+    let count = 0;
+    max.map(bp => {
+      count++;
+      allQueries[
+        bp
+      ] += `(max-width: ${breakpointsConfig[perScreenBreakpoints[count]] - 1}px)`;
+    });
+
+    both.map(bp => {
+      allQueries[bp] = allQueries[bp].replace(')(', ') and (');
+    });
+
+    return allQueries;
+  };
+
+  // printProps
+  // ------------------------------------------------------------------
+  // Creates a formatted block of CSS property and value sets as a
+  // string which can be passed to a another to printClass to finish
+  // formatting
+
+  const printProps = (classObj, multiple) => {
+    return String(
+      Object.entries(classObj[Object.keys(classObj)]).map(
+        ([prop, value]) =>
+          multiple ? `\t${prop}: ${value};\n` : `${prop}: ${value}`
+      )
+    )
+      .replace(',', '')
+      .trim();
+  };
+
+  // printClass
+  // ------------------------------------------------------------------
+  // Creates a formatted block of classes in a string which can be
+  // passed to a another function to render it into a CSS file.
+
+  const printClass = classObj => {
+    const multiple = Object.keys(classObj[Object.keys(classObj)]).length > 1;
+    const className = Object.keys(classObj);
+
+    let renderedClass;
+    if (multiple) {
+      renderedClass = `.${className} {\n\t${printProps(classObj, multiple)}\n}\n`;
+    } else {
+      renderedClass = `.${className} { ${printProps(classObj, multiple)} }`;
+    }
+    return renderedClass;
+  };
+
+  // printClasses
+  // ------------------------------------------------------------------
+  // Run through a
+  const printClasses = allClasses => {
+    return String(allClasses.map(classObj => printClass(classObj))).replace(
+      /,/g,
+      '\n'
+    );
+  };
+
+  // printBreakpoint
+  // ------------------------------------------------------------------
+
+  const printBreakpoint = ([bp, classObjs], mediaQueryObj) => {
+    return `@media ${mediaQueryObj[bp]} {\n${printClasses(classObjs)}\n}\n`;
+  };
+
+  // printMobileFirst
+  // ------------------------------------------------------------------
+
+  const printMobileFirst = obj => {
+    return String(
+      Object.entries(obj).map(([bp, classObjs]) =>
+        printBreakpoint([bp, classObjs], mobileFirstQueries)
+      )
+    );
+  };
+
+  // printPerScreen
+  // ------------------------------------------------------------------
+
+  const printPerScreen = obj => {
+    return String(
+      Object.entries(obj).map(([bp, cxs]) =>
+        printBreakpoint([bp, cxs], perScreenQueries())
+      )
+    );
+  };
+
+  const allValues = Object.keys(obj).map(propGroup => {
+    return printClasses(obj[propGroup].values.all);
+  });
+
+  const allMobileFirst = Object.keys(obj).map(
+    propGroup => obj[propGroup].mobileFirstValues
+  ) === [[]]
+    ? ''
+    : Object.keys(obj).map(propGroup =>
+        printMobileFirst(obj[propGroup].mobileFirstValues)
+      );
+
+  const allPerScreen = Object.keys(obj).map(
+    propGroup => obj[propGroup].perScreenValues
+  ) === [[]]
+    ? ''
+    : Object.keys(obj).map(propGroup =>
+        printPerScreen(obj[propGroup].perScreenValues)
+      );
+
+  return String(
+    allValues
+    .concat('\n', allMobileFirst)
+    .concat(allPerScreen)
+  ).replace(/,@/g, '\n@');
+};
 
 
 // Compiler
@@ -314,155 +480,26 @@ export const baseCompile = config => atoms => {
     );
   };
 
-  // mobileFirstQueries
-  // ------------------------------------------------------------------
-  // Creates an object with mobileFirst media query params
-
-  const mobileFirstQueries = mobileFirstBreakpoints.reduce((accum, bp) => {
-    accum[bp] = `(min-width: ${breakpointsConfig[bp]}px)`;
-    return accum;
-  }, {});
-
-  // perScreenQueries
-  // ------------------------------------------------------------------
-  // Creates an object with media query arguments per screen
-
-  const perScreenQueries = () => {
-    const min = perScreenBreakpoints.slice(1);
-    const max = perScreenBreakpoints.slice(0, -1);
-    const both = min.filter(n => max.indexOf(n) !== -1);
-
-    const allQueries = Object.keys(breakpointsConfig).reduce((accum, bp) => {
-      accum[bp] = '';
-      return accum;
-    }, {});
-
-    min.map(bp => (allQueries[bp] = `(min-width: ${breakpointsConfig[bp]}px)`));
-
-    let count = 0;
-    max.map(bp => {
-      count++;
-      allQueries[
-        bp
-      ] += `(max-width: ${breakpointsConfig[perScreenBreakpoints[count]] - 1}px)`;
-    });
-
-    both.map(bp => {
-      allQueries[bp] = allQueries[bp].replace(')(', ') and (');
-    });
-
-    return allQueries;
-  };
-
-  // printProps
-  // ------------------------------------------------------------------
-  // Creates a formatted block of CSS property and value sets as a
-  // string which can be passed to a another to printClass to finish
-  // formatting
-
-  const printProps = (classObj, multiple) => {
-    return String(
-      Object.entries(classObj[Object.keys(classObj)]).map(
-        ([prop, value]) =>
-          multiple ? `\t${prop}: ${value};\n` : `${prop}: ${value}`
-      )
-    )
-      .replace(',', '')
-      .trim();
-  };
-
-  // printClass
-  // ------------------------------------------------------------------
-  // Creates a formatted block of classes in a string which can be
-  // passed to a another function to render it into a CSS file.
-
-  const printClass = classObj => {
-    const multiple = Object.keys(classObj[Object.keys(classObj)]).length > 1;
-    const className = Object.keys(classObj);
-
-    let renderedClass;
-    if (multiple) {
-      renderedClass = `.${className} {\n\t${printProps(classObj, multiple)}\n}\n`;
-    } else {
-      renderedClass = `.${className} { ${printProps(classObj, multiple)} }`;
-    }
-    return renderedClass;
-  };
-
-  // printClasses
-  // ------------------------------------------------------------------
-  // Run through a
-  const printClasses = allClasses => {
-    return String(allClasses.map(classObj => printClass(classObj))).replace(
-      /,/g,
-      '\n'
-    );
-  };
-
-  // printBreakpoint
-  // ------------------------------------------------------------------
-
-  const printBreakpoint = ([bp, classObjs], mediaQueryObj) => {
-    return `@media ${mediaQueryObj[bp]} {\n${printClasses(classObjs)}\n}\n`;
-  };
-
-  // printMobileFirst
-  // ------------------------------------------------------------------
-
-  const printMobileFirst = obj => {
-    return String(
-      Object.entries(obj).map(([bp, classObjs]) =>
-        printBreakpoint([bp, classObjs], mobileFirstQueries)
-      )
-    );
-  };
-
-  // printPerScreen
-  // ------------------------------------------------------------------
-
-  const printPerScreen = obj => {
-    return String(
-      Object.entries(obj).map(([bp, cxs]) =>
-        printBreakpoint([bp, cxs], perScreenQueries())
-      )
-    );
-  };
-
-  // printAtom
-  // ------------------------------------------------------------------
-
-  const printAtom = obj => {
-    const allValues = Object.keys(obj).map(propGroup => {
-      return printClasses(obj[propGroup].values.all);
-    });
-
-    const allMobileFirst = Object.keys(obj).map(
-      propGroup => obj[propGroup].mobileFirstValues
-    ) === [[]]
-      ? ''
-      : Object.keys(obj).map(propGroup =>
-          printMobileFirst(obj[propGroup].mobileFirstValues)
-        );
-
-    const allPerScreen = Object.keys(obj).map(
-      propGroup => obj[propGroup].perScreenValues
-    ) === [[]]
-      ? ''
-      : Object.keys(obj).map(propGroup =>
-          printPerScreen(obj[propGroup].perScreenValues)
-        );
-
-    return String(
-      allValues.concat('\n', allMobileFirst).concat(allPerScreen)
-    ).replace(/,@/g, '\n@');
-  };
-
   const allAtoms = Object.keys(atoms).map(atom => atoms[atom]);
   const atomicJSON = Object.assign({}, ...allAtoms.flatMap(atomList));
-  const atomicCSS = String(allAtoms.flatMap(atomTree).map(printAtom)).replace(
-    /,(?=(?:"[^"]*"|\([^()]*\)|\[[^\[\]]*\]|\{[^{}]*}|[^"\[{}()\]])*$)/gm,
-    ''
-  );
+  const atomicCSS = allAtoms.flatMap(atomTree);
 
   return { css: atomicCSS, JSON: atomicJSON };
 };
+
+export const classJSON = {
+  "fz-14": { "font-size": "1.4rem" },
+  "fz-16": { "font-size": "1.6rem" },
+  "fz-21": { "font-size": "2.1rem" },
+  "lh2": { "line-height": "1.2rem" },
+  "lh3": { "line-height": "1.8rem" },
+  "lh4": { "line-height": "2.4rem" }
+}
+
+export const compileMolecules = (obj, JSONObject) => {
+  console.log(JSONObject)
+  return Object.keys(obj)
+    .flatMap(x => (
+      { [x]: Object.assign({}, ...obj[x].map(y => JSONObject[y]))}
+    ))
+}

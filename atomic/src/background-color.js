@@ -1,9 +1,10 @@
 import {
-  colors
+  colors,
+  allColors
 } from '../atomic.config.js';
 
 export const backgroundColor = {
   props: { 'bg': 'background-color' },
-  values: colors(['gray', 'blue', 'orange']),
+  // values: colors(...allColors),
   perScreenValues: colors(['transparent'])
 };
