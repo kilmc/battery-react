@@ -203,6 +203,7 @@ export const viewportWidths = (units, negative = false) => lengths({
   negative: negative
 });
 
+// Pixels
 export const pixels = (units, negative = false) => lengths({
   values: units,
   valueConverters: [remify],
@@ -211,11 +212,21 @@ export const pixels = (units, negative = false) => lengths({
   negative: negative
 });
 
+// Scalers
 export const scalers = (units, negative = false) => lengths({
   values: units,
   valueConverters: [remify, scaler],
   lengthUnit: 'rem',
   negative: negative
+});
+
+// Rems
+export const rems = (units, negative = false) => lengths({
+  values: units,
+  valueConverters: [remify],
+  lengthUnit: 'rem',
+  negative: negative,
+  separator: '-'
 });
 
 // Percentages

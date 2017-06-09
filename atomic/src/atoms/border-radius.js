@@ -3,7 +3,7 @@ import {
 } from '../../atomic.config.js';
 
 export const borderRadius = {
-  props: { '': 'border' },
+  props: { '': 'border-radius' },
   values: keywords({
     'pill': '200px',
     'circle': '100%'
@@ -11,7 +11,7 @@ export const borderRadius = {
 };
 
 export const borderRadiusFull = {
-  props: { '': 'border' },
+  props: { '': 'border-radius' },
   subProps: {
     'top': ['top-left-radius','top-right-radius'],
     'right': ['top-right-radius','bottom-right-radius'],

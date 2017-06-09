@@ -2,7 +2,10 @@ import {
   compile,
 } from './atomic.config';
 
-import { spacing } from './src/atoms/spacing';
+import {
+  marginPaddingAll,
+  spacingY
+} from './src/atoms/margin-padding';
 // Background
 import { backgroundColor } from './src/atoms/background-color';
 import { backgroundImage } from './src/atoms/background-image';
@@ -51,6 +54,9 @@ import { lineHeight } from './src/atoms/line-height'
 import { opacity } from './src/atoms/opacity'
 import { overflow } from './src/atoms/overflow'
 import { webkitOverflowScrolling } from './src/atoms/webkit'
+import { fontSize } from './src/atoms/font-size'
+import { textAlign } from './src/atoms/text-align'
+
 import {
   position,
   positionDirections
@@ -96,7 +102,8 @@ export const compiled = compile({
   textColor,
   letterSpacing,
   lineHeight,
-  spacing,
+  marginPaddingAll,
+  spacingY,
   opacity,
   overflow,
   webkitOverflowScrolling,
@@ -105,9 +112,11 @@ export const compiled = compile({
   boxShadow,
   height,
   width,
-  maxWidth
+  maxWidth,
+  fontSize,
+  textAlign
 })
 
 export const molecules = {
-  'sweet-molecule': ['pt5-lg','pr1-lg']
+  'bttn': ['rounded','block']
 }

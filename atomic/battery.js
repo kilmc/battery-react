@@ -184,11 +184,13 @@ export const printClass = classObj => {
   const className = Object.keys(classObj);
 
   let renderedClass;
+
   if (multiple) {
     renderedClass = `.${className} {${printProps(classObj, multiple)}\n}`;
   } else {
     renderedClass = `.${className} { ${printProps(classObj, multiple)} }`;
   }
+
   return renderedClass;
 };
 
@@ -196,8 +198,9 @@ export const printClass = classObj => {
 // ------------------------------------------------------------------
 // Run through a
 
-export const printClasses = (allClasses) =>
-  allClasses.map(classObj => printClass(classObj)).join('\n');
+export const printClasses = (allClasses) => {
+  return allClasses.map(classObj => printClass(classObj)).join('\n');
+}
 
 // printAtom
 // ------------------------------------------------------------------

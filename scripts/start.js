@@ -1,7 +1,5 @@
 /* eslint-env node */
 const fs = require('fs-extra');
-var postcss = require('postcss');
-var stylefmt = require('stylefmt');
 
 const { printAtom } = require('../atomic/atomic.config.js');
 const {
@@ -10,7 +8,8 @@ const {
  } = require('../atomic/atomic.js');
 const {
   compileMolecules,
-  printClass
+  printClass,
+  printClasses
 } = require('../atomic/battery.js');
 
 const atomicJSONFile = __dirname + '/../atomic/output/atomic.json'
@@ -52,16 +51,5 @@ generateLibrary(atomicJSONFile, compiled.JSON);
 generateAtoms(atomsCSSFile, compiled.css.map(printAtom).join(''));
 generateMolecules(
   moleculesCSSFile,
-  compileMolecules(molecules, JSON.parse(compiledJSON)).map(printClass)
+  compileMolecules(molecules, JSON.parse(compiledJSON)).map(printClass).join('')
 );
-
-var css = fs.readFileSync(atomsCSSFile, 'utf-8');
-
-postcss([
-  stylefmt
-]).process(css, {
-    from: 'atoms.css'
-  })
-  .then(function (result) {
-    result.css;
-  });
