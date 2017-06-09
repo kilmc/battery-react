@@ -4,11 +4,11 @@ import {
 
 export const textTransform = {
   props: { 'text': 'text-transform' },
-  mobileFirstValues: keywords({
-    'text-capitalize': 'capitalize',
-    'text-lowercase': 'lowercase',
-    'text-uppercase': 'uppercase',
-    'text-none': 'none'
+  values: keywords({
+    'capitalize': 'capitalize',
+    'lowercase': 'lowercase',
+    'uppercase': 'uppercase',
+    'none': 'none'
   })
 };
 
