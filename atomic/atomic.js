@@ -28,16 +28,21 @@ import { cursor } from './src/atoms/cursor';
 import { display } from './src/atoms/display';
 import { fillColor } from './src/atoms/fill';
 
-import {
-  flex,
-  flexDirection,
-  flexWrap,
-  alignItems,
-  alignSelf,
-  justifyContent,
-  alignContent,
-  flexOrder
-} from './src/atoms/flexbox';
+// import {
+//   flex,
+//   flexGrow,
+//   flexShrink,
+//   flexBasis,
+//   flexDirection,
+//   flexWrap,
+//   alignItems,
+//   alignSelf,
+//   justifyContent,
+//   alignContent,
+//   flexOrder
+// } from './src/atoms/flexbox';
+
+import * as Flex from './src/atoms/flexbox';
 
 import { float } from './src/atoms/float';
 import { fontFamily } from './src/atoms/font-family';
@@ -46,12 +51,14 @@ import { fontStyle } from './src/atoms/font-style';
 import { fontWeight } from './src/atoms/font-weight';
 import {
   height,
+  minHeight,
   width,
   maxWidth
 } from './src/atoms/height-width';
 
 import { letterSpacing } from './src/atoms/letter-spacing';
 import { lineHeight } from './src/atoms/line-height';
+import { listStyle } from './src/atoms/list-style';
 
 import {
   marginPaddingAll,
@@ -61,6 +68,7 @@ import {
 } from './src/atoms/margin-padding';
 
 import { opacity } from './src/atoms/opacity';
+import { outline } from './src/atoms/outline';
 import { overflow } from './src/atoms/overflow'
 import { pointerEvents } from './src/atoms/pointer-events';
 
@@ -76,7 +84,12 @@ import { textDecoration } from './src/atoms/text-decoration';
 import { textOverflow } from './src/atoms/text-overflow';
 import { textTransform } from './src/atoms/text-transform';
 import { verticalAlign } from './src/atoms/vertical-align';
-import { webkitOverflowScrolling } from './src/atoms/webkit';
+
+import {
+  webkitAppearance,
+  webkitOverflowScrolling
+} from './src/atoms/webkit';
+
 import { whiteSpace } from './src/atoms/white-space';
 import { wordBreak } from './src/atoms/word-break';
 import { zIndex } from './src/atoms/z-index';
@@ -86,9 +99,6 @@ import { zIndex } from './src/atoms/z-index';
 // ------------------------------------------------------------------
 
 export const compiled = compile({
-  alignContent,
-  alignItems,
-  alignSelf,
   backgroundColor,
   backgroundImage,
   backgroundPosition,
@@ -106,23 +116,22 @@ export const compiled = compile({
   cursor,
   display,
   fillColor,
-  flex,
-  flexDirection,
-  flexOrder,
-  flexWrap,
+  ...Flex,
   float,
   fontFamily,
   fontSize,
   fontStyle,
   fontWeight,
   height,
-  justifyContent,
   letterSpacing,
   lineHeight,
+  listStyle,
   margin,
   marginPaddingAll,
   maxWidth,
+  minHeight,
   opacity,
+  outline,
   overflow,
   pointerEvents,
   position,
@@ -137,6 +146,7 @@ export const compiled = compile({
   textOverflow,
   textTransform,
   verticalAlign,
+  webkitAppearance,
   webkitOverflowScrolling,
   whiteSpace,
   width,
@@ -144,6 +154,12 @@ export const compiled = compile({
   zIndex
 })
 
-export const molecules = {
-  'bttn': ['rounded','block']
-}
+import {
+  buttonBase,
+  buttonSizes
+} from './src/molecules/buttons'
+
+export const molecules = Object.assign(
+  buttonBase,
+  buttonSizes
+);

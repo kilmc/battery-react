@@ -1,4 +1,57 @@
 .bttn {
 border-radius: 2px;
-display: block;
+font-weight: 500;
+text-align: center;
+line-height: 1;
+cursor: pointer;
+background-color: #FFFFFF;
+border: none !important;
+position: relative;
+display: inline-block;
+-webkit-appearance: none;
+}
+.bttn-xsmall {
+height: 3rem;
+line-height: 3rem;
+padding-top: 0rem;
+padding-bottom: 0rem;
+padding-left: 1.2rem;
+padding-right: 1.2rem;
+font-size: 1.2rem;
+}
+.bttn-small {
+height: 3.6rem;
+line-height: 3.6rem;
+padding-top: 0rem;
+padding-bottom: 0rem;
+padding-left: 1.2rem;
+padding-right: 1.2rem;
+font-size: 1.2rem;
+}
+.bttn-medium {
+height: 4.2rem;
+line-height: 4.2rem;
+padding-top: 0rem;
+padding-bottom: 0rem;
+padding-left: 1.8rem;
+padding-right: 1.8rem;
+font-size: 1.4rem;
+}
+.bttn-large {
+height: 4.8rem;
+line-height: 4.8rem;
+padding-top: 0rem;
+padding-bottom: 0rem;
+padding-left: 2.4rem;
+padding-right: 2.4rem;
+font-size: 1.6rem;
+}
+.bttn-xlarge {
+height: 5.4rem;
+line-height: 5.4rem;
+padding-top: 0rem;
+padding-bottom: 0rem;
+padding-left: 2.4rem;
+padding-right: 2.4rem;
+font-size: 1.6rem;
 }

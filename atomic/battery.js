@@ -153,8 +153,10 @@ const propsCompile = ({
 // Merges an array of valueObjects with an array of propObjects and
 // forms a classObject
 
-export const propsValuesMerge = (props, values) =>
-  props.flatMap(prop => values.map(value => ({ ...prop, ...value })))
+export const propsValuesMerge = (props, values) => {
+  return props.flatMap(prop => values.map(value => ({ ...prop, ...value })))
+}
+
 
 
 // ------------------------------------------------------------------
@@ -477,33 +479,31 @@ export const baseCompile = config => atoms => {
         propGroups[prop],
         valuesCompile({
           values: Object.assign(values, mobileFirstValues)
-        })
+        }))
+      .map(classCompile)
+      .concat(
+        ...mobileFirstBreakpoints.map(breakpoint =>
+          propsValuesMerge(
+            propGroups[prop],
+            valuesCompile({
+              values: mobileFirstValues,
+              breakpoint,
+              psuedo
+            })
+          ).map(classCompile)
+        ))
+      .concat(
+        ...perScreenBreakpoints.map(breakpoint =>
+          propsValuesMerge(
+            propGroups[prop],
+            valuesCompile({
+              values: perScreenValues,
+              breakpoint,
+              psuedo
+            })
+          ).map(classCompile)
+        )
       )
-        .map(classCompile)
-        .concat(
-          ...mobileFirstBreakpoints.map(breakpoints =>
-            propsValuesMerge(
-              propGroups[prop],
-              valuesCompile({
-                values: mobileFirstValues,
-                breakpoints,
-                psuedo
-              })
-            ).map(classCompile)
-          )
-        )
-        .concat(
-          ...perScreenBreakpoints.map(breakpoints =>
-            propsValuesMerge(
-              propGroups[prop],
-              valuesCompile({
-                values: perScreenValues,
-                breakpoints,
-                psuedo
-              })
-            ).map(classCompile)
-          )
-        )
     );
   };
 

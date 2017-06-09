@@ -3,8 +3,15 @@ import {
 } from '../../atomic.config.js';
 
 export const webkitOverflowScrolling = {
-  props: { '': '-webkit-overflow-scrolling' },
+  props: { 'webkit': '-webkit-overflow-scrolling' },
   values: keywords({
-    'webkit-scrolling': 'touch'
-  }, '')
+    'scrolling': 'touch'
+  })
+};
+
+export const webkitAppearance = {
+  props: { 'webkit-appearance': '-webkit-appearance' },
+  values: keywords({
+    'none': 'none'
+  })
 };

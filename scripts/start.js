@@ -8,8 +8,7 @@ const {
  } = require('../atomic/atomic.js');
 const {
   compileMolecules,
-  printClass,
-  printClasses
+  printClass
 } = require('../atomic/battery.js');
 
 const atomicJSONFile = __dirname + '/../atomic/output/atomic.json'
@@ -51,5 +50,5 @@ generateLibrary(atomicJSONFile, compiled.JSON);
 generateAtoms(atomsCSSFile, compiled.css.map(printAtom).join(''));
 generateMolecules(
   moleculesCSSFile,
-  compileMolecules(molecules, JSON.parse(compiledJSON)).map(printClass).join('')
+  compileMolecules(molecules, JSON.parse(compiledJSON)).map(printClass).join('\n')
 );
