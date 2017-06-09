@@ -408,31 +408,31 @@
     "background-size": "105%"
   },
   "border": {
-    "border": "0.1rem solid #fff000"
+    "border": "0.1rem solid #E8E8E8"
   },
   "border-none": {
     "border": "none !important"
   },
   "border-top": {
-    "border-top": "0.1rem solid #fff000"
+    "border-top": "0.1rem solid #E8E8E8"
   },
   "border-top-none": {
     "border-top": "none !important"
   },
   "border-right": {
-    "border-right": "0.1rem solid #fff000"
+    "border-right": "0.1rem solid #E8E8E8"
   },
   "border-right-none": {
     "border-right": "none !important"
   },
   "border-bottom": {
-    "border-bottom": "0.1rem solid #fff000"
+    "border-bottom": "0.1rem solid #E8E8E8"
   },
   "border-bottom-none": {
     "border-bottom": "none !important"
   },
   "border-left": {
-    "border-left": "0.1rem solid #fff000"
+    "border-left": "0.1rem solid #E8E8E8"
   },
   "border-left-none": {
     "border-left": "none !important"
@@ -1141,13 +1141,13 @@
     "border-width": "0.3rem"
   },
   "shadow-1": {
-    "box-shadow": "0 1px 2px 1px color(black_17)"
+    "box-shadow": "0 1px 2px 1px rgna(0,0,0,0.17)"
   },
   "shadow-2": {
-    "box-shadow": "0 2px 6px 0 color(black_17)"
+    "box-shadow": "0 2px 6px 0 rgna(0,0,0,0.17)"
   },
   "shadow-3": {
-    "box-shadow": "0 3px 6px 1px color(black_17)"
+    "box-shadow": "0 3px 6px 1px rgna(0,0,0,0.17)"
   },
   "shadow-high": {
     "box-shadow": "0 4px 10px 0 rgba(22, 22, 22, 0.08)"

@@ -1,6 +1,7 @@
 import {
   keywords,
-  defaultValue
+  defaultValue,
+  colorHex
 } from '../../atomic.config.js';
 
 export const border = {
@@ -13,7 +14,7 @@ export const border = {
     'left': ['left'],
   },
   mobileFirstValues: Object.assign({},
-    defaultValue('0.1rem solid #fff000'),
+    defaultValue(`0.1rem solid ${colorHex('grey-400')}`),
     keywords({ 'none': 'none !important' })
   )
 }
