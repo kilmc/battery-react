@@ -78,7 +78,7 @@ import { textTransform } from './src/atoms/text-transform';
 import { verticalAlign } from './src/atoms/vertical-align';
 import { webkitOverflowScrolling } from './src/atoms/webkit';
 import { whiteSpace } from './src/atoms/white-space';
-import { wordBreak } from './src/atoms/white-break';
+import { wordBreak } from './src/atoms/word-break';
 import { zIndex } from './src/atoms/z-index';
 
 

@@ -2,7 +2,7 @@ import {
   keywords
 } from '../../atomic.config.js';
 
-export const textOverflow = {
+export const wordBreak = {
   props: { 'word': 'word-break' },
   values: keywords({
     'break': 'break-all',
