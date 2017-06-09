@@ -1,6 +1,6 @@
 import {
   scalers
-} from '../atomic.config.js';
+} from '../../atomic.config.js';
 
 export const spacing = {
   props: {

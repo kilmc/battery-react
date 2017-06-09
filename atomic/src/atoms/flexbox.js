@@ -1,7 +1,8 @@
 import {
   integers,
-  keywords
-} from '../atomic.config.js';
+  keywords,
+  percentages
+} from '../../atomic.config.js';
 
 // flex
 // ------------------------------------------------------------------
@@ -31,6 +32,15 @@ export const flexShrink = {
   props: { 'shrink': 'flex-shrink'},
   mobileFirstValues: integers([0,1])
 };
+
+// flex-basis
+// ------------------------------------------------------------------
+
+export const flexBasis = {
+  props: { 'basis': 'flex-basis'},
+  mobileFirstValues: percentages([10, 20, 25, 33, 34, 35, 40, 50, 60, 66, 75, 80, 100])
+};
+
 
 // flex-direction
 // ------------------------------------------------------------------

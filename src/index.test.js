@@ -2,7 +2,9 @@
 import {
   baseCompile,
   baseLengths,
-  baseKeywords
+  baseKeywords,
+  compileMolecules,
+  printClass
 } from '../atomic/battery';
 const config = {
   baseFontSize: 10,
@@ -26,11 +28,14 @@ const config = {
   }
 }
 
-const {
-  breakpointPrefixOrSuffix,
-  breakpointsConfig,
-  breakpointSeparator
-} = config;
+const classJSON = {
+  "fz-14": { "font-size": "1.4rem" },
+  "fz-16": { "font-size": "1.6rem" },
+  "fz-21": { "font-size": "2.1rem" },
+  "lh2": { "line-height": "1.2rem" },
+  "lh3": { "line-height": "1.8rem" },
+  "lh4": { "line-height": "2.4rem" }
+}
 
 const lengths = baseLengths(config)
 const keywords = baseKeywords(config)
@@ -63,3 +68,26 @@ describe('Battery', () => {
     });
   });
 });
+
+
+describe('Molecule', () => {
+  describe('compiler', () => {
+    it('matches snapshot', () => {
+      expect(compileMolecules({
+        'type-14': ['fz-14','lh3'],
+        'type-16': ['fz-16','lh3'],
+        'type-21': ['fz-21','lh4'],
+      }, classJSON)).toMatchSnapshot()
+    });
+  });
+
+  describe('printer', () => {
+    it('matches snapshot', () => {
+      expect(compileMolecules({
+        'type-14': ['fz-14','lh3'],
+        'type-16': ['fz-16','lh3'],
+        'type-21': ['fz-21','lh4'],
+      }, classJSON).map(printClass).join('\n')).toMatchSnapshot()
+    });
+  });
+})

@@ -1,6 +1,6 @@
 import {
   keywords
-} from '../atomic.config.js';
+} from '../../atomic.config.js';
 
 export const display = {
   props: { '': 'display' },
@@ -9,6 +9,7 @@ export const display = {
     'display-inline': 'inline',
     'inline-block': 'inline-block',
     'flex': 'flex',
-    'inline-flex': 'inline-flex'
-  })
+    'inline-flex': 'inline-flex',
+    'hide': 'none'
+  }, '')
 }

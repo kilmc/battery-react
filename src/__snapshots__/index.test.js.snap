@@ -567,3 +567,41 @@ Object {
   ],
 }
 `;
+
+exports[`Molecule compiler matches snapshot 1`] = `
+Array [
+  Object {
+    "type-14": Object {
+      "font-size": "1.4rem",
+      "line-height": "1.8rem",
+    },
+  },
+  Object {
+    "type-16": Object {
+      "font-size": "1.6rem",
+      "line-height": "1.8rem",
+    },
+  },
+  Object {
+    "type-21": Object {
+      "font-size": "2.1rem",
+      "line-height": "2.4rem",
+    },
+  },
+]
+`;
+
+exports[`Molecule printer matches snapshot 1`] = `
+".type-14 {
+font-size: 1.4rem;
+line-height: 1.8rem;
+}
+.type-16 {
+font-size: 1.6rem;
+line-height: 1.8rem;
+}
+.type-21 {
+font-size: 2.1rem;
+line-height: 2.4rem;
+}"
+`;

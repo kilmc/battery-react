@@ -1,13 +1,13 @@
 import {
   keywords
-} from '../atomic.config.js';
+} from '../../atomic.config.js';
 
 export const borderRadius = {
   props: { '': 'border' },
   values: keywords({
     'pill': '200px',
     'circle': '100%'
-  })
+  }, '')
 };
 
 export const borderRadiusFull = {
@@ -28,5 +28,5 @@ export const borderRadiusFull = {
     'rounded': '2px',
     'rounded-medium': '4px',
     'rounded-large': '6px'
-  })
+  },'')
 };

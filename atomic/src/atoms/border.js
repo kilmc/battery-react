@@ -1,7 +1,7 @@
 import {
   keywords,
   defaultValue
-} from '../atomic.config.js';
+} from '../../atomic.config.js';
 
 export const border = {
   props: { 'border': 'border' },
@@ -14,6 +14,6 @@ export const border = {
   },
   mobileFirstValues: Object.assign({},
     defaultValue('0.1rem solid #fff000'),
-    keywords({ 'none': 'none !important' }, '-')
+    keywords({ 'none': 'none !important' })
   )
 }

@@ -1,6 +1,6 @@
 import {
   keywords
-} from '../atomic.config.js';
+} from '../../atomic.config.js';
 
 export const borderWidth = {
   props: { 'border': 'border-width' },
@@ -8,5 +8,5 @@ export const borderWidth = {
     'regular': '0.1rem',
     'medium': '0.2rem',
     'thick': '0.3rem'
-  }, '-')
+  })
 };

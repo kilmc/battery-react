@@ -1,6 +1,6 @@
 import {
   keywords
-} from '../atomic.config.js';
+} from '../../atomic.config.js';
 
 export const clear = {
   props: { '': 'clear' },
@@ -8,5 +8,5 @@ export const clear = {
     'left': 'left',
     'right': 'right',
     'both': 'both'
-  })
+  }, '')
 };

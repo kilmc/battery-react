@@ -2,23 +2,26 @@ import {
   compile,
 } from './atomic.config';
 
-import { spacing } from './src/spacing';
+import { spacing } from './src/atoms/spacing';
 // Background
-import { backgroundColor } from './src/background-color';
-import { backgroundImage } from './src/background-image';
-import { backgroundPosition } from './src/background-position';
-import { backgroundSize } from './src/background-size';
+import { backgroundColor } from './src/atoms/background-color';
+import { backgroundImage } from './src/atoms/background-image';
+import { backgroundPosition } from './src/atoms/background-position';
+import { backgroundSize } from './src/atoms/background-size';
 
 // Border
-import { border } from './src/border';
-import { borderColor } from './src/border-color';
-import { borderWidth } from './src/border-width';
+import { border } from './src/atoms/border';
+import {
+  borderColor,
+  borderColorFocus
+} from './src/atoms/border-color';
+import { borderWidth } from './src/atoms/border-width';
 
 // Border Radius
 import {
   borderRadius,
   borderRadiusFull
-} from './src/border-radius';
+} from './src/atoms/border-radius';
 
 // Flexbox
 import {
@@ -30,19 +33,34 @@ import {
   justifyContent,
   alignContent,
   flexOrder
-} from './src/flexbox'
+} from './src/atoms/flexbox'
 
 // Misc
-import { boxSizing } from './src/box-sizing';
-import { clear } from './src/clear';
-import { textColor } from './src/text-color';
-import { cursor } from './src/cursor';
-import { display } from './src/display';
-import { fillColor } from './src/fill';
-import { pointerEvents } from './src/pointer-events';
-import { float } from './src/float'
-import { fontWeight } from './src/font-weight'
-
+import { boxSizing } from './src/atoms/box-sizing';
+import { clear } from './src/atoms/clear';
+import { textColor } from './src/atoms/color';
+import { cursor } from './src/atoms/cursor';
+import { display } from './src/atoms/display';
+import { fillColor } from './src/atoms/fill';
+import { strokeColor } from './src/atoms/stroke';
+import { pointerEvents } from './src/atoms/pointer-events';
+import { float } from './src/atoms/float'
+import { fontWeight } from './src/atoms/font-weight'
+import { letterSpacing } from './src/atoms/letter-spacing'
+import { lineHeight } from './src/atoms/line-height'
+import { opacity } from './src/atoms/opacity'
+import { overflow } from './src/atoms/overflow'
+import { webkitOverflowScrolling } from './src/atoms/webkit'
+import {
+  position,
+  positionDirections
+} from './src/atoms/position'
+import { boxShadow } from './src/atoms/box-shadow'
+import {
+  height,
+  width,
+  maxWidth
+} from './src/atoms/height-width'
 
 // Compiler
 // ------------------------------------------------------------------
@@ -57,6 +75,7 @@ export const compiled = compile({
   backgroundPosition,
   border,
   borderColor,
+  borderColorFocus,
   borderRadius,
   borderRadiusFull,
   borderWidth,
@@ -64,6 +83,7 @@ export const compiled = compile({
   clear,
   cursor,
   display,
+  strokeColor,
   fillColor,
   flex,
   flexDirection,
@@ -74,7 +94,18 @@ export const compiled = compile({
   justifyContent,
   pointerEvents,
   textColor,
-  spacing
+  letterSpacing,
+  lineHeight,
+  spacing,
+  opacity,
+  overflow,
+  webkitOverflowScrolling,
+  position,
+  positionDirections,
+  boxShadow,
+  height,
+  width,
+  maxWidth
 })
 
 export const molecules = {

@@ -1,10 +1,11 @@
 import {
   colors,
-  keywords
-} from '../atomic.config.js';
+  keywords,
+  allColors
+} from '../../atomic.config.js';
 
 export const textColor = {
   props: { '': 'color' },
-  values: colors(['gray', 'blue', 'orange'],''),
+  values: colors([...allColors],''),
   perScreenValues: keywords({ 'transparent': 'transparent' },'')
 }

@@ -1,6 +1,6 @@
 import {
   keywords
-} from '../atomic.config.js';
+} from '../../atomic.config.js';
 
 export const fontWeight = {
   props: { '': 'font-weight' },
@@ -9,5 +9,5 @@ export const fontWeight = {
     'normal': '400',
     'medium': '500',
     'bold': '700'
-  })
+  }, '')
 }

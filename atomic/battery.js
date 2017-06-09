@@ -99,12 +99,14 @@ const valueObjectFormat = ({
   name,
   value,
   type = 'none',
-  breakpoint = ''
+  breakpoint = '',
+  psuedo = ''
 }) => ({
   valueName: name,
   value: value,
   valueType: type,
-  breakpoint: breakpoint
+  breakpoint: breakpoint,
+  psuedo: psuedo
 });
 
 // valuesCompile
@@ -112,9 +114,14 @@ const valueObjectFormat = ({
 // Iterates over an object and passes each entry to the
 // valueObject formatter.
 
-const valuesCompile = (values, breakpoint, type = 'none') =>
+const valuesCompile = ({
+  values,
+  breakpoint,
+  type = 'none',
+  psuedo = ''
+}) =>
   Object.entries(values).map(([name, value]) =>
-    valueObjectFormat({ name, value, type, breakpoint })
+    valueObjectFormat({ name, value, type, breakpoint, psuedo })
   );
 
 // propsCompile
@@ -150,9 +157,47 @@ export const propsValuesMerge = (props, values) =>
   props.flatMap(prop => values.map(value => ({ ...prop, ...value })))
 
 
-
-// Print Atom
 // ------------------------------------------------------------------
+// C L A S S  P R I N T E R
+// ------------------------------------------------------------------
+
+// printProps
+// ------------------------------------------------------------------
+// Creates a formatted block of CSS property and value sets as a
+// string which can be passed to a another to printClass to finish
+// formatting
+
+export const printProps = (classObj, multiple) => {
+  return Object.entries(classObj[Object.keys(classObj)])
+    .map(([prop, value]) =>
+      multiple ? `\n${prop}: ${value};` : `${prop}: ${value}`)
+    .join('');
+};
+
+// printClass
+// ------------------------------------------------------------------
+// Creates a formatted block of classes in a string which can be
+// passed to a another function to render it into a CSS file.
+
+export const printClass = classObj => {
+  const multiple = Object.keys(classObj[Object.keys(classObj)]).length > 1;
+  const className = Object.keys(classObj);
+
+  let renderedClass;
+  if (multiple) {
+    renderedClass = `.${className} {${printProps(classObj, multiple)}\n}`;
+  } else {
+    renderedClass = `.${className} { ${printProps(classObj, multiple)} }`;
+  }
+  return renderedClass;
+};
+
+// printClasses
+// ------------------------------------------------------------------
+// Run through a
+
+export const printClasses = (allClasses) =>
+  allClasses.map(classObj => printClass(classObj)).join('\n');
 
 // printAtom
 // ------------------------------------------------------------------
@@ -177,6 +222,7 @@ export const basePrintAtom = config => obj => {
   // breakpointsConfig to be used to compile mobileFirst media queries
 
   const mobileFirstBreakpoints = perScreenBreakpoints.slice(1);
+
   // mobileFirstQueries
   // ------------------------------------------------------------------
   // Creates an object with mobileFirst media query params
@@ -204,9 +250,8 @@ export const basePrintAtom = config => obj => {
     let count = 0;
     max.map(bp => {
       count++;
-      allQueries[
-        bp
-      ] += `(max-width: ${breakpointsConfig[perScreenBreakpoints[count]] - 1}px)`;
+      allQueries[bp] +=
+        `(max-width: ${breakpointsConfig[perScreenBreakpoints[count]] - 1}px)`;
     });
 
     both.map(bp => {
@@ -214,51 +259,6 @@ export const basePrintAtom = config => obj => {
     });
 
     return allQueries;
-  };
-
-  // printProps
-  // ------------------------------------------------------------------
-  // Creates a formatted block of CSS property and value sets as a
-  // string which can be passed to a another to printClass to finish
-  // formatting
-
-  const printProps = (classObj, multiple) => {
-    return String(
-      Object.entries(classObj[Object.keys(classObj)]).map(
-        ([prop, value]) =>
-          multiple ? `\t${prop}: ${value};\n` : `${prop}: ${value}`
-      )
-    )
-      .replace(',', '')
-      .trim();
-  };
-
-  // printClass
-  // ------------------------------------------------------------------
-  // Creates a formatted block of classes in a string which can be
-  // passed to a another function to render it into a CSS file.
-
-  const printClass = classObj => {
-    const multiple = Object.keys(classObj[Object.keys(classObj)]).length > 1;
-    const className = Object.keys(classObj);
-
-    let renderedClass;
-    if (multiple) {
-      renderedClass = `.${className} {\n\t${printProps(classObj, multiple)}\n}\n`;
-    } else {
-      renderedClass = `.${className} { ${printProps(classObj, multiple)} }`;
-    }
-    return renderedClass;
-  };
-
-  // printClasses
-  // ------------------------------------------------------------------
-  // Run through a
-  const printClasses = allClasses => {
-    return String(allClasses.map(classObj => printClass(classObj))).replace(
-      /,/g,
-      '\n'
-    );
   };
 
   // printBreakpoint
@@ -271,28 +271,21 @@ export const basePrintAtom = config => obj => {
   // printMobileFirst
   // ------------------------------------------------------------------
 
-  const printMobileFirst = obj => {
-    return String(
-      Object.entries(obj).map(([bp, classObjs]) =>
-        printBreakpoint([bp, classObjs], mobileFirstQueries)
-      )
-    );
-  };
+  const printMobileFirst = obj => Object.entries(obj)
+    .map(([bp, classObjs]) =>
+      printBreakpoint([bp, classObjs], mobileFirstQueries))
+    .join('\n');
 
   // printPerScreen
   // ------------------------------------------------------------------
 
-  const printPerScreen = obj => {
-    return String(
-      Object.entries(obj).map(([bp, cxs]) =>
-        printBreakpoint([bp, cxs], perScreenQueries())
-      )
-    );
-  };
+  const printPerScreen = obj => Object.entries(obj)
+    .map(([bp, cxs]) =>
+      printBreakpoint([bp, cxs], perScreenQueries()))
+    .join('\n');
 
-  const allValues = Object.keys(obj).map(propGroup => {
-    return printClasses(obj[propGroup].values.all);
-  });
+  const allValues = Object.keys(obj)
+    .map(propGroup => printClasses(obj[propGroup].values.all));
 
   const allMobileFirst = Object.keys(obj).map(
     propGroup => obj[propGroup].mobileFirstValues
@@ -310,11 +303,10 @@ export const basePrintAtom = config => obj => {
         printPerScreen(obj[propGroup].perScreenValues)
       );
 
-  return String(
-    allValues
-    .concat('\n', allMobileFirst)
+  return allValues
+    .concat(allMobileFirst)
     .concat(allPerScreen)
-  ).replace(/,@/g, '\n@');
+    .join('\n');
 };
 
 
@@ -348,11 +340,16 @@ export const baseCompile = config => atoms => {
     props,
     valueName,
     value,
-    breakpoint = ''
+    breakpoint = '',
+    psuedo = ''
   }) => {
     let baseClassName = `${propName}${valueName}`;
     if (breakpoint !== '') {
       baseClassName = breakpointClassFormat(baseClassName, breakpoint);
+    }
+
+    if (psuedo !== '') {
+      baseClassName += `:${psuedo}`
     }
     return {
       [`${baseClassName}`]: Object.assign(
@@ -368,11 +365,15 @@ export const baseCompile = config => atoms => {
   // Converts a list of props, values and breakpoints into a set of
   // breakpoint specific arrays with breakpoint namespaced classes
 
-  const breakpointsClassCompile = ({ prop, values, breakpoints }) => {
+  const breakpointsClassCompile = ({ prop, values, breakpoints, psuedo }) => {
     return values === undefined
       ? []
-      : breakpoints.reduce((obj, bp) => {
-          obj[bp] = propsValuesMerge(prop, valuesCompile(values, bp)).map(
+      : breakpoints.reduce((obj, breakpoint) => {
+          obj[breakpoint] = propsValuesMerge(prop, valuesCompile({
+            values,
+            breakpoint,
+            psuedo
+          })).map(
             classCompile
           );
           return obj;
@@ -404,11 +405,18 @@ export const baseCompile = config => atoms => {
     props,
     propSeparator = '',
     subProps = {},
+    subPropSeparator = '',
+    psuedo = '',
     values = [],
     mobileFirstValues,
     perScreenValues
   }) => {
-    const propGroups = propsCompile({ props, propSeparator, subProps });
+    const propGroups = propsCompile({
+      props,
+      propSeparator,
+      subProps,
+      subPropSeparator
+    });
 
     return Object.assign(
       ...Object.entries(props).map(([propName, prop]) => ({
@@ -416,18 +424,23 @@ export const baseCompile = config => atoms => {
           values: {
             all: propsValuesMerge(
               propGroups[prop],
-              valuesCompile(Object.assign(values, mobileFirstValues))
+              valuesCompile({
+                values: Object.assign(values, mobileFirstValues),
+                psuedo
+              })
             ).map(classCompile)
           },
           mobileFirstValues: breakpointsClassCompile({
             prop: propGroups[prop],
             values: mobileFirstValues,
-            breakpoints: mobileFirstBreakpoints
+            breakpoints: mobileFirstBreakpoints,
+            psuedo
           }),
           perScreenValues: breakpointsClassCompile({
             prop: propGroups[prop],
             values: perScreenValues,
-            breakpoints: perScreenBreakpoints
+            breakpoints: perScreenBreakpoints,
+            psuedo
           })
         }
       }))
@@ -444,6 +457,7 @@ export const baseCompile = config => atoms => {
     propSeparator = '',
     subProps = {},
     subPropSeparator = '',
+    psuedo = '',
     values = [],
     mobileFirstValues = [],
     perScreenValues = []
@@ -458,22 +472,32 @@ export const baseCompile = config => atoms => {
     return Object.entries(props).flatMap(([propName, prop]) =>
       propsValuesMerge(
         propGroups[prop],
-        valuesCompile(Object.assign(values, mobileFirstValues))
+        valuesCompile({
+          values: Object.assign(values, mobileFirstValues)
+        })
       )
         .map(classCompile)
         .concat(
-          ...mobileFirstBreakpoints.map(bp =>
+          ...mobileFirstBreakpoints.map(breakpoints =>
             propsValuesMerge(
               propGroups[prop],
-              valuesCompile(mobileFirstValues, bp)
+              valuesCompile({
+                values: mobileFirstValues,
+                breakpoints,
+                psuedo
+              })
             ).map(classCompile)
           )
         )
         .concat(
-          ...perScreenBreakpoints.map(bp =>
+          ...perScreenBreakpoints.map(breakpoints =>
             propsValuesMerge(
               propGroups[prop],
-              valuesCompile(perScreenValues, bp)
+              valuesCompile({
+                values: perScreenValues,
+                breakpoints,
+                psuedo
+              })
             ).map(classCompile)
           )
         )
@@ -487,17 +511,8 @@ export const baseCompile = config => atoms => {
   return { css: atomicCSS, JSON: atomicJSON };
 };
 
-export const classJSON = {
-  "fz-14": { "font-size": "1.4rem" },
-  "fz-16": { "font-size": "1.6rem" },
-  "fz-21": { "font-size": "2.1rem" },
-  "lh2": { "line-height": "1.2rem" },
-  "lh3": { "line-height": "1.8rem" },
-  "lh4": { "line-height": "2.4rem" }
-}
 
 export const compileMolecules = (obj, JSONObject) => {
-  console.log(JSONObject)
   return Object.keys(obj)
     .flatMap(x => (
       { [x]: Object.assign({}, ...obj[x].map(y => JSONObject[y]))}

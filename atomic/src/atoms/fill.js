@@ -1,9 +1,10 @@
 import {
-  colors
-} from '../atomic.config.js';
+  colors,
+  allColors
+} from '../../atomic.config.js';
 
 export const fillColor = {
   props: { 'fill': 'fill' },
-  values: colors(['gray', 'blue', 'orange']),
+  values: colors([...allColors]),
   perScreenValues: colors(['transparent'])
 };

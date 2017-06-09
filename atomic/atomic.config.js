@@ -120,7 +120,7 @@ export const config = {
   },
 
   negativeValueIndicator: '-',
-  keywordValueSeparator: '',
+  keywordValueSeparator: '-',
   lengthValueSeparator: '',
   integerValueSeparator: '-',
   colorValueSeparator: '-',
@@ -219,12 +219,12 @@ export const scalers = (units, negative = false) => lengths({
 });
 
 // Percentages
-export const opacities = (units, negative = false) => lengths({
+export const opacities = (units, negative = '') => lengths({
   values: units,
   valueConverters: [opacify],
-  lengthUnit: '%',
+  lengthUnit: '',
   unitIndicator: "p",
-  negative: negative
+  negative: negative === 'negative' ? true : false
 });
 
 
