@@ -8,7 +8,8 @@
     "postcss": "^6.0.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "stylefmt": "^6.0.0"
+    "stylefmt": "^6.0.0",
+    "watchpack": "^1.3.1"
   },
   "devDependencies": {
     "autoprefixer": "6.7.2",
@@ -52,6 +53,7 @@
     "whatwg-fetch": "2.0.2"
   },
   "scripts": {
+    "watch": "NODE_ENV=development babel-node scripts/watch.js",
     "start": "NODE_ENV=development babel-node scripts/start.js",
     "build": "node scripts/build.js",
     "molecules": "NODE_ENV=development babel-node scripts/molecules.js",
