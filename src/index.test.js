@@ -4,7 +4,8 @@ import {
   baseLengths,
   baseKeywords,
   compileMolecules,
-  printClass
+  printClass,
+  test
 } from '../atomic/battery';
 const config = {
   baseFontSize: 10,
@@ -27,6 +28,7 @@ const config = {
     lg: 1100
   }
 }
+
 
 const classJSON = {
   "fz-14": { "font-size": "1.4rem" },
@@ -53,7 +55,9 @@ describe('Battery', () => {
     it('matches snapshot', () => {
       expect(compile({
         backgroundSize: {
-        props: { 'bg': 'background-size' },
+        props: {
+          'bg': 'background-size',
+        },
         mobileFirstValues: Object.assign({},
           keywords({
             'cover': 'cover',
@@ -66,6 +70,31 @@ describe('Battery', () => {
       }
       })).toMatchSnapshot()
     });
+  });
+});
+
+describe('border properties are correctly split', () => {
+  it('matches snapshot', () => {
+    expect(compile({
+      props: { '': 'border-radius' },
+      subProps: {
+        'top': ['top-left','top-right'],
+        'right': ['top-right','bottom-right'],
+        'bottom': ['bottom-left','bottom-right'],
+        'left': ['top-left','bottom-left'],
+        'top-right': ['top-right'],
+        'bottom-right': ['bottom-right'],
+        'top-left': ['top-left'],
+        'bottom-left': ['bottom-left']
+      },
+      subPropSeparator: '-',
+      values: keywords({
+        'no-radius': '0',
+        'rounded': '2px',
+        'rounded-medium': '4px',
+        'rounded-large': '6px'
+      },'')
+    })).toMatchSnapshot()
   });
 });
 

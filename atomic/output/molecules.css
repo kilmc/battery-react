@@ -1,11 +1,10 @@
 .bttn {
-border-radius: 2px;
+border: none !important;
 font-weight: 500;
 text-align: center;
 line-height: 1;
 cursor: pointer;
 background-color: #FFFFFF;
-border: none !important;
 position: relative;
 display: inline-block;
 -webkit-appearance: none;

@@ -156,7 +156,6 @@ const scaler = battery.baseScaler(config)
 const opacify = battery.baseOpacify
 const lengths = battery.baseLengths(config)
 
-
 // Value Functions
 // ------------------------------------------------------------------
 

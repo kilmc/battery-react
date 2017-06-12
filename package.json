@@ -54,7 +54,7 @@
   },
   "scripts": {
     "watch": "NODE_ENV=development babel-node scripts/watch.js",
-    "start": "NODE_ENV=development babel-node scripts/start.js",
+    "compile": "NODE_ENV=development babel-node scripts/compile.js",
     "build": "node scripts/build.js",
     "molecules": "NODE_ENV=development babel-node scripts/molecules.js",
     "test": "node scripts/test.js --env=jsdom"

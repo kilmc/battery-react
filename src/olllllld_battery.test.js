@@ -2,8 +2,9 @@
 import {
  compile,
  classJSON,
- molecule
-} from './battery';
+ molecule,
+ propsCompile
+} from '../atomic/battery';
 
 describe('Molecule', () => {
   it('matches snapshot', () => {
@@ -71,20 +72,38 @@ describe('Molecule', () => {
 //     });
 //   });
 
-//   describe('propsCompile', () => {
-//     it('matches snapshot', () => {
-//       expect(propsCompile({
-//         props: {
-//           'p': 'padding',
-//           'm': 'margin'
-//         },
-//         subProps: {
-//           't': ['top'],
-//           'x': ['right', 'left']
-//         }
-//       })).toMatchSnapshot()
-//     });
-//   });
+  describe('propsCompile regular', () => {
+    it('matches snapshot', () => {
+      expect(propsCompile({
+        props: {
+          'p': 'padding',
+          'm': 'margin'
+        },
+        subProps: {
+          't': ['top'],
+          'x': ['right', 'left']
+        }
+      })).toMatchSnapshot()
+    });
+  });
+
+  describe('propsCompile border', () => {
+    it('matches snapshot', () => {
+      expect(propsCompile({
+        props: { '': 'border-radius' },
+        subProps: {
+          'top': ['top-left','top-right'],
+          'right': ['top-right','bottom-right'],
+          'bottom': ['bottom-left','bottom-right'],
+          'left': ['top-left','bottom-left'],
+          'top-right': ['top-right'],
+          'bottom-right': ['bottom-right'],
+          'top-left': ['top-left'],
+          'bottom-left': ['bottom-left']
+        }
+      })).toMatchSnapshot()
+    });
+  });
 
 //   describe('propsValuesMerge', () => {
 //     it('matches expectations', () => {

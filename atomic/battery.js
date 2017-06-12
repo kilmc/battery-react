@@ -76,7 +76,7 @@ export const baseIntegers = config => (
 
 export const baseKeywords = config => (
   obj,
-  separator = config.keywordValueSeparator
+  separator = config.keywordValueSeparator || ''
 ) => {
   const newKey = key => separator.concat(key);
   return Object.assign(
@@ -95,7 +95,7 @@ export const defaultValue = str => ({ '': str });
 // ------------------------------------------------------------------
 // Formats input as a valueObject
 
-const valueObjectFormat = ({
+export const valueObjectFormat = ({
   name,
   value,
   type = 'none',
@@ -114,7 +114,7 @@ const valueObjectFormat = ({
 // Iterates over an object and passes each entry to the
 // valueObject formatter.
 
-const valuesCompile = ({
+export const valuesCompile = ({
   values,
   breakpoint,
   type = 'none',
@@ -129,24 +129,32 @@ const valuesCompile = ({
 // Converts a propsConfig object into an array containing objects
 // correctly formatted to be merged with a valueObject
 
-const propsCompile = ({
+export const propsCompile = ({
   props,
   subProps = {},
   propSeparator = '',
   subPropSeparator = '',
-  root = true
-}) =>
-  Object.assign(
+  includeShorthand = true
+}) => {
+  const formatBorderSubProps = (prop,sp) => {
+    let fullProp = prop.split(/-/);
+    fullProp.splice(1,0,sp)
+    return fullProp.join('-')
+  }
+  return Object.assign(
     ...Object.entries(props).map(([propName, prop]) => ({
       [prop]: [
-        root ? { propName: propName, props: [prop] } : {},
+        includeShorthand ? { propName: propName, props: [prop] } : {},
         ...Object.entries(subProps).map(([subPropName, subProps]) => ({
           propName: `${propName}${propSeparator}${subPropName}${subPropSeparator}`,
-          props: subProps.map(sp => `${prop}-${sp}`)
+          props: subProps.map(sp =>
+            prop.includes('border-')
+            ? formatBorderSubProps(prop,sp)
+            : `${prop}-${sp}`)
         }))
       ]
     }))
-  );
+  )};
 
 // propsValuesMerge
 // ------------------------------------------------------------------
@@ -156,7 +164,6 @@ const propsCompile = ({
 export const propsValuesMerge = (props, values) => {
   return props.flatMap(prop => values.map(value => ({ ...prop, ...value })))
 }
-
 
 
 // ------------------------------------------------------------------
@@ -245,6 +252,7 @@ export const basePrintAtom = config => obj => {
     const min = perScreenBreakpoints.slice(1);
     const max = perScreenBreakpoints.slice(0, -1);
     const both = min.filter(n => max.indexOf(n) !== -1)
+
     const allQueries = Object.keys(breakpointsConfig).reduce((accum, bp) => {
       accum[bp] = '';
       return accum;
@@ -371,18 +379,18 @@ export const baseCompile = config => atoms => {
   // breakpoint specific arrays with breakpoint namespaced classes
 
   const breakpointsClassCompile = ({ prop, values, breakpoints, psuedo }) => {
-    return values === undefined
-      ? []
-      : breakpoints.reduce((obj, breakpoint) => {
-          obj[breakpoint] = propsValuesMerge(prop, valuesCompile({
-            values,
-            breakpoint,
-            psuedo
-          })).map(
-            classCompile
-          );
-          return obj;
-        }, {});
+    if (values === undefined) { return [] }
+
+    return breakpoints.reduce((obj, breakpoint) => {
+      obj[breakpoint] = propsValuesMerge(prop, valuesCompile({
+        values,
+        breakpoint,
+        psuedo
+      })).map(
+        classCompile
+      );
+      return obj;
+    }, {});
   };
 
   // perScreenBreakpoints
@@ -521,3 +529,5 @@ export const compileMolecules = (obj, JSONObject) => {
       { [x]: Object.assign({}, ...obj[x].map(y => JSONObject[y]))}
     ))
 }
+
+
