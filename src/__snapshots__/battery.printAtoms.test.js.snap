@@ -1,0 +1,86 @@
+exports[`mobileFirstQueries matches snapshot 1`] = `
+Object {
+  "lg": "(min-width: 1100px)",
+  "md": "(min-width: 900px)",
+  "sm": "(min-width: 600px)",
+}
+`;
+
+exports[`perScreenQueries matches snapshot 1`] = `
+Object {
+  "lg": "(min-width: 1100px)",
+  "md": "(min-width: 900px) and (max-width: 1099px)",
+  "sm": "(min-width: 600px) and (max-width: 899px)",
+  "xs": "(max-width: 599px)",
+}
+`;
+
+exports[`printBreakpoint matches snapshot 1`] = `
+"@media (min-width: 600px) {
+.rounded { border-radius: 0.2rem }
+.rounded-medium { border-radius: 0.4rem }
+}
+"
+`;
+
+exports[`printClass multiple props matches snapshot 1`] = `
+".mx2 {
+margin-top: 1.2rem;
+margin-bottom: 1.2rem;
+}"
+`;
+
+exports[`printClass single prop matches snapshot 1`] = `".rounded { border-radius: 0.2rem }"`;
+
+exports[`printClasses matches snapshot 1`] = `
+".rounded { border-radius: 0.2rem }
+.top-rounded {
+border-top-right-radius: 0.2rem;
+border-top-left-radius: 0.2rem;
+}"
+`;
+
+exports[`printMobileFirst matches snapshot 1`] = `
+"@media (min-width: 600px) {
+.block-sm { display: block }
+.inline-sm { display: inline }
+}
+
+@media (min-width: 900px) {
+.block-md { display: block }
+.inline-md { display: inline }
+}
+
+@media (min-width: 1100px) {
+.block-lg { display: block }
+.inline-lg { display: inline }
+}
+"
+`;
+
+exports[`printPerScreen matches snapshot 1`] = `
+"@media (max-width: 599px) {
+.hide-xs { display: none }
+}
+
+@media (min-width: 600px) and (max-width: 899px) {
+.hide-sm { display: none }
+}
+
+@media (min-width: 900px) and (max-width: 1099px) {
+.hide-md { display: none }
+}
+
+@media (min-width: 1100px) {
+.hide-lg { display: none }
+}
+"
+`;
+
+exports[`printProps multiple props matches snapshot 1`] = `
+"
+padding-top: 2.4rem;
+padding-bottom: 2.4rem;"
+`;
+
+exports[`printProps single prop matches snapshot 1`] = `"display: block"`;
