@@ -10,7 +10,7 @@ import {
   printMobileFirst,
   printPerScreen,
   // basePrintAtom
-} from './battery.printAtoms';
+} from './printer';
 
 const breakpointsConfig = {
   xs: 0,

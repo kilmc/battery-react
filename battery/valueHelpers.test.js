@@ -3,14 +3,14 @@
 import {
   baseRemify,
   baseScaler,
-  baseOpacify,
+  opacify,
   baseColorHex,
   baseLengths,
   baseColors,
   baseIntegers,
   baseKeywords,
   defaultValue
-} from './battery.valueHelpers';
+} from './valueHelpers';
 
 const config = {
   baseFontSize: 10,
@@ -23,7 +23,6 @@ const config = {
 
 const remify = baseRemify(config);
 const scale = baseScaler(config);
-const opacify = baseOpacify;
 const colorHex = baseColorHex(config);
 
 const lengths = baseLengths(config);

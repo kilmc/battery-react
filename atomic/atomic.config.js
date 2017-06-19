@@ -1,4 +1,4 @@
-import * as battery from './battery';
+import * as battery from '../battery';
 
 // ------------------------------------------------------------------
 // Core Config
@@ -144,8 +144,8 @@ export const config = {
   outputChangelog: true
 };
 
-export const compile = battery.baseCompile(config);
-export const printAtom = battery.basePrintAtom(config);
+export const compile = battery.baseCompileAtoms(config);
+export const printAtom = battery.basePrintAtoms(config);
 
 // ------------------------------------------------------------------
 // Base Value Helper Functions
@@ -153,7 +153,7 @@ export const printAtom = battery.basePrintAtom(config);
 
 const remify = battery.baseRemify(config)
 const scaler = battery.baseScaler(config)
-const opacify = battery.baseOpacify
+const opacify = battery.opacify
 const lengths = battery.baseLengths(config)
 
 // Value Functions

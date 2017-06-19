@@ -1,11 +1,11 @@
 import {
   compose,
   identity
-} from './battery.utils';
+} from './utils';
 
 export const baseRemify = config => x => x / config.baseFontSize;
 export const baseScaler = config => x => x * config.baseUnit;
-export const baseOpacify = x => x / 100;
+export const opacify = x => x / 100;
 export const baseColorHex = config => name => config.systemColors[name];
 
 // lengths

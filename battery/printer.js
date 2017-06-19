@@ -1,3 +1,5 @@
+import { compileMolecules } from './compiler.js'
+
 // ------------------------------------------------------------------
 // C L A S S  P R I N T E R
 // ------------------------------------------------------------------
@@ -112,7 +114,7 @@ export const printPerScreen = (obj, inPerScreenQueries) => Object.entries(obj)
 // printAtom
 // ------------------------------------------------------------------
 
-export const basePrintAtom = config => obj => {
+export const basePrintAtoms = config => obj => {
   const {
     breakpointsConfig,
   } = config;
@@ -155,4 +157,8 @@ export const basePrintAtom = config => obj => {
     .concat(allMobileFirst)
     .concat(allPerScreen)
     .join('\n');
+};
+
+export const printMolecules = (obj, JSONObject) => {
+  return compileMolecules(obj, JSONObject).map(printClass).join('\n')
 };

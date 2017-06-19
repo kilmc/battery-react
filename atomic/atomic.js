@@ -28,20 +28,6 @@ import { cursor } from './src/atoms/cursor';
 import { display } from './src/atoms/display';
 import { fillColor } from './src/atoms/fill';
 
-// import {
-//   flex,
-//   flexGrow,
-//   flexShrink,
-//   flexBasis,
-//   flexDirection,
-//   flexWrap,
-//   alignItems,
-//   alignSelf,
-//   justifyContent,
-//   alignContent,
-//   flexOrder
-// } from './src/atoms/flexbox';
-
 import * as Flex from './src/atoms/flexbox';
 
 import { float } from './src/atoms/float';
