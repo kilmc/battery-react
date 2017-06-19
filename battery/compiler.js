@@ -1,3 +1,6 @@
+import entries from 'object.entries';
+Object.entries = entries;
+
 Array.prototype.flatMap = function(fn) {
   return this.map(fn).reduce((xs, x) => xs.concat(x), []);
 };
