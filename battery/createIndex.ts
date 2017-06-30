@@ -1,16 +1,16 @@
 const path = require('path');
 const cc = require('change-case');
 
-export const printImport = (filepath) => {
+export const printImport = (filepath: string) => {
   const filename = path.basename(filepath, '.js')
   return `import * as ${cc.pascal(filename)} from './src/atoms/${filename}';`;
 }
 
-export const createIndex = (arr) => {
+export const createIndex = (arr: string[]) => {
   return arr.map(printImport)
 }
 
-export const printCompile = (arr) => {
+export const printCompile = (arr: string[]) => {
   const compileList = arr.map(x =>  path.basename(x, '.js'))
     .map(x => cc.pascalCase(x))
     .map(x => '...' + x)

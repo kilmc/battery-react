@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`mobileFirstQueries matches snapshot 1`] = `
 Object {
   "lg": "(min-width: 1100px)",
