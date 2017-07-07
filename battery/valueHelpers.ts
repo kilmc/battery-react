@@ -1,6 +1,10 @@
 import { squash, identity } from './utils';
 
-interface Config {
+export interface BreakpointsConfig {
+  [key: string]: number;
+}
+
+export interface Config {
   baseFontSize: number;
   baseUnit: number;
   systemColors: { [key: string]: string };
@@ -11,7 +15,7 @@ interface Config {
   colorValueSeparator: string;
   breakpointPrefixOrSuffix: 'prefix' | 'suffix';
   breakpointSeparator: string;
-  breakpointsConfig: { [key: string]: number };
+  breakpointsConfig: BreakpointsConfig;
   outputGzippedCSS: boolean;
   outputJSON: boolean;
   outputDocs: boolean;
