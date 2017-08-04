@@ -1,15 +1,12 @@
-import {
-  colors,
-  allColors
-} from '../../atomic.config.js';
+import { colors, allColors } from '../../atomic.config.js';
 
 export const borderColor = {
-  props: { 'border': 'border-color' },
+  props: { border: 'border-color' },
   values: colors([...allColors])
-}
+};
 
 export const borderColorFocus = {
   props: { 'border-focused': 'border-color' },
-  psuedo: 'focus',
+  pseudo: 'focus',
   values: colors([...allColors])
-}
+};

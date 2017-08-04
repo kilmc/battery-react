@@ -174,7 +174,7 @@ export const basePrintAtoms = (config: Config) => (obj: Atoms) => {
   );
 
   const allMobileFirst =
-    obj[Object.keys(obj)[0]].length === 0
+    Object.keys(obj[Object.keys(obj)[0]].mobileFirstValues).length === 0
       ? ''
       : Object.keys(obj).map(propGroup =>
           inPrintMobileFirst(
@@ -184,7 +184,7 @@ export const basePrintAtoms = (config: Config) => (obj: Atoms) => {
         );
 
   const allPerScreen =
-    Object.keys(obj).map(propGroup => obj[propGroup].perScreenValues) === [[]]
+    Object.keys(obj[Object.keys(obj)[0]].perScreenValues).length === 0
       ? ''
       : Object.keys(obj).map(propGroup =>
           inPrintPerScreen(obj[propGroup].perScreenValues, inPerScreenQueries)

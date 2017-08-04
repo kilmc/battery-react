@@ -1,11 +1,9 @@
-import {
-  keywords
-} from '../../atomic.config.js';
+import { keywords } from '../../atomic.config.js';
 
 export const outline = {
-  props: { 'outline': 'outline' },
-  psuedo: 'focus',
+  props: { outline: 'outline' },
+  pseudo: 'focus',
   values: keywords({
-    'none': 'none'
+    none: 'none'
   })
 };

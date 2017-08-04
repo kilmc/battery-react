@@ -1958,7 +1958,7 @@ Array [
 exports[`valueObjectFormat matches snapshot 1`] = `
 Object {
   "breakpoint": "sm",
-  "psuedo": "",
+  "pseudo": "",
   "value": "1.2rem",
   "valueName": undefined,
   "valueType": "none",
@@ -1969,21 +1969,21 @@ exports[`valuesCompile with all config options matches snapshot 1`] = `
 Array [
   Object {
     "breakpoint": "sm",
-    "psuedo": "hover",
+    "pseudo": "hover",
     "value": "#FF0099",
     "valueName": "hot-pink",
     "valueType": "color",
   },
   Object {
     "breakpoint": "sm",
-    "psuedo": "hover",
+    "pseudo": "hover",
     "value": "#0000FF",
     "valueName": "blue",
     "valueType": "color",
   },
   Object {
     "breakpoint": "sm",
-    "psuedo": "hover",
+    "pseudo": "hover",
     "value": "#FF0000",
     "valueName": "red",
     "valueType": "color",
@@ -1995,28 +1995,28 @@ exports[`valuesCompile with values only matches snapshot 1`] = `
 Array [
   Object {
     "breakpoint": "",
-    "psuedo": "",
+    "pseudo": "",
     "value": "block",
     "valueName": "block",
     "valueType": "none",
   },
   Object {
     "breakpoint": "",
-    "psuedo": "",
+    "pseudo": "",
     "value": "inline",
     "valueName": "display-inline",
     "valueType": "none",
   },
   Object {
     "breakpoint": "",
-    "psuedo": "",
+    "pseudo": "",
     "value": "inline-block",
     "valueName": "inline-block",
     "valueType": "none",
   },
   Object {
     "breakpoint": "",
-    "psuedo": "",
+    "pseudo": "",
     "value": "flex",
     "valueName": "flex",
     "valueType": "none",
