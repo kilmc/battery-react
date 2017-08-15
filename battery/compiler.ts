@@ -1,6 +1,8 @@
 // map     :: [A] ~> (A ->  B ) -> [B]
 // flatMap :: [A] ~> (A -> [B]) -> [B]
 
+import { Config } from './valueHelpers';
+
 declare global {
   interface Array<T> {
     flatMap<B>(fn: (x: T) => B[]): Array<B>;
@@ -26,15 +28,15 @@ interface ValueObject {
   value: string;
   type: string;
   breakpoint: string;
-  pseudo: Pseudo;
+  pseudo?: Pseudo;
 }
 
 interface FormattedValueObject {
   valueName: string;
   value: string;
-  valueType: string;
-  breakpoint: string;
-  pseudo: Pseudo;
+  valueType?: string;
+  breakpoint?: string;
+  pseudo?: Pseudo;
 }
 
 export const valueObjectFormat = ({
@@ -77,18 +79,18 @@ export const valuesCompile = ({
 // correctly formatted to be merged with a valueObject
 
 export const propsCompile = ({
-  props = {},
+  props,
   subProps = {},
   propSeparator = '',
   subPropSeparator = '',
   includeShorthand = true
 }: {
   props: { [key: string]: string };
-  subProps: { [key: string]: string[] };
-  propSeparator: string;
-  subPropSeparator: string;
+  subProps?: { [key: string]: string[] };
+  propSeparator?: string;
+  subPropSeparator?: string;
   includeShorthand?: boolean;
-}) => {
+}): { [key: string]: PropsObject[] } => {
   const formatBorderSubProps = (prop: string, sp: string) => {
     let fullProp = prop.split(/-/);
     fullProp.splice(1, 0, sp);
@@ -137,8 +139,8 @@ export const propsValuesMerge = (
 // the user config.
 
 export const breakpointClassFormat = (
-  bpPosition: 'prefix' | 'suffix',
-  separator: string
+  bpPosition: 'prefix' | 'suffix' = 'prefix',
+  separator: string = '-'
 ) => (baseClass: string, breakpoint: string) =>
   bpPosition === 'suffix'
     ? baseClass + separator + breakpoint
@@ -258,9 +260,9 @@ export const atomTree = (
     subProps = {},
     subPropSeparator = '',
     pseudo = '',
-    values = {}, // TODO: Is it necessary?
-    mobileFirstValues,
-    perScreenValues
+    values = {},
+    mobileFirstValues = {},
+    perScreenValues = {}
   }: {
     props: { [key: string]: string };
     propSeparator?: string;
@@ -271,7 +273,7 @@ export const atomTree = (
     mobileFirstValues?: { [key: string]: string };
     perScreenValues?: { [key: string]: string };
   },
-  config: { [key: string]: string }
+  config: Config
 ) => {
   const propGroups = propsCompile({
     props,
@@ -290,7 +292,13 @@ export const atomTree = (
               values: Object.assign({}, values, mobileFirstValues),
               pseudo
             })
-          ).map(classCompile)
+          ).map(x =>
+            classCompile(
+              x,
+              config.breakpointPrefixOrSuffix,
+              config.breakpointSeparator
+            )
+          )
         },
         mobileFirstValues: breakpointsClassCompile(
           {
@@ -329,11 +337,20 @@ export const atomList = (
     subProps = {},
     subPropSeparator = '',
     pseudo = '',
-    values = [],
-    mobileFirstValues = [],
-    perScreenValues = []
+    values = {},
+    mobileFirstValues = {},
+    perScreenValues = {}
+  }: {
+    props: { [key: string]: string };
+    propSeparator?: string;
+    subProps?: { [key: string]: string[] };
+    subPropSeparator?: string;
+    pseudo?: Pseudo;
+    values?: { [key: string]: string };
+    mobileFirstValues?: { [key: string]: string };
+    perScreenValues?: { [key: string]: string };
   },
-  config
+  config: Config
 ) => {
   const propGroups = propsCompile({
     props,
@@ -409,8 +426,15 @@ export const baseCompileAtoms = config => atoms => {
   return { css: atomicCSS, JSON: atomicJSON };
 };
 
-export const compileMolecules = (obj, JSONObject) => {
-  return Object.keys(obj).flatMap(x => ({
-    [x]: Object.assign({}, ...obj[x].map(y => JSONObject[y]))
-  }));
+export const compileMolecules = (
+  obj: { [key: string]: string[] },
+  // tslint:disable-next-line:no-any
+  JSONObject: any
+) => {
+  return Object.keys(obj).flatMap((x: string) => {
+    const tmpA = obj[x].map(y => JSONObject[y]);
+    return {
+      [x]: Object.assign({}, ...tmpA)
+    };
+  });
 };

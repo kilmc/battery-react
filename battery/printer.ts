@@ -18,7 +18,7 @@ interface ClassPair {
 export const printProps = (
   // TODO: classObj: [string, { [key: string]: string }]
   classObj: ClassPair,
-  multiple: boolean
+  multiple: boolean = false
 ) => {
   return Object.entries(classObj[Object.keys(classObj)[0]])
     .map(
@@ -193,6 +193,10 @@ export const basePrintAtoms = (config: Config) => (obj: Atoms) => {
   return allValues.concat(allMobileFirst).concat(allPerScreen).join('\n');
 };
 
-export const printMolecules = (obj, JSONObject) => {
+export const printMolecules = (
+  obj: { [key: string]: string[] },
+  // tslint:disable-next-line:no-any
+  JSONObject: any
+) => {
   return compileMolecules(obj, JSONObject).map(printClass).join('\n');
 };

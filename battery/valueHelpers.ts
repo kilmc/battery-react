@@ -5,21 +5,21 @@ export interface BreakpointsConfig {
 }
 
 export interface Config {
-  baseFontSize: number;
-  baseUnit: number;
-  systemColors: { [key: string]: string };
-  negativeValueIndicator: string;
-  keywordValueSeparator: string;
-  lengthValueSeparator: string;
-  integerValueSeparator: string;
-  colorValueSeparator: string;
-  breakpointPrefixOrSuffix: 'prefix' | 'suffix';
-  breakpointSeparator: string;
-  breakpointsConfig: BreakpointsConfig;
-  outputGzippedCSS: boolean;
-  outputJSON: boolean;
-  outputDocs: boolean;
-  outputChangelog: boolean;
+  baseFontSize?: number;
+  baseUnit?: number;
+  systemColors?: { [key: string]: string };
+  negativeValueIndicator?: string;
+  keywordValueSeparator?: string;
+  lengthValueSeparator?: string;
+  integerValueSeparator?: string;
+  colorValueSeparator?: string;
+  breakpointPrefixOrSuffix?: 'prefix' | 'suffix';
+  breakpointSeparator?: string;
+  breakpointsConfig?: BreakpointsConfig;
+  outputGzippedCSS?: boolean;
+  outputJSON?: boolean;
+  outputDocs?: boolean;
+  outputChangelog?: boolean;
 }
 
 export const baseRemify = (config: Config) => (x: number) =>
@@ -38,11 +38,11 @@ export const baseColorHex = (config: Config) => (name: string) =>
 
 interface LengthsConfig {
   values: number[];
-  unitIndicator: string;
-  lengthUnit: string;
-  valueConverters: Array<(x: number) => number>;
-  negative: boolean;
-  separator: string;
+  unitIndicator?: string;
+  lengthUnit?: string;
+  valueConverters?: Array<(x: number) => number>;
+  negative?: boolean;
+  separator?: string;
 }
 
 export const baseLengths = (config: Config) => ({

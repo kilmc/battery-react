@@ -9,13 +9,12 @@ import {
   classCompile,
   breakpointsClassCompile,
   atomTree,
-  atomList,
-  baseCompile
+  atomList
 } from './compiler';
 
-import { baseRemify, baseScaler, baseLengths } from './valueHelpers';
+import { baseRemify, baseScaler, baseLengths, Config } from './valueHelpers';
 
-const config = {
+const config: Config = {
   baseFontSize: 10,
   baseUnit: 6,
   systemColors: {
@@ -37,7 +36,7 @@ const remify = baseRemify(config);
 const scaler = baseScaler(config);
 const lengths = baseLengths(config);
 
-const scalers = (units, negative = false) =>
+const scalers = (units: number[], negative = false) =>
   lengths({
     values: units,
     valueConverters: [remify, scaler],
@@ -45,7 +44,7 @@ const scalers = (units, negative = false) =>
     negative: negative
   });
 
-export const pixels = (units, negative = false) =>
+export const pixels = (units: number[], negative = false) =>
   lengths({
     values: units,
     valueConverters: [remify],
